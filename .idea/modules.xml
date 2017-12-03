@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GoogleVisionAPI.iml" filepath="$PROJECT_DIR$/GoogleVisionAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/INSUVIDA.iml" filepath="$PROJECT_DIR$/INSUVIDA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
