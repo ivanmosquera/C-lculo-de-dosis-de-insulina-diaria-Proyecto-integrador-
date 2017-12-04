@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/inicio"
+        android:icon="@drawable/inicio"
+        android:id="@+id/iniciomenu"/>
+
+    <item android:title="@string/perfil"
+        android:icon="@drawable/usuario"
+        android:id="@+id/perfilmenu" ></item>
+
+    <item android:title="@string/camera"
+        android:icon="@drawable/camara"
+        android:id="@+id/camaramenu"></item>
+
+
+</menu>

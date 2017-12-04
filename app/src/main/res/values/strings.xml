@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">GoogleVisionAPI</string>
+    <string name="app_name">UI</string>
+    <string name="st">String v19</string>
+    <string name="st2">String v24</string>
+    <string name="inicio">inicio</string>
+    <string name="perfil">perfil</string>
+    <string name="camera">camera</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_buttonmenu">buttonmenu</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_botton_menu">botton_menu</string>
 </resources>

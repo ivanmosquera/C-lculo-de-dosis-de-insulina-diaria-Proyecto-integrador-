@@ -1,64 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondologin"
+    tools:context="com.example.kleberstevendiazcoello.ui.MainActivity">
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.app.androidkt.googlevisionapi.MainActivity">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="112dp"
+        app:srcCompat="@mipmap/ic_launcher" />
 
-        <ProgressBar
-            android:id="@+id/imageProgress"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:indeterminate="true"
-            android:visibility="invisible"
-            tools:visibility="visible" />
+    <EditText
+        android:id="@+id/txtcorreolog"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:background="@drawable/botonusuario"
+        android:ems="10"
+        android:hint="   Correo"
+        android:inputType="textPersonName"
+        android:textColorHint="@android:color/background_light"
+        android:textSize="15dp" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_below="@+id/imageProgress"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            app:srcCompat="@android:drawable/alert_dark_frame" />
+    <EditText
+        android:id="@+id/txtpasswordlog"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
 
-        <Button
-            android:id="@+id/takePicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/imageView"
-            android:layout_below="@+id/imageView"
-            android:text="Take Picture" />
+        android:layout_alignStart="@+id/txtcorreolog"
+        android:layout_below="@+id/txtcorreolog"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/botoncontrasenac"
+        android:ems="10"
+        android:hint="   Contraseña"
+        android:inputType="textPersonName"
+        android:textColorHint="@android:color/background_light"
+        android:textSize="15dp" />
 
-        <Spinner
-            android:id="@+id/spinnerVisionAPI"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/takePicture"
-            android:layout_alignStart="@+id/imageView"
-            android:layout_below="@+id/imageView"
-            android:layout_toStartOf="@+id/takePicture" />
+    <Button
+        android:id="@+id/btn_crear_ok"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/btncrearcuenta"
+        android:layout_alignStart="@+id/txtpasswordlog"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/ingresar_login"
+        android:text="" />
 
-        <TextView
-            android:id="@+id/visionAPIData"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignEnd="@+id/takePicture"
-            android:layout_alignStart="@+id/spinnerVisionAPI"
-            android:layout_below="@+id/spinnerVisionAPI"
-            android:layout_marginTop="24dp"
-            android:gravity="left"
-            android:textSize="18dp"
-            tools:text="Text LAbele" />
-    </RelativeLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/btncrearcuenta"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_crear_ok"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/go"
+        android:text="" />
+
+
+</RelativeLayout>
