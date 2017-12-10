@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/inicio"
-        android:icon="@drawable/inicio"
+        android:icon="@drawable/inicioboton"
         android:id="@+id/iniciomenu"/>
 
     <item android:title="@string/perfil"
-        android:icon="@drawable/usuario"
+        android:icon="@drawable/perfilboton"
         android:id="@+id/perfilmenu" ></item>
 
     <item android:title="@string/camera"
-        android:icon="@drawable/camara"
+        android:icon="@drawable/calcularboton"
         android:id="@+id/camaramenu"></item>
+
+    <item android:title="platos"
+        android:icon="@drawable/platosboton"
+        android:id="@+id/platosmenu"></item>
+
+    <item android:title="historial"
+        android:icon="@drawable/hostorialboton"
+        android:id="@+id/historialmenu"></item>
 
 
 </menu>

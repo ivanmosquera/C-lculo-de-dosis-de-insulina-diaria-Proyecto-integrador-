@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kleberstevendiazcoello.ui.homeFragment">
+    tools:context="com.example.kleberstevendiazcoello.ui.homeFragment"
+    android:background="@drawable/fondonuevo">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

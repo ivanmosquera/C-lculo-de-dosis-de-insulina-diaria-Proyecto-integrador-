@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondonuevo">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,8 +29,6 @@
             android:layout_height="300dp"
             android:layout_below="@+id/imageProgress"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             app:srcCompat="@android:drawable/alert_dark_frame" />
 
         <Button
@@ -60,5 +59,6 @@
             android:gravity="left"
             android:textSize="18dp"
             tools:text="Text LAbele" />
+
     </RelativeLayout>
 </ScrollView>

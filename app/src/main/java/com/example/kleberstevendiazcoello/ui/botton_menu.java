@@ -31,7 +31,15 @@ public class botton_menu extends AppCompatActivity  {
                 case R.id.navigation_user:
                     transaction.replace(R.id.content2,new PerfilFragment()).commit();
 
+
                     return true;
+                case R.id.navigation_platos:
+                    transaction.replace(R.id.content2,new PlatoFragment()).commit();
+                    return true;
+                case R.id.navigation_historial:
+                    transaction.replace(R.id.content2,new HistorialFragment()).commit();
+                    return true;
+
             }
             return false;
         }
@@ -45,6 +53,9 @@ public class botton_menu extends AppCompatActivity  {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        android.support.v4.app.FragmentManager fragmentManager= getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.content2,new homeFragment()).commit();
     }
 
 }
