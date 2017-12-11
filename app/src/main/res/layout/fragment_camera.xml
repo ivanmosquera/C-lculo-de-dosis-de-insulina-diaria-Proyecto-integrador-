@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/imageView"
             android:layout_below="@+id/imageView"
-            android:text="Take Picture" />
+            android:text="Tomar foto" />
 
         <Spinner
             android:id="@+id/spinnerVisionAPI"
