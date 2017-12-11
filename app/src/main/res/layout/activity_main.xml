@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondonuevo"
-    tools:context="com.example.kleberstevendiazcoello.ui.MainActivity">
+    tools:context="com.example.kleberstevendiazcoello.ui.login.MainActivity">
     
     <LinearLayout
         android:orientation="vertical"

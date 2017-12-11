@@ -1,12 +1,10 @@
-package com.example.kleberstevendiazcoello.ui;
+package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,16 +17,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
+import com.example.kleberstevendiazcoello.ui.MyAdapater;
+import com.example.kleberstevendiazcoello.ui.R;
+import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,8 +36,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 import okhttp3.OkHttpClient;
@@ -109,33 +107,14 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
         View view = inflater.inflate(R.layout.fragment_plato, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         requestQueue = Volley.newRequestQueue(getActivity());
-        toolbar = (android.support.v7.widget.Toolbar) view.findViewById(R.id.toolbara);
-        //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        //arrayList.add(new Detalle(1,"Leche","Taza","9,4"));
         try {
             getList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         recyclerView.setHasFixedSize(true);
-
         layoutManager = new LinearLayoutManager(getActivity());
-        //gridLayoutManager = new GridLayoutManager(getActivity(),1);
         recyclerView.setLayoutManager(layoutManager);
-        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-
-                if(gridLayoutManager.findLastCompletelyVisibleItemPosition() == arrayList.size()-1){
-                    Toast.makeText(getActivity(), "Cargando Datos",Toast.LENGTH_SHORT).show();
-                    load_data_from_server(1);
-                }
-
-            }
-        });*/
-
-
 
 
         return view;
@@ -143,13 +122,10 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menus, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_items, menus);
-        MenuItem searchItem = menus.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint("Search");
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     }
+
+
 
     private void load_data_from_server(final int id) {
         AsyncTask<Integer,Void,Void> task = new AsyncTask<Integer, Void, Void>() {
@@ -254,9 +230,10 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
                             }
 
                         }
-                        adapater = new MyAdapater(recyclerView,getActivity(),arrayList);
-                        adapter = new RecyclerAdapter(arrayList);
-                        recyclerView.setAdapter(adapater);
+
+                        adapter = new RecyclerAdapter(arrayList,getActivity());
+
+                        recyclerView.setAdapter(adapter);
 
                     }
                 }, new Response.ErrorListener() {

@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="celesteazul">#24CECE</color>
+    <color name="overlayBackgroud">#7f333639</color>
+
 </resources>

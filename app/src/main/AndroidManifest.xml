@@ -12,19 +12,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".crearcuenta" />
+        <activity android:name=".login.crearcuenta" />
         <activity android:name=".visioapi" />
         <activity android:name=".menu" />
         <activity
-            android:name=".botton_menu"
-            android:label="@string/title_activity_botton_menu"></activity>
+            android:name=".Activitys.botton_menu"
+            android:label="@string/title_activity_botton_menu" />
+        <activity android:name=".Activitys.Detalle_food"></activity>
     </application>
 
 </manifest>

@@ -1,18 +1,17 @@
 package com.example.kleberstevendiazcoello.ui;
 
 import android.app.Activity;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kleberstevendiazcoello on 8/12/17.
