@@ -42,7 +42,7 @@
         android:id="@+id/btncarro"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/fbutton_color_green_sea"
+        android:backgroundTint="@color/celesteazul"
         android:src = "@drawable/ic_action_name"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"
@@ -74,17 +74,40 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/layout_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
                     <TextView
                         android:id="@+id/txtNombreComida"
                         android:layout_width="wrap_content"
                         android:padding="12dp"
                         android:text="Nombre Comida"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/fbutton_color_silver"
                         android:textSize="20sp"
                         android:textStyle="bold"
-
                         android:layout_height="wrap_content" />
+                    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/numbre_button"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginBottom="18dp"
+                        app:textSize="8sp"
+                        app:backGroundColor="@color/celesteazul"
+                        app:initialNumber="1"
+                        app:finalNumber="20"
+                        ></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+
+
+
+                </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/layout_price"
                         android:layout_width="match_parent"
@@ -99,7 +122,7 @@
                             android:layout_width="0dp"
                             android:padding="12dp"
                             android:text="Calorias: "
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/fbutton_color_silver"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_weight="9"
@@ -113,44 +136,54 @@
                             android:layout_weight="9"
                             android:padding="12dp"
                             android:text="200gr"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/celesteazul"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
-                    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                        android:layout_width="100dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/numbre_button"
+                <LinearLayout
+                    android:id="@+id/layout_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    >
+                    <TextView
+                        android:id="@+id/food_total_carbonov"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginBottom="18dp"
-                        app:textSize="8sp"
-                        app:backGroundColor="@color/colorAccent"
-                        app:initialNumber="1"
-                        app:finalNumber="20"
-                        ></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+                        android:layout_weight="9"
+                        android:padding="12dp"
+                        android:text="Total:"
+                        android:textColor="@color/fbutton_color_silver"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/food_total_carbo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="9"
+                        android:padding="12dp"
+                        android:text="200gr"
+                        android:textColor="@color/celesteazul"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+
+                        />
+
+                </LinearLayout>
+
+
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                app:cardElevation="5dp"
-                app:cardUseCompatPadding="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:lineSpacingMultiplier="1.5"
-                    android:padding="12dp"
-                    android:id="@+id/food_total_carbo"
-                    android:text="Total : "
-                    android:textColor="@color/fbutton_color_midnight_blue"
-                    android:textSize="14sp"
-
-                    />
-            </android.support.v7.widget.CardView>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
