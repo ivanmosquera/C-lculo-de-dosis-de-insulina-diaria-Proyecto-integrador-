@@ -1,13 +1,18 @@
-package com.example.kleberstevendiazcoello.ui;
+package com.example.kleberstevendiazcoello.ui.Activitys;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.kleberstevendiazcoello.ui.CalculosFragment;
+import com.example.kleberstevendiazcoello.ui.R;
+import com.example.kleberstevendiazcoello.ui.fragments.HistorialFragment;
+import com.example.kleberstevendiazcoello.ui.fragments.PerfilFragment;
+import com.example.kleberstevendiazcoello.ui.fragments.PlatoFragment;
+import com.example.kleberstevendiazcoello.ui.fragments.cameraFragment;
+import com.example.kleberstevendiazcoello.ui.fragments.homeFragment;
 
 public class botton_menu extends AppCompatActivity  {
 
@@ -25,7 +30,7 @@ public class botton_menu extends AppCompatActivity  {
 
                     return true;
                 case R.id.navigation_camera:
-                    transaction.replace(R.id.content2,new cameraFragment()).commit();
+                    transaction.replace(R.id.content2,new CalculosFragment()).commit();
 
                     return true;
                 case R.id.navigation_user:
