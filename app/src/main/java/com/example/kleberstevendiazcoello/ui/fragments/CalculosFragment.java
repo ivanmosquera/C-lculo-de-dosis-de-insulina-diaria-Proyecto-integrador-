@@ -1,16 +1,17 @@
-package com.example.kleberstevendiazcoello.ui;
+package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.kleberstevendiazcoello.ui.fragments.homeFragment;
+import com.example.kleberstevendiazcoello.ui.R;
 
 
 /**
@@ -70,15 +71,17 @@ public class CalculosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_calculos, container, false);
         calculomanual = view.findViewById(R.id.calculo_manual);
         calculoautomatico = view.findViewById(R.id.calculo_automatico);
+        Log.d("myTag", "Me cree");
         calculomanual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new CalcularmanualFragment()).commit();
+                transaction.replace(R.id.content2,new CalcularmanualFragment()).addToBackStack("").commit();
             }
         });
 
