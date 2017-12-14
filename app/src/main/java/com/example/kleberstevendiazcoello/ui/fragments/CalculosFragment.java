@@ -1,13 +1,17 @@
-package com.example.kleberstevendiazcoello.ui;
+package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import com.example.kleberstevendiazcoello.ui.R;
 
 
 /**
@@ -23,6 +27,8 @@ public class CalculosFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    CardView calculomanual;
+    CardView calculoautomatico;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,7 +71,27 @@ public class CalculosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calculos, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_calculos, container, false);
+        calculomanual = view.findViewById(R.id.calculo_manual);
+        calculoautomatico = view.findViewById(R.id.calculo_automatico);
+        Log.d("myTag", "Me cree");
+        calculomanual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new CalcularmanualFragment()).addToBackStack("").commit();
+            }
+        });
+
+        calculoautomatico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -25,7 +25,8 @@
         <activity
             android:name=".Activitys.botton_menu"
             android:label="@string/title_activity_botton_menu" />
-        <activity android:name=".Activitys.Detalle_food"></activity>
+        <activity android:name=".Activitys.Detalle_food" />
+        <activity android:name=".Activitys.Detalle_Plato_Selec"></activity>
     </application>
 
 </manifest>

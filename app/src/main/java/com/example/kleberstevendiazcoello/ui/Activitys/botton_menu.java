@@ -6,12 +6,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.example.kleberstevendiazcoello.ui.CalculosFragment;
+import com.example.kleberstevendiazcoello.ui.fragments.CalculosFragment;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.fragments.HistorialFragment;
 import com.example.kleberstevendiazcoello.ui.fragments.PerfilFragment;
 import com.example.kleberstevendiazcoello.ui.fragments.PlatoFragment;
-import com.example.kleberstevendiazcoello.ui.fragments.cameraFragment;
 import com.example.kleberstevendiazcoello.ui.fragments.homeFragment;
 
 public class botton_menu extends AppCompatActivity  {
