@@ -2,6 +2,7 @@ package com.example.kleberstevendiazcoello.ui.ViewHolder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,23 +23,36 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
     private ArrayList<Detalle> arrayList = new ArrayList<>();
     private ItemClickListener itemClickListener;
+    private  ArrayList<Detalle>filterarray = new ArrayList<>();
     Context ctx;
     public RecyclerAdapter(ArrayList<Detalle> arrayList, Context ctx){
         this.arrayList = arrayList;
         this.ctx = ctx;
+        filterarray= this.arrayList;
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plato_item,parent,false);
-        return new MyViewHolder(view,ctx,arrayList);
+        return new MyViewHolder(view,ctx,filterarray);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.comida.setText(arrayList.get(position).getComida());
-        holder.medida.setText(arrayList.get(position).getMedida());
-        holder.Carbohidratos.setText(arrayList.get(position).getCarbohidratos());
+        holder.comida.setText(filterarray.get(position).getComida());
+        holder.medida.setText(filterarray.get(position).getMedida());
+        holder.Carbohidratos.setText(filterarray.get(position).getCarbohidratos());
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void OnClick(View view, int position) {
+                //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
+                Detalle detalle = filterarray.get(position);
+                Intent intent = new Intent(ctx,Detalle_food.class);
+                intent.putExtra("Nombre",detalle.getComida());
+                intent.putExtra("Caloria",detalle.getCarbohidratos());
+                ctx.startActivity(intent);
+            }
+        });
 
 
 
@@ -49,10 +63,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public int getItemCount() {
 
-        return arrayList.size();
+        return filterarray.size();
     }
 
-
+    public void filter(String query) {
+        filterarray = new ArrayList<>();
+        for(Detalle pl: arrayList ){
+            if(pl.getComida().toLowerCase().contains(query.toLowerCase())){
+                filterarray.add(pl);
+            }
+        }
+        notifyDataSetChanged();
+    }
 
 
     public  static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -76,13 +98,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         @Override
         public void onClick(View view) {
-
-           int position = getAdapterPosition();
+            this.itemClickListener.OnClick(view,getLayoutPosition());
+          /* int position = getAdapterPosition();
             Detalle detalle = this.food.get(position);
             Intent intent = new Intent(this.ctx,Detalle_food.class);
             intent.putExtra("Nombre",detalle.getComida());
             intent.putExtra("Caloria",detalle.getCarbohidratos());
-            this.ctx.startActivity(intent);
+            this.ctx.startActivity(intent);*/
 
 
         }

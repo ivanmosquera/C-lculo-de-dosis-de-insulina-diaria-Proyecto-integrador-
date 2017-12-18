@@ -7,10 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -47,6 +50,7 @@ public class SeleccionarPlatos extends Fragment {
     RAdapterSPlatos adapter;
     GridLayoutManager gridLayoutManager;
     RequestQueue requestQueue;
+    EditText mSearchField;
 
 
     // TODO: Rename and change types of parameters
@@ -93,6 +97,8 @@ public class SeleccionarPlatos extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_seleccionar_platos, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         Log.d("myTag", "Me cree");
+        mSearchField = (EditText)view.findViewById(R.id.buscar_food_calculo_manual);
+        mSearchField.addTextChangedListener(mQuery);
 
         requestQueue = Volley.newRequestQueue(getActivity());
         try {
@@ -106,6 +112,24 @@ public class SeleccionarPlatos extends Fragment {
 
         return view;
     }
+
+
+    private TextWatcher mQuery = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            adapter.filter(editable.toString());
+        }
+    };
 
     public void  getList() throws JSONException {
         final ArrayList<Detalle> arrayListe = new ArrayList<>();
