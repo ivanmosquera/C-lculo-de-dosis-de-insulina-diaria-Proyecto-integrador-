@@ -5,6 +5,23 @@
     tools:context="com.example.kleberstevendiazcoello.ui.fragments.PlatoFragment"
     android:orientation="vertical"
     >
+ <android.support.v7.widget.Toolbar
+     android:layout_width="match_parent"
+     android:layout_height="?attr/actionBarSize"
+     android:background="@color/celesteazul"
+     >
+     <ImageView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@drawable/buscarfood"/>
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:id="@+id/buscar_food"
+         android:backgroundTint="@color/fbutton_color_midnight_blue"
+         android:textColor="@color/fbutton_color_midnight_blue"/>
+
+ </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

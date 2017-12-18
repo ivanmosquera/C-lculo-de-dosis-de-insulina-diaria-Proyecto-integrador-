@@ -119,4 +119,7 @@ public class MyAdapater extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void setIsloaded() {
         this.isloading = false;
     }
+
+    public void filter() {
+    }
 }

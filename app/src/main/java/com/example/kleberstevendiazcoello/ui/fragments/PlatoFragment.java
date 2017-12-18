@@ -9,6 +9,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -62,6 +65,7 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
     RequestQueue requestQueue;
     MyAdapater adapater;
     android.support.v7.widget.Toolbar toolbar;
+    EditText mSearchField;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -105,6 +109,8 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_plato, container, false);
+        mSearchField = (EditText)view.findViewById(R.id.buscar_food);
+        mSearchField.addTextChangedListener(mQuery);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         Log.d("myTag", "Me cree");
         requestQueue = Volley.newRequestQueue(getActivity());
@@ -118,9 +124,28 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
         recyclerView.setLayoutManager(layoutManager);
 
 
+
         return view;
 
     }
+
+
+    private TextWatcher mQuery = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            adapter.filter(editable.toString());
+        }
+    };
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

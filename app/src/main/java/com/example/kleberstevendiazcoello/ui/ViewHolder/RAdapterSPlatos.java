@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_Plato_Selec;
+import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_food;
 import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
@@ -22,31 +23,54 @@ import java.util.ArrayList;
 public class RAdapterSPlatos extends RecyclerView.Adapter<RAdapterSPlatos.ReciclerViewHolder>{
     private ArrayList<Detalle> arrayList = new ArrayList<>();
     private ItemClickListener itemClickListener;
+    private  ArrayList<Detalle>filterarray = new ArrayList<>();
     Context ctx;
 
     public RAdapterSPlatos(ArrayList<Detalle> arrayList, Context ctx){
         this.arrayList = arrayList;
         this.ctx = ctx;
+        filterarray = this.arrayList;
     }
     @Override
     public ReciclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.platos_elegidos_modelo,parent,false);
-        ReciclerViewHolder reciclerViewHolder = new ReciclerViewHolder(view,ctx,arrayList);
+        ReciclerViewHolder reciclerViewHolder = new ReciclerViewHolder(view,ctx,filterarray);
         return reciclerViewHolder;
     }
 
     @Override
     public void onBindViewHolder(ReciclerViewHolder holder, int position) {
-        holder.comida.setText(arrayList.get(position).getComida());
-        holder.medida.setText(arrayList.get(position).getMedida());
-        holder.Carbohidratos.setText(arrayList.get(position).getCarbohidratos());
+        holder.comida.setText(filterarray.get(position).getComida());
+        holder.medida.setText(filterarray.get(position).getMedida());
+        holder.Carbohidratos.setText(filterarray.get(position).getCarbohidratos());
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void OnClick(View view, int position) {
+                //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
+                Detalle detalle = filterarray.get(position);
+                Intent intent = new Intent(ctx,Detalle_Plato_Selec.class);
+                intent.putExtra("Nombre",detalle.getComida());
+                intent.putExtra("Caloria",detalle.getCarbohidratos());
+                ctx.startActivity(intent);
+            }
+        });
     }
 
 
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return filterarray.size();
+    }
+
+    public void filter(String query) {
+        filterarray = new ArrayList<>();
+        for(Detalle pl: arrayList ){
+            if(pl.getComida().toLowerCase().contains(query.toLowerCase())){
+                filterarray.add(pl);
+            }
+        }
+        notifyDataSetChanged();
     }
 
 
@@ -69,12 +93,7 @@ public class RAdapterSPlatos extends RecyclerView.Adapter<RAdapterSPlatos.Recicl
 
         @Override
         public void onClick(View view) {
-            int position = getAdapterPosition();
-            Detalle detalle = this.food.get(position);
-            Intent intent = new Intent(this.ctx,Detalle_Plato_Selec.class);
-            intent.putExtra("Nombre",detalle.getComida());
-            intent.putExtra("Caloria",detalle.getCarbohidratos());
-            this.ctx.startActivity(intent);
+            this.itemClickListener.OnClick(view,getLayoutPosition());
         }
         public void setItemClickListener(ItemClickListener itemClickListener){
             this.itemClickListener = itemClickListener;
