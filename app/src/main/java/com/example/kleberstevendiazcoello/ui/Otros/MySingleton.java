@@ -1,4 +1,4 @@
-package com.example.kleberstevendiazcoello.ui;
+package com.example.kleberstevendiazcoello.ui.Otros;
 
 import android.content.Context;
 

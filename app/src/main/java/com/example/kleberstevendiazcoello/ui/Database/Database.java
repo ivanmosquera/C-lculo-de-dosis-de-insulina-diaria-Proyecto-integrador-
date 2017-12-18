@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 
 public class Database extends SQLiteAssetHelper {
-    private static final String DB_NAME="InsuDB.db";
+    private static final String DB_NAME="Insuvida.db";
     private static final int DB_VER = 1;
     public Database(Context context) {
         super(context, DB_NAME, null, DB_VER);
@@ -48,6 +48,38 @@ public class Database extends SQLiteAssetHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         String query = String.format("DELETE FROM FoodDetail");
+        db.execSQL(query);
+
+    }
+
+
+    public ArrayList<Platos> getListaComidaAuto(){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String[] sqlSelect={"FoodID, FoodName, Calorias, Cantidad"};
+        String sqlTable="FoodDetailAuto";
+        qb.setTables(sqlTable);
+        Cursor c = qb.query(db,sqlSelect,null,null,null,null,null);
+        final ArrayList<Platos> result = new ArrayList<>();
+        if(c.moveToFirst()){
+            do{
+                result.add(new Platos(c.getString(c.getColumnIndex("FoodID")),c.getString(c.getColumnIndex("FoodName")),
+                        c.getString(c.getColumnIndex("Calorias")),c.getString(c.getColumnIndex("Cantidad"))));
+            }while (c.moveToNext());
+        }
+        return result;
+    }
+
+    public void addPlatosAuto(Platos platos){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = String.format("INSERT INTO FoodDetailAuto (FoodID, FoodName, Calorias, Cantidad)VALUES ('%s','%s','%s','%s');",platos.getFoodID(),platos.getFoodName(),
+                platos.getCalorias(),platos.getCantidad());
+        db.execSQL(query);
+    }
+    public void cleanListAuto(){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String query = String.format("DELETE FROM FoodDetailAuto");
         db.execSQL(query);
 
     }

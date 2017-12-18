@@ -1,4 +1,4 @@
-package com.example.kleberstevendiazcoello.ui;
+package com.example.kleberstevendiazcoello.ui.Otros;
 
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 
 import java.util.ArrayList;
