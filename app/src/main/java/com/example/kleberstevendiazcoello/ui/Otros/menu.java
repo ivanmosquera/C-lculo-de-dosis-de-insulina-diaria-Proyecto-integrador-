@@ -1,4 +1,4 @@
-package com.example.kleberstevendiazcoello.ui;
+package com.example.kleberstevendiazcoello.ui.Otros;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.fragments.PerfilFragment;
 import com.example.kleberstevendiazcoello.ui.fragments.cameraFragment;
 import com.example.kleberstevendiazcoello.ui.fragments.homeFragment;

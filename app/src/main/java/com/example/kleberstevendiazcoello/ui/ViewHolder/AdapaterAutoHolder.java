@@ -13,33 +13,32 @@ import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 import java.util.ArrayList;
 
 /**
- * Created by kleberstevendiazcoello on 12/12/17.
+ * Created by kleberstevendiazcoello on 13/12/17.
  */
 
-public class Apter_carrito_paltos extends RecyclerView.Adapter<Apter_carrito_paltos.HolderSeleccionados> {
+public class AdapaterAutoHolder extends RecyclerView.Adapter<AdapaterAutoHolder.AutoHolder> {
     private ArrayList<Platos> arrayList = new ArrayList<>();
     Context ctx;
 
-    public Apter_carrito_paltos(ArrayList<Platos> arrayList, Context ctx){
+    public AdapaterAutoHolder(ArrayList<Platos> arrayList, Context ctx){
         this.arrayList = arrayList;
         this.ctx = ctx;
     }
     @Override
-    public HolderSeleccionados onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.platos_ya_selecionado,parent,false);
-        Apter_carrito_paltos.HolderSeleccionados holderSeleccionados = new HolderSeleccionados(view,ctx,arrayList);
-        return holderSeleccionados;
+    public AutoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.platos_ya_selecionadoauto,parent,false);
+        AdapaterAutoHolder.AutoHolder autoHolder = new AdapaterAutoHolder.AutoHolder(view,ctx,arrayList);
+        return autoHolder;
     }
 
     @Override
-    public void onBindViewHolder(HolderSeleccionados holder, int position) {
+    public void onBindViewHolder(AutoHolder holder, int position) {
         holder.comida.setText(arrayList.get(position).getFoodName());
-        //holder.cantidad.setText(arrayList.get(position).getCantidad());
+        holder.cantidad.setText(arrayList.get(position).getCantidad());
         //holder.Carbohidratos.setText(arrayList.get(position).getCalorias());
         int total = (Integer.parseInt(arrayList.get(position).getCalorias()))*(Integer.parseInt(arrayList.get(position).getCantidad()));
         holder.Carbohidratos.setText(String.valueOf(total));
     }
-
 
 
     @Override
@@ -48,20 +47,19 @@ public class Apter_carrito_paltos extends RecyclerView.Adapter<Apter_carrito_pal
     }
 
 
-    public static class HolderSeleccionados extends RecyclerView.ViewHolder{
+    public static class AutoHolder extends RecyclerView.ViewHolder{
         TextView comida;
         TextView cantidad;
         TextView Carbohidratos;
-
         ArrayList<Platos> food = new ArrayList<>();
         Context ctx ;
-        public HolderSeleccionados(View itemView,Context ctx,ArrayList<Platos> food) {
+        public AutoHolder(View itemView,Context ctx,ArrayList<Platos> food) {
             super(itemView);
             this.food = food;
             this.ctx = ctx;
-            comida = (TextView) itemView.findViewById(R.id.txtcomidaSelect);
-            //cantidad = (TextView) itemView.findViewById(R.id.txtcantidadSelect);
-            Carbohidratos = (TextView) itemView.findViewById(R.id.txtcarbohidratosSelect);
+            comida = (TextView) itemView.findViewById(R.id.txtcomidaselectauto);
+            cantidad = (TextView) itemView.findViewById(R.id.txtcantidadselectauto);
+            Carbohidratos = (TextView) itemView.findViewById(R.id.txtcarbohidratosselectauto);
         }
     }
 }

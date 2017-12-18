@@ -1,4 +1,4 @@
-package com.example.kleberstevendiazcoello.ui;
+package com.example.kleberstevendiazcoello.ui.Otros;
 
 /**
  * Created by kleberstevendiazcoello on 8/12/17.

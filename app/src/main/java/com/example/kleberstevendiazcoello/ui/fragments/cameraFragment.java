@@ -287,6 +287,9 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
             protected void onPostExecute(String result) {
                 visionAPIData.setText(result);
                 imageUploadProgress.setVisibility(View.INVISIBLE);
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new AutomaticCalculo()).addToBackStack("").commit();
             }
         }.execute();
     }

@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:cardElevation="3dp"
-    android:layout_margin="3dp"
+    app:cardElevation="10dp"
+    android:layout_margin="8dp"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,19 +15,19 @@
         android:padding="10dp"
         android:background="?android:selectableItemBackground"
         
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="20dp"
-            android:id="@+id/txtcomidaSelect"
-            android:textStyle="bold"
-            android:textSize="14dp"/>
+        android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/txtcarbohidratosSelect"
-            android:textStyle="bold"
-            android:textSize="14dp"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/txtcomidaselectauto"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtcantidadselectauto"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtcarbohidratosselectauto"/>
         
     </LinearLayout>
 

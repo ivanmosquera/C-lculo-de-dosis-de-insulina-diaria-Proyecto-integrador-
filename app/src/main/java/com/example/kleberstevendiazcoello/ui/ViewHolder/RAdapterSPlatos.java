@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_Plato_Selec;
-import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_food;
-import com.example.kleberstevendiazcoello.ui.ItemClickListener;
+import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 
