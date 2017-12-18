@@ -34,7 +34,7 @@ public class Apter_carrito_paltos extends RecyclerView.Adapter<Apter_carrito_pal
     @Override
     public void onBindViewHolder(HolderSeleccionados holder, int position) {
         holder.comida.setText(arrayList.get(position).getFoodName());
-        holder.cantidad.setText(arrayList.get(position).getCantidad());
+        //holder.cantidad.setText(arrayList.get(position).getCantidad());
         //holder.Carbohidratos.setText(arrayList.get(position).getCalorias());
         int total = (Integer.parseInt(arrayList.get(position).getCalorias()))*(Integer.parseInt(arrayList.get(position).getCantidad()));
         holder.Carbohidratos.setText(String.valueOf(total));
@@ -60,7 +60,7 @@ public class Apter_carrito_paltos extends RecyclerView.Adapter<Apter_carrito_pal
             this.food = food;
             this.ctx = ctx;
             comida = (TextView) itemView.findViewById(R.id.txtcomidaSelect);
-            cantidad = (TextView) itemView.findViewById(R.id.txtcantidadSelect);
+            //cantidad = (TextView) itemView.findViewById(R.id.txtcantidadSelect);
             Carbohidratos = (TextView) itemView.findViewById(R.id.txtcarbohidratosSelect);
         }
     }
