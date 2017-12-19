@@ -1,7 +1,9 @@
 package com.example.kleberstevendiazcoello.ui.login;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     EditText correo, contrasena;
     private ProgressDialog pDialog;
     RequestQueue requestQueue;
+    public static final String User_data = "insuuser";
+    public static final String Mail_data = "email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 String mail = correo.getText().toString();
                 String pass = contrasena.getText().toString();
                 enviarDatos(mail,pass);
+                SharedPreferences sharedPref = MainActivity.this.getSharedPreferences(
+                        "userinfo", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(Mail_data, mail);
+                editor.commit();
 
             }
         });
@@ -75,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
+
                         Intent intent = new Intent(getApplicationContext(),botton_menu.class);
                         startActivity(intent);
                         finish();
