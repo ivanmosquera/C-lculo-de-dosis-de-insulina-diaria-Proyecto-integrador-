@@ -1,6 +1,7 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +17,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
@@ -24,12 +30,18 @@ import com.example.kleberstevendiazcoello.ui.ViewHolder.Apter_carrito_paltos;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
+import com.example.kleberstevendiazcoello.ui.login.MainActivity;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 /**
@@ -54,7 +66,8 @@ public class CalcularmanualFragment extends Fragment {
     RequestQueue requestQueue;
     TextView total_carbo;
     ArrayList<Platos> cart;
-    int total;
+    int total = 0;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -96,10 +109,11 @@ public class CalcularmanualFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calcularmanual, container, false);
          selecplatos = (Button) view.findViewById(R.id.agregarplatos);
+         requestQueue = Volley.newRequestQueue(getActivity());
          calc_dosis= (Button) view.findViewById(R.id.btn_calcular_dosis);
          total_carbo = (TextView)view.findViewById(R.id.sumatoria_corbogidratos);
          selecplatos.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +128,13 @@ public class CalcularmanualFragment extends Fragment {
          calc_dosis.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                  new Database(getActivity()).cleanList();
+                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                 String currentDate = sdf.format(new Date());
+
+                 SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
+                 String hour = format.format(new Date());
+                 saveHistorial(currentDate,hour);
+
 
              }
          });
@@ -128,7 +148,40 @@ public class CalcularmanualFragment extends Fragment {
         return view;
     }
 
+
+    private void saveHistorial(final String dia, final String hora){
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/guardarHistorial.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("fecha",dia);
+                map.put("hora",hora);
+                map.put("idusuario","1");
+                map.put("insulina","12.1");
+                map.put("total",total_carbo.getText().toString());
+                return map;
+            }
+
+        };
+        requestQueue.add(request);
+
+        new Database(getActivity()).cleanList();
+        total = 0;
+
+    }
     private void LoadListFood() {
+        total = 0;
         cart = new Database(getActivity()).getListaComida();
         adapter = new Apter_carrito_paltos(cart,getActivity());
         recyclerView.setAdapter(adapter);
@@ -136,9 +189,9 @@ public class CalcularmanualFragment extends Fragment {
             total += (Integer.parseInt(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
 
         }
-        Locale locale = new Locale("en","US");
-        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
-        total_carbo.setText(fmt.format(total));
+        /*Locale locale = new Locale("en","US");
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);*/
+        total_carbo.setText(String.valueOf(total));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
