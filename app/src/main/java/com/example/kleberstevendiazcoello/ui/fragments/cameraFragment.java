@@ -26,7 +26,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.kleberstevendiazcoello.ui.R;
+import com.example.kleberstevendiazcoello.ui.ViewHolder.RAdapterSPlatos;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
@@ -46,8 +51,13 @@ import com.google.api.services.vision.v1.model.Image;
 import com.google.api.services.vision.v1.model.ImageProperties;
 import com.google.api.services.vision.v1.model.SafeSearchAnnotation;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +86,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
     ProgressBar imageUploadProgress;
     Spinner spinnerVisionAPI;
     TextView visionAPIData;
+    ArrayList<String> arrayList = new ArrayList<>();
 
     private Feature feature;
     private Bitmap bitmap;
@@ -335,6 +346,12 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
             case "LABEL_DETECTION":
                 entityAnnotations = imageResponses.getLabelAnnotations();
                 message = formatAnnotation(entityAnnotations);
+                Log.d("Lista",formatAnnotation(entityAnnotations));  //prueba
+                try {
+                    getListLabelsNoNecesarios();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
         return message;
@@ -363,13 +380,53 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
 
         if (entityAnnotation != null) {
             for (EntityAnnotation entity : entityAnnotation) {
-                message = message + "    " + entity.getDescription() + " " + entity.getScore();
+                message = message + "    " + entity.getDescription() + " " + entity.getScore()*100 + "%";
                 message += "\n";
             }
         } else {
-            message = "Nothing Found";
+            message = "No se pudo reconocer el plato";
         }
         return message;
+    }
+
+    public void  getListLabelsNoNecesarios() throws JSONException {
+        //final ArrayList<Detalle> arrayListe = new ArrayList<>();
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/labels_no_necesarios.php";
+        JSONObject obj = new JSONObject();
+        obj.put("id",3);
+
+        JsonArrayRequest jsonArrayRequest =  new JsonArrayRequest(com.android.volley.Request.Method.POST, url,(String) null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        int count = 0;
+                        while(count<response.length()){
+                            try {
+                                JSONObject object = response.getJSONObject(count);
+                                //Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("Cantidad"));
+                                arrayList.add(object.getString("Nombre"));
+                                Log.d("Lista", String.valueOf(arrayList.toArray()));  //prueba
+                                count ++;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        //adapter = new RAdapterSPlatos(arrayList,getActivity());
+
+                        //recyclerView.setAdapter(adapter);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        //requestQueue.add(jsonArrayRequest);
+
+
     }
 
     @Override
