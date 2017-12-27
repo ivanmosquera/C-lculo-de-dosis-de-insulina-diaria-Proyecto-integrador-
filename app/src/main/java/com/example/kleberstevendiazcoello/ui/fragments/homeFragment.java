@@ -1,6 +1,7 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,8 +12,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.kleberstevendiazcoello.ui.Activitys.botton_menu;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.login.MainActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -28,8 +45,14 @@ public class homeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String ID_data = "iduser";
     public static final String Mail_data = "email";
-    TextView user ;
+    public static final String User_data = "user";
+    public static final String Peso_data = "peso";
+    public static final String Altura_data = "altura";
+    public static final String Edad_data = "edad";
+    TextView user, e, peso,a,nombre ;
+    RequestQueue requestQueue;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,12 +96,88 @@ public class homeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View view  =inflater.inflate(R.layout.fragment_home, container, false);
-       user = (TextView)view.findViewById(R.id.showuser);
+        requestQueue = Volley.newRequestQueue(getActivity());
+        user = (TextView)view.findViewById(R.id.showuser);
+        a = (TextView)view.findViewById(R.id.txtshowaltura);
+        peso= (TextView)view.findViewById(R.id.txtshowpeso);
+        e = (TextView)view.findViewById(R.id.txtshowedad);
+        nombre = (TextView)view.findViewById(R.id.txtshowusuario);
+
+
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 "userinfo", Context.MODE_PRIVATE);
         String username = sharedPref.getString(Mail_data, "hola");
-        user.setText(username);
+        getdatosuser(username);
+
+
+        /*SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                "userinfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(ID_data,object.getInt("id"));
+        editor.putString(User_data,object.getString("Usuario"));
+        editor.putString(Peso_data,String.valueOf(object.getString("Peso")));
+        editor.putString(Altura_data,String.valueOf(object.getString("Altura")));
+        editor.putInt(Edad_data,object.getInt("Edad"));
+        editor.commit();*/
+
        return view;
+    }
+
+
+    public void getdatosuser(final String mail){
+
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/datosuser.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jObj = new JSONArray(response);
+                    JSONObject object = jObj.getJSONObject(0);
+                    SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                            "userinfodata", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putInt(ID_data,object.getInt("id"));
+                    editor.putString(User_data,object.getString("Nombre"));
+                    editor.putString(Peso_data,String.valueOf(object.getString("Peso")));
+                    editor.putString(Altura_data,String.valueOf(object.getString("Altura")));
+                    editor.putInt(Edad_data,object.getInt("Edad"));
+                    editor.commit();
+
+                    SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                            "userinfodata", Context.MODE_PRIVATE);
+                    int edad = sharedPrefe.getInt(Edad_data, 0);
+                    String name = sharedPrefe.getString(User_data, "hola");
+                    String altu = sharedPrefe.getString(Altura_data, "hola");
+                    String pe = sharedPrefe.getString(Peso_data, "hola");
+                    nombre.setText(name);
+                    e.setText(String.valueOf(edad));
+                    a.setText(altu);
+                    peso.setText(pe);
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        }){
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("correo",mail);
+                return map;
+            }
+
+        };
+        requestQueue.add(request);
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

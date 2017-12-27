@@ -24,6 +24,8 @@ public class Detalle_Plato_Selec extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     String calorias,nombre,cantidad;
     float calculo_total;
+    int id;
+    String sid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,9 @@ public class Detalle_Plato_Selec extends AppCompatActivity {
         txtcarbohidratos.setText(getIntent().getStringExtra("Caloria"));
         nombre = getIntent().getStringExtra("Nombre");
         calorias = getIntent().getStringExtra("Caloria");
+        id = getIntent().getIntExtra("id_Comida",0);
+        sid = String.valueOf(id);
+
         elegantNumberButton.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +59,7 @@ public class Detalle_Plato_Selec extends AppCompatActivity {
         btn_agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Database(getBaseContext()).addPlatos(new Platos("A1",nombre,calorias,cantidad));
+                new Database(getBaseContext()).addPlatos(new Platos(sid,nombre,calorias,cantidad));
 
                 Toast.makeText(getApplicationContext(), "Plato Agregado", Toast.LENGTH_LONG).show();
             }

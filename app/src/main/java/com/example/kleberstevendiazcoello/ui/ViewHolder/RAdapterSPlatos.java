@@ -49,6 +49,7 @@ public class RAdapterSPlatos extends RecyclerView.Adapter<RAdapterSPlatos.Recicl
                 //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
                 Detalle detalle = filterarray.get(position);
                 Intent intent = new Intent(ctx,Detalle_Plato_Selec.class);
+                intent.putExtra("id_Comida",detalle.getId());
                 intent.putExtra("Nombre",detalle.getComida());
                 intent.putExtra("Caloria",detalle.getCarbohidratos());
                 ctx.startActivity(intent);

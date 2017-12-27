@@ -29,7 +29,7 @@ import java.util.Map;
  */
 
 public class crearcuenta extends AppCompatActivity {
-    EditText nombre, contraseña, correo;
+    EditText nombre, contraseña, correo,altura,edad,peso;
     Button enviar;
     RequestQueue requestQueue;
     @Override
@@ -39,6 +39,9 @@ public class crearcuenta extends AppCompatActivity {
         nombre = (EditText) findViewById(R.id.txtusuario);
         contraseña = (EditText) findViewById(R.id.txtpasswordi);
         correo = (EditText) findViewById(R.id.txtcorreoi);
+        altura = (EditText) findViewById(R.id.txtaltura);
+        edad = (EditText) findViewById(R.id.txtedad);
+        peso = (EditText) findViewById(R.id.txtpeso);
         enviar = (Button) findViewById(R.id.btn_crear_ok);
         requestQueue = Volley.newRequestQueue(this);
 
@@ -94,6 +97,9 @@ public class crearcuenta extends AppCompatActivity {
                 map.put("nombre",nombre.getText().toString());
                 map.put("contrasena",contraseña.getText().toString());
                 map.put("correo",correo.getText().toString());
+                map.put("altura",altura.getText().toString());
+                map.put("edad",edad.getText().toString());
+                map.put("peso",peso.getText().toString());
                 return map;
             }
 

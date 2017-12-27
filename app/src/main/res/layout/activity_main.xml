@@ -49,7 +49,7 @@
         android:background="@drawable/botoncontrasenac"
         android:ems="10"
         android:hint="   Contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textColorHint="@android:color/background_light"
         android:textSize="15dp" />
 

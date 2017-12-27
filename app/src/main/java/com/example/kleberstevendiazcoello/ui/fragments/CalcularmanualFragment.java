@@ -2,6 +2,7 @@ package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -32,6 +33,7 @@ import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 import com.example.kleberstevendiazcoello.ui.login.MainActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -63,10 +65,13 @@ public class CalcularmanualFragment extends Fragment {
     ArrayList<Platos> arrayList = new ArrayList<>();
     Apter_carrito_paltos adapter;
     GridLayoutManager gridLayoutManager;
-    RequestQueue requestQueue;
+    RequestQueue requestQueue,requestQueue2,requestQueue3;
     TextView total_carbo;
     ArrayList<Platos> cart;
+    ArrayList<Platos> cartlistos;
     int total = 0;
+    public static final String ID_data = "iduser";
+    static String id_h ;
 
 
     // TODO: Rename and change types of parameters
@@ -114,6 +119,8 @@ public class CalcularmanualFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calcularmanual, container, false);
          selecplatos = (Button) view.findViewById(R.id.agregarplatos);
          requestQueue = Volley.newRequestQueue(getActivity());
+         requestQueue2 = Volley.newRequestQueue(getActivity());
+         requestQueue3 = Volley.newRequestQueue(getActivity());
          calc_dosis= (Button) view.findViewById(R.id.btn_calcular_dosis);
          total_carbo = (TextView)view.findViewById(R.id.sumatoria_corbogidratos);
          selecplatos.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +141,8 @@ public class CalcularmanualFragment extends Fragment {
                  SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
                  String hour = format.format(new Date());
                  saveHistorial(currentDate,hour);
+                 getlastindexHistorial();
+
 
 
              }
@@ -149,6 +158,73 @@ public class CalcularmanualFragment extends Fragment {
     }
 
 
+    private void getlastindexHistorial(){
+
+
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/ultimohistorial.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jObj = new JSONArray(response);
+                    JSONObject object = jObj.getJSONObject(0);
+                    id_h = object.getString("id_historial");
+                    Log.d("Id obtenido",id_h);
+                    SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                            "userinfodata", Context.MODE_PRIVATE);
+                    int iduser = sharedPrefe.getInt(ID_data, 0);
+                    String ids = String.valueOf(iduser);
+                    saveplatos(id_h,ids);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        });
+        requestQueue3.add(request);
+    }
+    private void saveplatos(final String idhi,final String idusuario){
+        cartlistos = new Database(getActivity()).getListaComida();
+        for (Platos platos:cartlistos){
+            final String idplato = platos.getFoodID();
+            String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/guardarplatos.php";
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }){
+                protected Map<String,String> getParams() throws AuthFailureError {
+                    Map<String,String> map = new HashMap<String,String>();
+                    map.put("idcomida",idplato);
+                    map.put("idhistorial",id_h);
+                    map.put("idusuario",idusuario);
+                    return map;
+                }
+
+            };
+            requestQueue2.add(request);
+
+        }
+        new Database(getActivity()).cleanList();
+        total = 0;
+        android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.content2,new CalcularmanualFragment()).commit();
+
+    }
     private void saveHistorial(final String dia, final String hora){
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/guardarHistorial.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -176,8 +252,6 @@ public class CalcularmanualFragment extends Fragment {
         };
         requestQueue.add(request);
 
-        new Database(getActivity()).cleanList();
-        total = 0;
 
     }
     private void LoadListFood() {

@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,9 +7,51 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home fragment"
-        android:id="@+id/showuser"/>
+        android:id="@+id/showuser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="home fragment" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/txtshowusuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="81dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txtshowedad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtshowusuario"
+        android:layout_below="@+id/txtshowusuario"
+        android:layout_marginTop="36dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txtshowpeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtshowedad"
+        android:layout_below="@+id/txtshowedad"
+        android:layout_marginTop="46dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/txtshowaltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtshowpeso"
+        android:layout_below="@+id/txtshowpeso"
+        android:layout_marginTop="41dp"
+        android:text="TextView" />
+
+
+
+
+</RelativeLayout>
