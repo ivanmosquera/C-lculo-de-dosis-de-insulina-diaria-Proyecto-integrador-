@@ -236,7 +236,9 @@ public class visioapi extends AppCompatActivity implements AdapterView.OnItemSel
             case "LABEL_DETECTION":
                 entityAnnotations = imageResponses.getLabelAnnotations();
                 message = formatAnnotation(entityAnnotations);
-                break;
+                break;/*
+            case "WEB_DETECTION":
+                entityAnnotations = imageResponses*/
         }
         return message;
     }
