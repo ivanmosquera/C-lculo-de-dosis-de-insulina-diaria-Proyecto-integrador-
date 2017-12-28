@@ -137,10 +137,13 @@ public class CalcularmanualFragment extends Fragment {
              public void onClick(View view) {
                  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                  String currentDate = sdf.format(new Date());
-
+                 SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                         "userinfodata", Context.MODE_PRIVATE);
+                 int iduser = sharedPrefe.getInt(ID_data, 0);
+                 String ids = String.valueOf(iduser);
                  SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
                  String hour = format.format(new Date());
-                 saveHistorial(currentDate,hour);
+                 saveHistorial(currentDate,hour,ids);
                  getlastindexHistorial();
 
 
@@ -225,7 +228,7 @@ public class CalcularmanualFragment extends Fragment {
         transaction.replace(R.id.content2,new CalcularmanualFragment()).commit();
 
     }
-    private void saveHistorial(final String dia, final String hora){
+    private void saveHistorial(final String dia, final String hora,final String idusuario){
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/guardarHistorial.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -243,7 +246,7 @@ public class CalcularmanualFragment extends Fragment {
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("fecha",dia);
                 map.put("hora",hora);
-                map.put("idusuario","1");
+                map.put("idusuario",idusuario);
                 map.put("insulina","12.1");
                 map.put("total",total_carbo.getText().toString());
                 return map;
