@@ -91,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
                     if (!error) {
 
                         //getdatosuser(mail);
+                        SharedPreferences sharedPref = MainActivity.this.getSharedPreferences(
+                                "userinfo", Context.MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.clear();
+                        editor.putString(Mail_data, mail);
+                        editor.commit();
                         Intent intent = new Intent(getApplicationContext(),botton_menu.class);
                         startActivity(intent);
                         finish();

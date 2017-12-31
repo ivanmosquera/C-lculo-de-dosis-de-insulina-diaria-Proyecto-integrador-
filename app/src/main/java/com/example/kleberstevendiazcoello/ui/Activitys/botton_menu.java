@@ -32,11 +32,7 @@ public class botton_menu extends AppCompatActivity  {
                     transaction.replace(R.id.content2,new CalculosFragment()).commit();
 
                     return true;
-                case R.id.navigation_user:
-                    transaction.replace(R.id.content2,new PerfilFragment()).commit();
 
-
-                    return true;
                 case R.id.navigation_platos:
                     transaction.replace(R.id.content2,new PlatoFragment()).commit();
                     return true;

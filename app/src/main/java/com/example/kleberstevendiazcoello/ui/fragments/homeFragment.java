@@ -97,7 +97,7 @@ public class homeFragment extends Fragment {
         // Inflate the layout for this fragment
        View view  =inflater.inflate(R.layout.fragment_home, container, false);
         requestQueue = Volley.newRequestQueue(getActivity());
-        user = (TextView)view.findViewById(R.id.showuser);
+        user = (TextView)view.findViewById(R.id.txtcorreouser);
         a = (TextView)view.findViewById(R.id.txtshowaltura);
         peso= (TextView)view.findViewById(R.id.txtshowpeso);
         e = (TextView)view.findViewById(R.id.txtshowedad);
@@ -136,6 +136,7 @@ public class homeFragment extends Fragment {
                     SharedPreferences sharedPref = getActivity().getSharedPreferences(
                             "userinfodata", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.clear();
                     editor.putInt(ID_data,object.getInt("id"));
                     editor.putString(User_data,object.getString("Nombre"));
                     editor.putString(Peso_data,String.valueOf(object.getString("Peso")));
@@ -149,10 +150,11 @@ public class homeFragment extends Fragment {
                     String name = sharedPrefe.getString(User_data, "hola");
                     String altu = sharedPrefe.getString(Altura_data, "hola");
                     String pe = sharedPrefe.getString(Peso_data, "hola");
-                    nombre.setText(name);
+                    user.setText(mail);
                     e.setText(String.valueOf(edad));
                     a.setText(altu);
                     peso.setText(pe);
+                    nombre.setText(name);
 
 
 

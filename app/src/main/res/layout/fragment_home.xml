@@ -1,57 +1,127 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.kleberstevendiazcoello.ui.fragments.homeFragment"
-    android:background="@drawable/fondonuevo">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
     <TextView
-        android:id="@+id/showuser"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:text="HOLAAAA"
+        android:textSize="18dp"
+        android:background="@drawable/fondonuevo"
+        android:id="@+id/txtshowusuario"/>
+
+
+</LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:text="home fragment" />
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/iconopeso"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="127 LB"
+            android:textSize="14dp"
+            android:id="@+id/txtshowpeso"/>
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
-    <TextView
-        android:id="@+id/txtshowusuario"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp"
-        android:text="TextView" />
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/iconoaltura"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="1,76"
+            android:textSize="14dp"
+            android:id="@+id/txtshowaltura"/>
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
-    <TextView
-        android:id="@+id/txtshowedad"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtshowusuario"
-        android:layout_below="@+id/txtshowusuario"
-        android:layout_marginTop="36dp"
-        android:text="TextView" />
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/iconoedad"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="24 años"
+            android:textSize="14dp"
+            android:id="@+id/txtshowedad"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtshowpeso"
-        android:layout_width="wrap_content"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/txtshowedad"
-        android:layout_below="@+id/txtshowedad"
-        android:layout_marginTop="46dp"
-        android:text="TextView" />
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/iconocorreo"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:text="ksdiaz"
+            android:textSize="14dp"
+            android:id="@+id/txtcorreouser"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/txtshowaltura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txtshowpeso"
-        android:layout_below="@+id/txtshowpeso"
-        android:layout_marginTop="41dp"
-        android:text="TextView" />
 
-
-
-
-</RelativeLayout>
+</LinearLayout>
