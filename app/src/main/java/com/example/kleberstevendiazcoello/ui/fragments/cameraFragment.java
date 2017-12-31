@@ -26,9 +26,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RAdapterSPlatos;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
@@ -87,6 +90,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
     Spinner spinnerVisionAPI;
     TextView visionAPIData;
     ArrayList<String> arrayList = new ArrayList<>();
+    RequestQueue requestQueue;
 
     private Feature feature;
     private Bitmap bitmap;
@@ -347,6 +351,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
                 entityAnnotations = imageResponses.getLabelAnnotations();
                 message = formatAnnotation(entityAnnotations);
                 Log.d("Lista",formatAnnotation(entityAnnotations));  //prueba
+                requestQueue = Volley.newRequestQueue(getActivity());
                 try {
                     getListLabelsNoNecesarios();
                 } catch (JSONException e) {
@@ -390,11 +395,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     public void  getListLabelsNoNecesarios() throws JSONException {
-        //final ArrayList<Detalle> arrayListe = new ArrayList<>();
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/labels_no_necesarios.php";
-        JSONObject obj = new JSONObject();
-        obj.put("id",3);
-
         JsonArrayRequest jsonArrayRequest =  new JsonArrayRequest(com.android.volley.Request.Method.POST, url,(String) null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -403,16 +404,16 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
                         while(count<response.length()){
                             try {
                                 JSONObject object = response.getJSONObject(count);
+                                String label = object.getString("Nombre");
                                 //Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("Cantidad"));
-                                arrayList.add(object.getString("Nombre"));
-                                Log.d("Lista", String.valueOf(arrayList.toArray()));  //prueba
+                                arrayList.add(label);
                                 count ++;
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
                         }
-
+                        Log.d("Lista", arrayList.toString());  //Imprime lista de labels no necesarios por consola
                         //adapter = new RAdapterSPlatos(arrayList,getActivity());
 
                         //recyclerView.setAdapter(adapter);
@@ -424,7 +425,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
                 Toast.makeText(getActivity(), error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-        //requestQueue.add(jsonArrayRequest);
+        requestQueue.add(jsonArrayRequest);
 
 
     }
