@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 import com.example.kleberstevendiazcoello.ui.login.MainActivity;
+import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -157,6 +159,7 @@ public class CalcularmanualFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
+
         return view;
     }
 
@@ -262,6 +265,9 @@ public class CalcularmanualFragment extends Fragment {
         cart = new Database(getActivity()).getListaComida();
         adapter = new Apter_carrito_paltos(cart,getActivity());
         recyclerView.setAdapter(adapter);
+        ItemTouchHelper.Callback callback = new SwipeHelper(adapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerView);
         for (Platos platos:cart){
             total += (Integer.parseInt(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
 

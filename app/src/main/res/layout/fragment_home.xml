@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAlignment="center"
-        android:text="HOLAAAA"
         android:textSize="18dp"
         android:background="@drawable/fondonuevo"
         android:id="@+id/txtshowusuario"/>
@@ -42,7 +41,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
-            android:text="127 LB"
             android:textSize="14dp"
             android:id="@+id/txtshowpeso"/>
     </LinearLayout>
@@ -67,7 +65,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
-            android:text="1,76"
             android:textSize="14dp"
             android:id="@+id/txtshowaltura"/>
     </LinearLayout>
@@ -92,7 +89,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
-            android:text="24 años"
             android:textSize="14dp"
             android:id="@+id/txtshowedad"/>
     </LinearLayout>
@@ -118,7 +114,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
-            android:text="ksdiaz"
             android:textSize="14dp"
             android:id="@+id/txtcorreouser"/>
     </LinearLayout>

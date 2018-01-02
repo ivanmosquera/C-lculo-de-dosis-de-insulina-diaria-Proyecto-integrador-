@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class Apter_carrito_paltos extends RecyclerView.Adapter<Apter_carrito_paltos.HolderSeleccionados> {
     private ArrayList<Platos> arrayList = new ArrayList<>();
     Context ctx;
+    Database db;
 
     public Apter_carrito_paltos(ArrayList<Platos> arrayList, Context ctx){
         this.arrayList = arrayList;
@@ -46,6 +48,17 @@ public class Apter_carrito_paltos extends RecyclerView.Adapter<Apter_carrito_pal
     public int getItemCount() {
         return arrayList.size();
     }
+
+    //Dismiss
+    public void dismissFood(int pos){
+        String item =  arrayList.get(pos).getFoodName();
+        db = new Database(ctx);
+        db.DeleteItem(item);
+        arrayList.remove(pos);
+        this.notifyItemRemoved(pos);
+
+    }
+
 
 
     public static class HolderSeleccionados extends RecyclerView.ViewHolder{
