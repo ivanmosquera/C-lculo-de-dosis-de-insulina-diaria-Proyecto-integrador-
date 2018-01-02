@@ -131,6 +131,8 @@ public class SeleccionarPlatos extends Fragment {
         }
     };
 
+
+
     public void  getList() throws JSONException {
         final ArrayList<Detalle> arrayListe = new ArrayList<>();
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/itemscomida.php";
