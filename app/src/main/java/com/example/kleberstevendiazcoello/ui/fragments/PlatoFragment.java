@@ -247,7 +247,7 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
                         while(count<response.length()){
                             try {
                                 JSONObject object = response.getJSONObject(count);
-                                Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("Cantidad"));
+                                Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("CHO"));
                                 arrayList.add(d);
                                 count ++;
                             } catch (JSONException e) {

@@ -58,6 +58,7 @@ public class HistorialFragment extends Fragment {
     HistorialAdpater adapter;
     android.support.v7.widget.Toolbar toolbar;
     EditText mSearchField;
+    public static final String ID_data = "iduser";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -144,6 +145,10 @@ public class HistorialFragment extends Fragment {
     };
 
     public void  getList() throws JSONException {
+        SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                "userinfodata", Context.MODE_PRIVATE);
+        int iduser = sharedPrefe.getInt(ID_data, 0);
+        final String ids = String.valueOf(iduser);
 
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/getHistorial.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -185,7 +190,7 @@ public class HistorialFragment extends Fragment {
         }){
             protected Map<String,String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<String,String>();
-                map.put("iduser","10");
+                map.put("iduser",ids);
                 return map;
             }
 

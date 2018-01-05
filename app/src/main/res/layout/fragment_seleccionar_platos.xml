@@ -11,15 +11,16 @@
         android:background="@color/celesteazul"
         >
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/buscarfood"/>
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:src="@drawable/lupaicono"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/buscar_food_calculo_manual"
             android:backgroundTint="@color/fbutton_color_midnight_blue"
-            android:textColor="@color/fbutton_color_midnight_blue"/>
+            android:textColor="@color/fbutton_color_midnight_blue"
+            />
 
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView

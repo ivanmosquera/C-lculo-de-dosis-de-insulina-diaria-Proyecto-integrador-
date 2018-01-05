@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.kleberstevendiazcoello.ui.Activitys.DetalleHistorial;
+import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_Plato_Selec;
 import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
@@ -45,7 +48,13 @@ public class HistorialAdpater extends RecyclerView.Adapter<HistorialAdpater.Hist
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void OnClick(View view, int position) {
-                //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
+                Historial his = filterarray.get(position);
+                Intent intent = new Intent(ctx,DetalleHistorial.class);
+                intent.putExtra("id_Historial",his.getId_historial());
+                intent.putExtra("fechahistorial",his.getFecha());
+                intent.putExtra("totalcarbs",his.getCarbs());
+
+                ctx.startActivity(intent);
             }
         });
     }
