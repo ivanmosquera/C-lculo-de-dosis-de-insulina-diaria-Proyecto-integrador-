@@ -15,7 +15,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,7 @@ import org.json.JSONObject;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -71,6 +74,10 @@ public class CalcularmanualFragment extends Fragment {
     TextView total_carbo;
     ArrayList<Platos> cart;
     ArrayList<Platos> cartlistos;
+    Spinner spsalud,spinenfermo;
+    ArrayList<String> listavida,listaenfermo;
+    String[] strvida,senfermo;
+    ArrayAdapter comboAdapter,comboadapterenfermo;
     int total = 0;
     public static final String ID_data = "iduser";
     static String id_h ;
@@ -125,6 +132,42 @@ public class CalcularmanualFragment extends Fragment {
          requestQueue3 = Volley.newRequestQueue(getActivity());
          calc_dosis= (Button) view.findViewById(R.id.btn_calcular_dosis);
          total_carbo = (TextView)view.findViewById(R.id.sumatoria_corbogidratos);
+
+        spsalud = (Spinner)view.findViewById(R.id.spinnervida);
+        //Implemento el setOnItemSelectedListener: para realizar acciones cuando se seleccionen los ítems
+        //spsalud.setOnItemSelectedListener(getActivity());
+        //Convierto la variable List<> en un ArrayList<>()
+        listavida = new ArrayList<>();
+        //Arreglo con nombre de frutas
+        strvida = new String[] {"Alta","Media","Baja"};
+        //Agrego las frutas del arreglo `strFrutas` a la listaFrutas
+        Collections.addAll(listavida, strvida);
+        //Implemento el adapter con el contexto, layout, listaFrutas
+        comboAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item, listavida);
+        //Cargo el spinner con los datos
+        spsalud.setAdapter(comboAdapter);
+
+        spinenfermo = (Spinner)view.findViewById(R.id.spinersalud);
+        //Implemento el setOnItemSelectedListener: para realizar acciones cuando se seleccionen los ítems
+        //spsalud.setOnItemSelectedListener(getActivity());
+        //Convierto la variable List<> en un ArrayList<>()
+        listaenfermo = new ArrayList<>();
+        //Arreglo con nombre de frutas
+        senfermo = new String[] {"Si","No"};
+        //Agrego las frutas del arreglo `strFrutas` a la listaFrutas
+        Collections.addAll(listaenfermo, senfermo);
+        //Implemento el adapter con el contexto, layout, listaFrutas
+        comboadapterenfermo = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item, listaenfermo);
+        //Cargo el spinner con los datos
+        spinenfermo.setAdapter(comboadapterenfermo);
+
+
+
+
+
+
+
+
          selecplatos.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
