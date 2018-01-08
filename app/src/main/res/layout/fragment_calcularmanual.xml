@@ -60,6 +60,8 @@
             <EditText
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/mglucosaactual"
+                android:text="0"
                 />
 
 
@@ -79,6 +81,8 @@
             <EditText
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/mglucosaobjetivo"
+                android:text="0"
                 />
 
 
@@ -138,7 +142,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 500 gr"
+                android:text="0"
                 android:id="@+id/sumatoria_corbogidratos"
                 android:textColor="@color/celesteazul"/>
 
@@ -157,5 +161,5 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp" />
     </LinearLayout>
-    
+
 </LinearLayout>

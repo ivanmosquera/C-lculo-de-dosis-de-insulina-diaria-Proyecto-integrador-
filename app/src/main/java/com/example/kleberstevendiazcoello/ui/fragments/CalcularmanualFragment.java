@@ -1,5 +1,6 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +83,17 @@ public class CalcularmanualFragment extends Fragment {
     int total = 0;
     public static final String ID_data = "iduser";
     static String id_h ;
+    Dialog mydialog;
+    TextView txtclose,txttotalinsu;
+    EditText glucosoactual, glucosaobjetivo;
+    float totalamostar;
+    String totalamostars;
+    Button guardarhistorial,nuevainsulina;
+    float tot = 0;
+    float icr = 0;
+    float nivelact = 0;
+    float nivelobj = 0;
+    float factor = 0;
 
 
     // TODO: Rename and change types of parameters
@@ -132,6 +145,13 @@ public class CalcularmanualFragment extends Fragment {
          requestQueue3 = Volley.newRequestQueue(getActivity());
          calc_dosis= (Button) view.findViewById(R.id.btn_calcular_dosis);
          total_carbo = (TextView)view.findViewById(R.id.sumatoria_corbogidratos);
+         glucosoactual = (EditText)view.findViewById(R.id.mglucosaactual);
+         glucosaobjetivo = (EditText)view.findViewById(R.id.mglucosaobjetivo);
+        mydialog = new Dialog(getActivity());
+         mydialog.setContentView(R.layout.custompopup);
+         txtclose = (TextView)mydialog.findViewById(R.id.txtpopclose);
+         txttotalinsu = (TextView)mydialog.findViewById(R.id.totalinsulinadministrar);
+
 
         spsalud = (Spinner)view.findViewById(R.id.spinnervida);
         //Implemento el setOnItemSelectedListener: para realizar acciones cuando se seleccionen los ítems
@@ -142,9 +162,7 @@ public class CalcularmanualFragment extends Fragment {
         strvida = new String[] {"Alta","Media","Baja"};
         //Agrego las frutas del arreglo `strFrutas` a la listaFrutas
         Collections.addAll(listavida, strvida);
-        //Implemento el adapter con el contexto, layout, listaFrutas
         comboAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item, listavida);
-        //Cargo el spinner con los datos
         spsalud.setAdapter(comboAdapter);
 
         spinenfermo = (Spinner)view.findViewById(R.id.spinersalud);
@@ -180,7 +198,10 @@ public class CalcularmanualFragment extends Fragment {
          calc_dosis.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+                 showpopu(view);
+
+                 /*SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                  String currentDate = sdf.format(new Date());
                  SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
                          "userinfodata", Context.MODE_PRIVATE);
@@ -189,7 +210,7 @@ public class CalcularmanualFragment extends Fragment {
                  SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
                  String hour = format.format(new Date());
                  saveHistorial(currentDate,hour,ids);
-                 getlastindexHistorial();
+                 getlastindexHistorial();*/
 
 
 
@@ -206,6 +227,71 @@ public class CalcularmanualFragment extends Fragment {
         return view;
     }
 
+
+    public void showpopu(View v){
+
+            txtclose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mydialog.dismiss();
+                }
+            });
+            String t  =  totalcalculo();
+            guardarhistorial = (Button)mydialog.findViewById(R.id.btnguardarhistorial);
+            guardarhistorial.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                    String currentDate = sdf.format(new Date());
+                    SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                            "userinfodata", Context.MODE_PRIVATE);
+                    int iduser = sharedPrefe.getInt(ID_data, 0);
+                    String ids = String.valueOf(iduser);
+                    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
+                    String hour = format.format(new Date());
+                    saveHistorial(currentDate,hour,ids);
+                    getlastindexHistorial();
+                    Toast.makeText(getActivity(), "Historial Guardado", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            nuevainsulina = (Button)mydialog.findViewById(R.id.btnnuevocalculo);
+            nuevainsulina.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new Database(getActivity()).cleanList();
+                    total = 0;
+                    android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                    android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.content2,new CalcularmanualFragment()).commit();
+                    mydialog.dismiss();
+                }
+            });
+
+            txttotalinsu.setText(t);
+            mydialog.show();
+
+
+
+
+
+
+
+
+    }
+
+    private String totalcalculo(){
+         tot = Float.parseFloat(total_carbo.getText().toString());
+         icr = 15;
+         nivelact = Float.parseFloat(glucosoactual.getText().toString());
+         nivelobj = Float.parseFloat(glucosaobjetivo.getText().toString());
+         factor = 1;
+
+        totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
+        totalamostars = String.valueOf(totalamostar);
+
+        return totalamostars;
+    }
 
     private void getlastindexHistorial(){
 
@@ -238,7 +324,7 @@ public class CalcularmanualFragment extends Fragment {
         });
         requestQueue3.add(request);
     }
-    private void saveplatos(final String idhi,final String idusuario){
+    private void saveplatos(final String idhistorial,final String idusuario){
         cartlistos = new Database(getActivity()).getListaComida();
         for (Platos platos:cartlistos){
             final String idplato = platos.getFoodID();
@@ -258,7 +344,7 @@ public class CalcularmanualFragment extends Fragment {
                 protected Map<String,String> getParams() throws AuthFailureError {
                     Map<String,String> map = new HashMap<String,String>();
                     map.put("idcomida",idplato);
-                    map.put("idhistorial",id_h);
+                    map.put("idhistorial",idhistorial);
                     map.put("idusuario",idusuario);
                     return map;
                 }
@@ -267,11 +353,6 @@ public class CalcularmanualFragment extends Fragment {
             requestQueue2.add(request);
 
         }
-        new Database(getActivity()).cleanList();
-        total = 0;
-        android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.content2,new CalcularmanualFragment()).commit();
 
     }
     private void saveHistorial(final String dia, final String hora,final String idusuario){
@@ -293,7 +374,7 @@ public class CalcularmanualFragment extends Fragment {
                 map.put("fecha",dia);
                 map.put("hora",hora);
                 map.put("idusuario",idusuario);
-                map.put("insulina","12.1");
+                map.put("insulina",txttotalinsu.getText().toString());
                 map.put("total",total_carbo.getText().toString());
                 return map;
             }

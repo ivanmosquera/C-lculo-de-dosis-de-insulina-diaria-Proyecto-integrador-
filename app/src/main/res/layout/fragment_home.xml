@@ -17,7 +17,10 @@
         android:textAlignment="center"
         android:textSize="18dp"
         android:background="@drawable/fondonuevo"
-        android:id="@+id/txtshowusuario"/>
+        android:id="@+id/txtshowusuario"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:gravity="bottom"/>
 
 
 </LinearLayout>

@@ -15,19 +15,37 @@
         android:padding="10dp"
         android:background="?android:selectableItemBackground"
 
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/htotalcarh"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/htxttotalinsulina"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/htotalcarh"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/htxttotalinsulina"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/hfechahistorial"/>
+            android:id="@+id/hfechahistorial"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/celesteazul"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
 

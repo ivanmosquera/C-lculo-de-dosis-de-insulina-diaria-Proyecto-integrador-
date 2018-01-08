@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="275dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/celesteazul"
+    android:padding="5dp"
+    android:layout_gravity="center">
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:textColor="@android:color/white"
+        android:text="X"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:id="@+id/txtpopclose"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Insulina a administrar :"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="500 ml"
+            android:textColor="@android:color/white"
+            android:textSize="50dp"
+            android:id="@+id/totalinsulinadministrar"/>
+
+
+
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Space
+            android:layout_width="30dp"
+            android:layout_height= "2dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:id="@+id/btnguardarhistorial"/>
+        <Space
+            android:layout_width="30dp"
+            android:layout_height= "0dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nuevo"
+            android:id="@+id/btnnuevocalculo"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

@@ -11,38 +11,42 @@
     >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="?android:selectableItemBackground"
-        
         android:orientation="horizontal">
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
 
-            android:textSize="18dp"
-            android:id="@+id/txtcomida"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:id="@+id/txtcomida"
+                />
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:id="@+id/txtmedida"
+                />
+
+        </LinearLayout>
+
         <TextView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:textSize="15dp"
-            android:id="@+id/txtmedida"/>
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
+
             android:id="@+id/txtcarbohidratos"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="@color/celesteazul"
-            />
-        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:text="gr"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:textColor="@color/celesteazul"
+            android:textSize="16dp"
+            android:textStyle="bold"
             />
         
     </LinearLayout>
