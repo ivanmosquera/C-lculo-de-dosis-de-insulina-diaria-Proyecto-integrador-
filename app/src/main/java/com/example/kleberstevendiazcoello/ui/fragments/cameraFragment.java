@@ -91,7 +91,10 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
     TextView visionAPIData;
     ArrayList<String> arrayList = new ArrayList<>();
     RequestQueue requestQueue;
-
+    char[] list;
+    ArrayList<String> listaobtenido = new ArrayList<>();
+    ArrayList<String> listafiltrada = new ArrayList<>();
+    ArrayList<String> comparacionl = new ArrayList<>();
     private Feature feature;
     private Bitmap bitmap;
     private String[] visionAPI = new String[]{"LABEL_DETECTION"};
@@ -302,9 +305,14 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
             protected void onPostExecute(String result) {
                 visionAPIData.setText(result);
                 imageUploadProgress.setVisibility(View.INVISIBLE);
+                //listafiltrada = compararlistas();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ListaObtenida",listaobtenido);
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new AutomaticCalculo()).addToBackStack("").commit();
+                Labels_obtenidos lbl = new Labels_obtenidos();
+                lbl.setArguments(bundle);
+                transaction.replace(R.id.content2,lbl).addToBackStack("").commit();
             }
         }.execute();
     }
@@ -349,14 +357,12 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
                 break;
             case "LABEL_DETECTION":
                 entityAnnotations = imageResponses.getLabelAnnotations();
-                message = formatAnnotation(entityAnnotations);
-                Log.d("Lista",formatAnnotation(entityAnnotations));  //prueba
-                requestQueue = Volley.newRequestQueue(getActivity());
-                try {
+                message = formatAnnotation(entityAnnotations);requestQueue = Volley.newRequestQueue(getActivity());
+                /*try {
                     getListLabelsNoNecesarios();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
                 break;
         }
         return message;
@@ -384,9 +390,11 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
         String message = "";
 
         if (entityAnnotation != null) {
+            listaobtenido.clear();
             for (EntityAnnotation entity : entityAnnotation) {
-                message = message + "    " + entity.getDescription() + " " + entity.getScore()*100 + "%";
+                message = message + "    " + entity.getDescription();/*message + "    " + entity.getDescription() + " " + entity.getScore()*100 + "%";*/
                 message += "\n";
+                listaobtenido.add(entity.getDescription());
             }
         } else {
             message = "No se pudo reconocer el plato";
@@ -394,7 +402,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
         return message;
     }
 
-    public void  getListLabelsNoNecesarios() throws JSONException {
+   /* public void  getListLabelsNoNecesarios() throws JSONException {
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/labels_no_necesarios.php";
         JsonArrayRequest jsonArrayRequest =  new JsonArrayRequest(com.android.volley.Request.Method.POST, url,(String) null,
                 new Response.Listener<JSONArray>() {
@@ -413,7 +421,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
                             }
 
                         }
-                        Log.d("Lista", arrayList.toString());  //Imprime lista de labels no necesarios por consola
+                        Log.d("Lista no deseados", arrayList.toString());  //Imprime lista de labels no necesarios por consola
                         //adapter = new RAdapterSPlatos(arrayList,getActivity());
 
                         //recyclerView.setAdapter(adapter);
@@ -428,8 +436,24 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
         requestQueue.add(jsonArrayRequest);
 
 
-    }
+    }*/
 
+
+    public ArrayList<String> compararlistas(){
+        for (int i = 0; i < listaobtenido.size(); i++) {
+            for (int j = 0; j < arrayList.size(); j++) {
+                Log.d("Comparar",listaobtenido.get(i).toString()+" "+arrayList.get(j).toString());
+                if(listaobtenido.get(i).toString().equals(arrayList.get(j).toString())){
+                    listaobtenido.remove(i);
+                    Log.d("Removi", listaobtenido.get(i).toString());
+                }
+            }
+        }
+
+
+
+        return listaobtenido;
+    }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         api = (String) adapterView.getItemAtPosition(i);

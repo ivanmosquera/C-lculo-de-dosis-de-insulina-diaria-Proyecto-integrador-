@@ -42,10 +42,12 @@
             android:textSize="15dp"
             android:gravity="center"/>
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
+        android:padding="8dp"
+        android:id="@+id/recyclerviewhistorial"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:id="@+id/recyclerviewhistorial"/>
+        android:scrollbars="vertical" />
 
 </LinearLayout>
