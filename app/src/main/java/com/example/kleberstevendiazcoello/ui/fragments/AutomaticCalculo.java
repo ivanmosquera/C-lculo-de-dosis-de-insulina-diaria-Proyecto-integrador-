@@ -1,29 +1,50 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.AdapaterAutoHolder;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.Apter_carrito_paltos;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
+import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelper;
+import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelperAuto;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 /**
@@ -45,10 +66,24 @@ public class AutomaticCalculo extends Fragment {
     ArrayList<Platos> arrayList = new ArrayList<>();
     AdapaterAutoHolder adapter;
     GridLayoutManager gridLayoutManager;
-    RequestQueue requestQueue;
     TextView total_carbo;
+    ArrayList<Platos> cartlistos;
     ArrayList<Platos> cart;
     int total;
+    Dialog mydialog;
+    TextView txtclose,txttotalinsu;
+    Button guardarhistorial,nuevainsulina;
+    public static final String ID_data = "iduser";
+    float tot = 0;
+    float icr = 0;
+    float nivelact = 0;
+    float nivelobj = 0;
+    float factor = 0;
+    EditText glucosoactual, glucosaobjetivo;
+    float totalamostar;
+    String totalamostars;
+    static String id_h ;
+    RequestQueue requestQueue,requestQueue2,requestQueue3;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,6 +130,15 @@ public class AutomaticCalculo extends Fragment {
         selecplatos = (Button) view.findViewById(R.id.agregarplatosauto);
         calc_dosis= (Button) view.findViewById(R.id.btn_calcular_dosisauto);
         total_carbo = (TextView)view.findViewById(R.id.sumatoria_corbogidratosauto);
+        requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue2 = Volley.newRequestQueue(getActivity());
+        requestQueue3 = Volley.newRequestQueue(getActivity());
+        mydialog = new Dialog(getActivity());
+        mydialog.setContentView(R.layout.custompopupauto);
+        txtclose = (TextView)mydialog.findViewById(R.id.txtpopcloseauto);
+        txttotalinsu = (TextView)mydialog.findViewById(R.id.totalinsulinadministrarauto);
+        glucosoactual = (EditText)view.findViewById(R.id.mglucosaactualauto);
+        glucosaobjetivo = (EditText)view.findViewById(R.id.mglucosaobjetivoauto);
         selecplatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +151,7 @@ public class AutomaticCalculo extends Fragment {
         calc_dosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Database(getActivity()).cleanListAuto();
+                showpopu(view);
 
             }
         });
@@ -120,6 +164,156 @@ public class AutomaticCalculo extends Fragment {
         return view;
     }
 
+
+    public void showpopu(View v){
+
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mydialog.dismiss();
+            }
+        });
+        String t  =  totalcalculo();
+        guardarhistorial = (Button)mydialog.findViewById(R.id.btnguardarhistorialauto);
+        guardarhistorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                String currentDate = sdf.format(new Date());
+                SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                        "userinfodata", Context.MODE_PRIVATE);
+                int iduser = sharedPrefe.getInt(ID_data, 0);
+                String ids = String.valueOf(iduser);
+                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
+                String hour = format.format(new Date());
+                saveHistorial(currentDate,hour,ids);
+                getlastindexHistorial();
+                Toast.makeText(getActivity(), "Historial Guardado", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        nuevainsulina = (Button)mydialog.findViewById(R.id.btnnuevocalculoauto);
+        nuevainsulina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Database(getActivity()).cleanListAuto();
+                total = 0;
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new AutomaticCalculo()).commit();
+                mydialog.dismiss();
+            }
+        });
+
+        txttotalinsu.setText(t);
+        mydialog.show();
+    }
+
+    private void saveHistorial(final String dia, final String hora,final String idusuario){
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/guardarHistorial.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("fecha",dia);
+                map.put("hora",hora);
+                map.put("idusuario",idusuario);
+                map.put("insulina",txttotalinsu.getText().toString());
+                map.put("total",total_carbo.getText().toString());
+                return map;
+            }
+
+        };
+        requestQueue.add(request);
+
+
+    }
+
+    private void getlastindexHistorial(){
+
+
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/ultimohistorial.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jObj = new JSONArray(response);
+                    JSONObject object = jObj.getJSONObject(0);
+                    id_h = object.getString("id_historial");
+                    Log.d("Id obtenido",id_h);
+                    SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                            "userinfodata", Context.MODE_PRIVATE);
+                    int iduser = sharedPrefe.getInt(ID_data, 0);
+                    String ids = String.valueOf(iduser);
+                    saveplatos(id_h,ids);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        });
+        requestQueue3.add(request);
+    }
+
+    private void saveplatos(final String idhistorial,final String idusuario){
+        cartlistos = new Database(getActivity()).getListaComidaAuto();
+        for (Platos platos:cartlistos){
+            final String idplato = platos.getFoodID();
+            String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/guardarplatos.php";
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }){
+                protected Map<String,String> getParams() throws AuthFailureError {
+                    Map<String,String> map = new HashMap<String,String>();
+                    map.put("idcomida",idplato);
+                    map.put("idhistorial",idhistorial);
+                    map.put("idusuario",idusuario);
+                    return map;
+                }
+
+            };
+            requestQueue2.add(request);
+
+        }
+
+    }
+    private String totalcalculo(){
+        tot = Float.parseFloat(total_carbo.getText().toString());
+        icr = 15;
+        nivelact = Float.parseFloat(glucosoactual.getText().toString());
+        nivelobj = Float.parseFloat(glucosaobjetivo.getText().toString());
+        factor = 1;
+
+        totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
+        totalamostars = String.valueOf(totalamostar);
+
+        return totalamostars;
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -128,16 +322,18 @@ public class AutomaticCalculo extends Fragment {
     }
 
     private void LoadListFood() {
+        total = 0;
         cart = new Database(getActivity()).getListaComidaAuto();
         adapter = new AdapaterAutoHolder(cart,getActivity());
         recyclerView.setAdapter(adapter);
+        ItemTouchHelper.Callback callback = new SwipeHelperAuto(adapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerView);
         for (Platos platos:cart){
             total += (Integer.parseInt(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
 
         }
-        Locale locale = new Locale("en","US");
-        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
-        total_carbo.setText(fmt.format(total));
+        total_carbo.setText(String.valueOf(total));
     }
     @Override
     public void onAttach(Context context) {

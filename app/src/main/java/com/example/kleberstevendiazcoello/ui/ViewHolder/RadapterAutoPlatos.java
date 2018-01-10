@@ -27,26 +27,49 @@ public class RadapterAutoPlatos extends RecyclerView.Adapter<RadapterAutoPlatos.
     private ArrayList<Detalle> arrayList = new ArrayList<>();
     private ItemClickListener itemClickListener;
     Context ctx;
+    private  ArrayList<Detalle>filterarray = new ArrayList<>();
 
     public RadapterAutoPlatos(ArrayList<Detalle> arrayList, Context ctx){
         this.arrayList = arrayList;
         this.ctx = ctx;
+        filterarray = this.arrayList;
     }
     @Override
     public ReciclerViewHolderAuto onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.platos_elegidos_modeloauto,parent,false);
-        RadapterAutoPlatos.ReciclerViewHolderAuto reciclerViewHolderAuto = new RadapterAutoPlatos.ReciclerViewHolderAuto(view,ctx,arrayList);
+        RadapterAutoPlatos.ReciclerViewHolderAuto reciclerViewHolderAuto = new RadapterAutoPlatos.ReciclerViewHolderAuto(view,ctx,filterarray);
         return reciclerViewHolderAuto;
     }
 
     @Override
     public void onBindViewHolder(ReciclerViewHolderAuto holder, int position) {
-        holder.comida.setText(arrayList.get(position).getComida());
-        holder.medida.setText(arrayList.get(position).getMedida());
-        holder.Carbohidratos.setText(arrayList.get(position).getCarbohidratos());
+        holder.comida.setText(filterarray.get(position).getComida());
+        holder.medida.setText(filterarray.get(position).getMedida());
+        holder.Carbohidratos.setText(filterarray.get(position).getCarbohidratos());
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void OnClick(View view, int position) {
+                //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
+                Detalle detalle = filterarray.get(position);
+                Intent intent = new Intent(ctx,Detalle_Plato_Auto.class);
+                intent.putExtra("id_Comida",detalle.getId());
+                intent.putExtra("Nombre",detalle.getComida());
+                intent.putExtra("Caloria",detalle.getCarbohidratos());
+                ctx.startActivity(intent);
+            }
+        });
 
     }
 
+    public void filter(String query) {
+        filterarray = new ArrayList<>();
+        for(Detalle pl: arrayList ){
+            if(pl.getComida().toLowerCase().contains(query.toLowerCase())){
+                filterarray.add(pl);
+            }
+        }
+        notifyDataSetChanged();
+    }
 
 
     @Override
@@ -73,12 +96,7 @@ public class RadapterAutoPlatos extends RecyclerView.Adapter<RadapterAutoPlatos.
 
         @Override
         public void onClick(View view) {
-            int position = getAdapterPosition();
-            Detalle detalle = this.food.get(position);
-            Intent intent = new Intent(this.ctx,Detalle_Plato_Auto.class);
-            intent.putExtra("Nombre",detalle.getComida());
-            intent.putExtra("Caloria",detalle.getCarbohidratos());
-            this.ctx.startActivity(intent);
+            this.itemClickListener.OnClick(view,getLayoutPosition());
         }
         public void setItemClickListener(ItemClickListener itemClickListener){
             this.itemClickListener = itemClickListener;

@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -17,10 +19,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.FilterAdapter;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
+import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelper;
+import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelperFilter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,6 +60,7 @@ public class Labels_obtenidos extends Fragment {
     RecyclerView recyclerView;
     FilterAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
+    Button btn_continuar_automatico;
 
     private OnFragmentInteractionListener mListener;
 
@@ -94,6 +101,15 @@ public class Labels_obtenidos extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_labels_obtenidos, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.rvalimentosfiltrados);
+        btn_continuar_automatico = (Button)view.findViewById(R.id.continuarautomatico);
+        btn_continuar_automatico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new AutomaticCalculo()).addToBackStack("").commit();
+            }
+        });
         listaob = (ArrayList<String>) getArguments().getSerializable("ListaObtenida");
         for (int i = 0; i < listaob.size(); i++) {
             Log.d("Lista en otro fragment",listaob.get(i));
@@ -166,18 +182,19 @@ public class Labels_obtenidos extends Fragment {
                         }
 
                         for (int i = 0; i < list.size(); i++) {
-                            Log.d("Lista filtrada ",listaob.get(i));
+                            String name = listaob.get(i);
+                            new Database(getActivity()).addPlatosAuto(new Platos("A1",name,"12","1"));
                         }
 
                         adapter = new FilterAdapter(listaob,getActivity());
 
                         recyclerView.setAdapter(adapter);
-
+                        ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
+                        ItemTouchHelper helper = new ItemTouchHelper(callback);
+                        helper.attachToRecyclerView(recyclerView);
                         //Log.d("Lista no deseados 2 fragment", arrayList.toString());  //Imprime lista de labels no necesarios por consola
                         //adapter = new RAdapterSPlatos(arrayList,getActivity());
-
                         //recyclerView.setAdapter(adapter);
-
                     }
                 }, new Response.ErrorListener() {
             @Override

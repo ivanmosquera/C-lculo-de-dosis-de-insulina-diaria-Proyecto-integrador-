@@ -83,6 +83,13 @@ public class Database extends SQLiteAssetHelper {
                 platos.getCalorias(),platos.getCantidad());
         db.execSQL(query);
     }
+
+
+    public void DeleteItemAuto(String name){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = String.format("DELETE FROM FoodDetailAuto  WHERE FoodName = '%s' ;", name );
+        db.execSQL(query);
+    }
     public void cleanListAuto(){
 
         SQLiteDatabase db = getWritableDatabase();

@@ -147,7 +147,7 @@ public class CalcularmanualFragment extends Fragment {
          total_carbo = (TextView)view.findViewById(R.id.sumatoria_corbogidratos);
          glucosoactual = (EditText)view.findViewById(R.id.mglucosaactual);
          glucosaobjetivo = (EditText)view.findViewById(R.id.mglucosaobjetivo);
-        mydialog = new Dialog(getActivity());
+         mydialog = new Dialog(getActivity());
          mydialog.setContentView(R.layout.custompopup);
          txtclose = (TextView)mydialog.findViewById(R.id.txtpopclose);
          txttotalinsu = (TextView)mydialog.findViewById(R.id.totalinsulinadministrar);

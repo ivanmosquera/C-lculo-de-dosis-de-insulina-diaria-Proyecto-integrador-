@@ -7,10 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -49,6 +52,7 @@ public class SeleccionarPlatosAuto extends Fragment {
     RadapterAutoPlatos adapter;
     GridLayoutManager gridLayoutManager;
     RequestQueue requestQueue;
+    EditText mSearchField;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -94,7 +98,8 @@ public class SeleccionarPlatosAuto extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_seleccionar_platos_auto, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewselectauto);
         Log.d("myTag", "Me cree");
-
+        mSearchField = (EditText)view.findViewById(R.id.buscar_food_calculo_auto);
+        mSearchField.addTextChangedListener(mQuery);
         requestQueue = Volley.newRequestQueue(getActivity());
         try {
             getList();
@@ -122,7 +127,7 @@ public class SeleccionarPlatosAuto extends Fragment {
                         while(count<response.length()){
                             try {
                                 JSONObject object = response.getJSONObject(count);
-                                Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("Cantidad"));
+                                Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("CHO"));
                                 arrayList.add(d);
                                 count ++;
                             } catch (JSONException e) {
@@ -164,6 +169,22 @@ public class SeleccionarPlatosAuto extends Fragment {
         }
     }
 
+    private TextWatcher mQuery = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            adapter.filter(editable.toString());
+        }
+    };
     @Override
     public void onDetach() {
         super.onDetach();

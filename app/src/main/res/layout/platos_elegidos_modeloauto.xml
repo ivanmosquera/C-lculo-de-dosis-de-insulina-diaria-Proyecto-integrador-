@@ -14,21 +14,36 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="?android:selectableItemBackground"
-        
-        android:orientation="vertical">
+
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtcomidaauto"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtmedidaauto"
+                android:textSize="15dp"/>
+
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtcomidaauto"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtmedidaauto"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/celesteazul"
+            android:textSize="16dp"
+            android:textStyle="bold"
             android:id="@+id/txtcarbohidratosauto"/>
-        
+
     </LinearLayout>
 
 

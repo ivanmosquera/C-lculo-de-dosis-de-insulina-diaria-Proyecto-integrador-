@@ -66,6 +66,7 @@ public class HistorialAdpater extends RecyclerView.Adapter<HistorialAdpater.Hist
     }
 
 
+
     public void filter(String query) {
         filterarray = new ArrayList<>();
         for(Historial pl: arrayList ){

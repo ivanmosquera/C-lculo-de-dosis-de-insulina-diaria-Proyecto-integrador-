@@ -76,13 +76,13 @@
 
                         <TextView
                             android:id="@+id/txtNombreComidas"
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:padding="12dp"
                             android:text="Nombre Comida"
                             android:textColor="@color/fbutton_color_silver"
-                            android:textSize="20sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
@@ -127,7 +127,6 @@
                             android:layout_marginTop="8dp"
                             android:layout_weight="9"
                             android:padding="12dp"
-                            android:text="200gr"
                             android:textColor="@color/celesteazul"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -163,7 +162,6 @@
                             android:layout_marginTop="8dp"
                             android:layout_weight="9"
                             android:padding="12dp"
-                            android:text="200gr"
                             android:textColor="@color/celesteazul"
                             android:textSize="18sp"
                             android:textStyle="bold"

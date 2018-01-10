@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.kleberstevendiazcoello.ui.Activitys.DetalleHistorial;
+import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Historial;
@@ -24,6 +25,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
     private ItemClickListener itemClickListener;
     private  ArrayList<String>filterarray = new ArrayList<>();
     Context ctx;
+    Database db;
 
     public FilterAdapter(ArrayList<String> arrayList, Context ctx) {
         this.arrayList = arrayList;
@@ -49,8 +51,17 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
         return filterarray.size();
     }
 
+    //Dismiss
+    public void dismissFood(int pos){
+        String item =  arrayList.get(pos).toString();
+        db = new Database(ctx);
+        db.DeleteItemAuto(item);
+        arrayList.remove(pos);
+        this.notifyItemRemoved(pos);
 
-    public static class FilterviewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    }
+
+    public static class FilterviewHolder extends RecyclerView.ViewHolder {
         TextView alimento;
 
 
@@ -62,10 +73,10 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
             this.food = food;
             this.ctx = ctx;
             alimento = (TextView) itemView.findViewById(R.id.alimentosfilter);
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
         }
 
-        @Override
+        /*@Override
         public void onClick(View view) {
             this.itemClickListener.OnClick(view,getLayoutPosition());
         }
@@ -73,6 +84,6 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
             this.itemClickListener = itemClickListener;
 
 
-        }
+        }*/
     }
 }
