@@ -1,13 +1,35 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kleberstevendiazcoello.ui.fragments.Labels_obtenidos">
+    tools:context="com.example.kleberstevendiazcoello.ui.fragments.PlatoFragment"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="   Alimentos"
+            android:padding="8dp"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scrollbars="vertical"
+        android:id="@+id/rvalimentosfiltrados"/>
 
-</FrameLayout>
+
+
+
+
+
+
+
+</LinearLayout>
