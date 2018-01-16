@@ -1,6 +1,7 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,16 +15,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.FilterAdapter;
+import com.example.kleberstevendiazcoello.ui.ViewHolder.HistorialAdpater;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Historial;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelper;
 import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelperFilter;
@@ -33,7 +39,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -54,9 +62,10 @@ public class Labels_obtenidos extends Fragment {
     private String mParam1;
     private String mParam2;
     private ArrayList<String> listaob;
-    RequestQueue requestQueue;
+    RequestQueue requestQueue,requestQueue2;
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayList<String> filtrada= new ArrayList<>();
+    ArrayList<Detalle> listtraduc= new ArrayList<>();
     RecyclerView recyclerView;
     FilterAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
@@ -115,6 +124,7 @@ public class Labels_obtenidos extends Fragment {
             Log.d("Lista en otro fragment",listaob.get(i));
         }
         requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue2 = Volley.newRequestQueue(getActivity());
         try {
             getListLabelsNoNecesarios(listaob);
         } catch (JSONException e) {
@@ -185,17 +195,26 @@ public class Labels_obtenidos extends Fragment {
                             }
                         }
 
+
+
                         for (int i = 0; i < list.size(); i++) {
+                            Log.d("Palabra a traducir", list.get(i));
                             String name = list.get(i);
-                            new Database(getActivity()).addPlatosAuto(new Platos("A1",name,"12","1"));
+                            try {
+                                getListtraduct(name);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            //new Database(getActivity()).addPlatosAuto(new Platos("A1",name,"12","1"));
                         }
 
-                        adapter = new FilterAdapter(list,getActivity());
 
+
+                       /* adapter = new FilterAdapter(list,getActivity());
                         recyclerView.setAdapter(adapter);
                         ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
                         ItemTouchHelper helper = new ItemTouchHelper(callback);
-                        helper.attachToRecyclerView(recyclerView);
+                        helper.attachToRecyclerView(recyclerView);*/
                         //Log.d("Lista no deseados 2 fragment", arrayList.toString());  //Imprime lista de labels no necesarios por consola
                         //adapter = new RAdapterSPlatos(arrayList,getActivity());
                         //recyclerView.setAdapter(adapter);
@@ -210,6 +229,60 @@ public class Labels_obtenidos extends Fragment {
 
 
     }
+
+
+    public void  getListtraduct(final String name) throws JSONException {
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/traductor.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jObj = new JSONArray(response);
+
+                    int count = 0;
+                    while(count<jObj.length()){
+                        try {
+                            JSONObject object = jObj.getJSONObject(count);
+                            Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("CHO"));
+                            listtraduc.add(d);
+                            count ++;
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    adapter = new FilterAdapter(listtraduc,getActivity());
+                    recyclerView.setAdapter(adapter);
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+
+            }
+        }){
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("palabra",name);
+                return map;
+            }
+
+        };
+        requestQueue2.add(request);
+
+
+    }
+
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
