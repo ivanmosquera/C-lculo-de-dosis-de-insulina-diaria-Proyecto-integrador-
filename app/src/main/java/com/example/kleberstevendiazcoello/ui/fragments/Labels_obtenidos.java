@@ -172,11 +172,15 @@ public class Labels_obtenidos extends Fragment {
                         }
                         for (int i = 0; i < list.size(); i++) {
                             for (int j = 0; j < arrayList.size(); j++) {
-                                //Log.d("Comparar", list.get(i).toString() + " " + arrayList.get(j).toString());
+                                Log.d("Index", "i:" + i +"de " + list.size() + " " + "j:" + j + "de " + arrayList.size());
+                                Log.d("Comparar", list.get(i).toString() + " " + arrayList.get(j).toString());
                                 if (list.get(i).toString().equals(arrayList.get(j).toString())) {
                                     Log.d("Removi", list.get(i).toString());
                                     list.remove(i);
-
+                                    i--;
+                                    break;
+                                    //i = i+1;
+                                    //j = -1;
                                 }
                             }
                         }
