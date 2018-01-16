@@ -182,11 +182,11 @@ public class Labels_obtenidos extends Fragment {
                         }
 
                         for (int i = 0; i < list.size(); i++) {
-                            String name = listaob.get(i);
+                            String name = list.get(i);
                             new Database(getActivity()).addPlatosAuto(new Platos("A1",name,"12","1"));
                         }
 
-                        adapter = new FilterAdapter(listaob,getActivity());
+                        adapter = new FilterAdapter(list,getActivity());
 
                         recyclerView.setAdapter(adapter);
                         ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
