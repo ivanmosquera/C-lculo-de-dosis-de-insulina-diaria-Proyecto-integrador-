@@ -1,19 +1,15 @@
 package com.example.kleberstevendiazcoello.ui.ViewHolder;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.kleberstevendiazcoello.ui.Activitys.DetalleHistorial;
 import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
-import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
-import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Historial;
 
 import java.util.ArrayList;
 
@@ -21,14 +17,14 @@ import java.util.ArrayList;
  * Created by kleberstevendiazcoello on 2/1/18.
  */
 
-public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterviewHolder> {
-    private ArrayList<Detalle> arrayList = new ArrayList<>();
+public class FilterAdapterCop extends RecyclerView.Adapter<FilterAdapterCop.FilterviewHolder> {
+    private ArrayList<String> arrayList = new ArrayList<>();
     private ItemClickListener itemClickListener;
-    private  ArrayList<Detalle>filterarray = new ArrayList<>();
+    private  ArrayList<String>filterarray = new ArrayList<>();
     Context ctx;
     Database db;
 
-    public FilterAdapter(ArrayList<Detalle> arrayList, Context ctx) {
+    public FilterAdapterCop(ArrayList<String> arrayList, Context ctx) {
         this.arrayList = arrayList;
         this.ctx = ctx;
         filterarray = this.arrayList;
@@ -37,13 +33,13 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
     @Override
     public FilterviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.alimentosfiltradoscard,parent,false);
-        FilterAdapter.FilterviewHolder historialviewHolder = new FilterAdapter.FilterviewHolder(view,ctx,filterarray);
+        FilterAdapterCop.FilterviewHolder historialviewHolder = new FilterAdapterCop.FilterviewHolder(view,ctx,filterarray);
         return historialviewHolder;
     }
 
     @Override
     public void onBindViewHolder(FilterviewHolder holder, int position) {
-        holder.alimento.setText(filterarray.get(position).getComida());
+        holder.alimento.setText(filterarray.get(position).toString());
     }
 
 
@@ -54,7 +50,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
 
     //Dismiss
     public void dismissFood(int pos){
-        String item =  arrayList.get(pos).getComida();
+        String item =  arrayList.get(pos).toString();
         db = new Database(ctx);
         db.DeleteItemAuto(item);
         arrayList.remove(pos);
@@ -66,10 +62,10 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
         TextView alimento;
 
 
-        ArrayList<Detalle> food = new ArrayList<>();
+        ArrayList<String> food = new ArrayList<>();
         Context ctx ;
         private ItemClickListener itemClickListener;
-        public FilterviewHolder(View itemView, Context ctx, ArrayList<Detalle> food) {
+        public FilterviewHolder(View itemView, Context ctx, ArrayList<String> food) {
             super(itemView);
             this.food = food;
             this.ctx = ctx;
