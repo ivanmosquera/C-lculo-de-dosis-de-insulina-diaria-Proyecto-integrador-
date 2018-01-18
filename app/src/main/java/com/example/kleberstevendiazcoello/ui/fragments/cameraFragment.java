@@ -1,6 +1,7 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -98,6 +100,10 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
     private Feature feature;
     private Bitmap bitmap;
     private String[] visionAPI = new String[]{"LABEL_DETECTION"};
+    Dialog waitdia;
+    EditText mSearchField;
+    private int tiempo = 30;
+    int pStatus = 0;
 
     private String api = visionAPI[0];
     // TODO: Rename parameter arguments, choose names that match
@@ -306,6 +312,24 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
                 //visionAPIData.setText(result);
                 //imageUploadProgress.setVisibility(View.INVISIBLE);
                 //listafiltrada = compararlistas();
+                waitdia = new Dialog(getActivity());
+                waitdia.setContentView(R.layout.popupwait);
+                waitdia.show();
+                Thread thread = new Thread() {
+                    public void run() {
+                        while (pStatus < 100) {
+                            pStatus += 1;
+                            try {
+                                sleep(tiempo);
+                            } catch (Exception e) {
+
+                            }
+                        }
+
+                        waitdia.dismiss();
+                    }
+                };
+                thread.start();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("ListaObtenida",listaobtenido);
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();

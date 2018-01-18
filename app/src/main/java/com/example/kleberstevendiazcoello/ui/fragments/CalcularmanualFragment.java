@@ -80,7 +80,7 @@ public class CalcularmanualFragment extends Fragment {
     ArrayList<String> listavida,listaenfermo;
     String[] strvida,senfermo;
     ArrayAdapter comboAdapter,comboadapterenfermo;
-    int total = 0;
+    float total = 0;
     public static final String ID_data = "iduser";
     static String id_h ;
     Dialog mydialog;

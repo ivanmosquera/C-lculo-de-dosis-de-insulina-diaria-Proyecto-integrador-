@@ -1,5 +1,6 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -58,6 +59,9 @@ public class HistorialFragment extends Fragment {
     HistorialAdpater adapter;
     android.support.v7.widget.Toolbar toolbar;
     EditText mSearchField;
+    Dialog waitdia;
+    private int tiempo = 30;
+    int pStatus = 0;
     public static final String ID_data = "iduser";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -110,6 +114,9 @@ public class HistorialFragment extends Fragment {
         mSearchField.addTextChangedListener(mQuery);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewhistorial);
         Log.d("myTag", "Me cree");
+        waitdia = new Dialog(getActivity());
+        waitdia.setContentView(R.layout.popupwait);
+        waitdia.show();
         requestQueue = Volley.newRequestQueue(getActivity());
         try {
             getList();
@@ -119,6 +126,21 @@ public class HistorialFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        Thread thread = new Thread() {
+            public void run() {
+                while (pStatus < 100) {
+                    pStatus += 1;
+                    try {
+                        sleep(tiempo);
+                    } catch (Exception e) {
+
+                    }
+                }
+
+                waitdia.dismiss();
+            }
+        };
+        thread.start();
 
 
         return view;

@@ -69,7 +69,7 @@ public class AutomaticCalculo extends Fragment {
     TextView total_carbo;
     ArrayList<Platos> cartlistos;
     ArrayList<Platos> cart;
-    int total;
+    float total;
     Dialog mydialog;
     TextView txtclose,txttotalinsu;
     Button guardarhistorial,nuevainsulina;

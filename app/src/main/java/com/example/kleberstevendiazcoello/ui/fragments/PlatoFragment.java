@@ -1,5 +1,6 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -64,8 +65,11 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
     GridLayoutManager gridLayoutManager;
     RequestQueue requestQueue;
     MyAdapater adapater;
-    android.support.v7.widget.Toolbar toolbar;
     EditText mSearchField;
+    android.support.v7.widget.Toolbar toolbar;
+    Dialog waitdia;
+    private int tiempo = 30;
+    int pStatus = 0;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -113,6 +117,9 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
         mSearchField.addTextChangedListener(mQuery);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         Log.d("myTag", "Me cree");
+        waitdia = new Dialog(getActivity());
+        waitdia.setContentView(R.layout.popupwait);
+        waitdia.show();
         requestQueue = Volley.newRequestQueue(getActivity());
         try {
             getList();
@@ -122,6 +129,24 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+
+        Thread thread = new Thread() {
+            public void run() {
+                while (pStatus < 100) {
+                    pStatus += 1;
+                    try {
+                        sleep(tiempo);
+                    } catch (Exception e) {
+
+                    }
+                }
+
+                waitdia.dismiss();
+            }
+        };
+        thread.start();
+
+
 
 
 

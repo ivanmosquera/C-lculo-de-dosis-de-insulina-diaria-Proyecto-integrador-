@@ -38,7 +38,7 @@ public class Apter_carrito_paltos extends RecyclerView.Adapter<Apter_carrito_pal
         holder.comida.setText(arrayList.get(position).getFoodName());
         //holder.cantidad.setText(arrayList.get(position).getCantidad());
         //holder.Carbohidratos.setText(arrayList.get(position).getCalorias());
-        int total = (Integer.parseInt(arrayList.get(position).getCalorias()))*(Integer.parseInt(arrayList.get(position).getCantidad()));
+        float total = (Float.parseFloat(arrayList.get(position).getCalorias()))*(Integer.parseInt(arrayList.get(position).getCantidad()));
         holder.Carbohidratos.setText(String.valueOf(total));
     }
 

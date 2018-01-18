@@ -1,5 +1,6 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,6 +52,9 @@ public class SeleccionarPlatos extends Fragment {
     GridLayoutManager gridLayoutManager;
     RequestQueue requestQueue;
     EditText mSearchField;
+    Dialog waitdia;
+    private int tiempo = 30;
+    int pStatus = 0;
 
 
     // TODO: Rename and change types of parameters
@@ -99,7 +103,9 @@ public class SeleccionarPlatos extends Fragment {
         Log.d("myTag", "Me cree");
         mSearchField = (EditText)view.findViewById(R.id.buscar_food_calculo_manual);
         mSearchField.addTextChangedListener(mQuery);
-
+        waitdia = new Dialog(getActivity());
+        waitdia.setContentView(R.layout.popupwait);
+        waitdia.show();
         requestQueue = Volley.newRequestQueue(getActivity());
         try {
             getList();
@@ -109,6 +115,21 @@ public class SeleccionarPlatos extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        Thread thread = new Thread() {
+            public void run() {
+                while (pStatus < 100) {
+                    pStatus += 1;
+                    try {
+                        sleep(tiempo);
+                    } catch (Exception e) {
+
+                    }
+                }
+
+                waitdia.dismiss();
+            }
+        };
+        thread.start();
 
         return view;
     }
