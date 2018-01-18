@@ -6,11 +6,10 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="50dp"
+    android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,99 +26,168 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp" />
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/iconopeso"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="fitXY"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-        <TextView
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:textSize="14dp"
-            android:id="@+id/txtshowpeso"/>
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="170dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/iconopeso"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:textSize="14dp"
+                    android:id="@+id/txtshowpeso"/>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/iconoaltura"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="fitXY"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:textSize="14dp"
-            android:id="@+id/txtshowaltura"/>
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/iconoaltura"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:textSize="14dp"
+                    android:id="@+id/txtshowaltura"/>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/iconoedad"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="fitXY"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:textSize="14dp"
-            android:id="@+id/txtshowedad"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/iconoedad"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:textSize="14dp"
+                    android:id="@+id/txtshowedad"/>
+            </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/iconocorreo"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="fitXY"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:textSize="14dp"
-            android:id="@+id/txtcorreouser"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/iconocorreo"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:textSize="14dp"
+                    android:id="@+id/txtcorreouser"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/iconocorreo"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:textSize="14dp"
+                    android:id="@+id/txtshowgenero"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/iconocorreo"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAlignment="center"
+                    android:textSize="14dp"
+                    android:id="@+id/txtshowciudad"/>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

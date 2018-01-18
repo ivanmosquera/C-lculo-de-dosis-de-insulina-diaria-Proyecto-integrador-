@@ -51,7 +51,9 @@ public class homeFragment extends Fragment {
     public static final String Peso_data = "peso";
     public static final String Altura_data = "altura";
     public static final String Edad_data = "edad";
-    TextView user, e, peso,a,nombre ;
+    public static final String Genero_data = "genero";
+    public static final String Ciudad_data = "ciudad";
+    TextView user, e, peso,a,nombre,genero,ciudad ;
     RequestQueue requestQueue;
 
     // TODO: Rename and change types of parameters
@@ -102,6 +104,8 @@ public class homeFragment extends Fragment {
         peso= (TextView)view.findViewById(R.id.txtshowpeso);
         e = (TextView)view.findViewById(R.id.txtshowedad);
         nombre = (TextView)view.findViewById(R.id.txtshowusuario);
+        genero = (TextView)view.findViewById(R.id.txtshowgenero);
+        ciudad = (TextView)view.findViewById(R.id.txtshowciudad);
 
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
@@ -141,6 +145,8 @@ public class homeFragment extends Fragment {
                     editor.putString(User_data,object.getString("Nombre"));
                     editor.putString(Peso_data,String.valueOf(object.getString("Peso")));
                     editor.putString(Altura_data,String.valueOf(object.getString("Altura")));
+                    editor.putString(Genero_data,String.valueOf(object.getString("Genero")));
+                    editor.putString(Ciudad_data,String.valueOf(object.getString("Ciudad")));
                     editor.putInt(Edad_data,object.getInt("Edad"));
                     editor.commit();
 
@@ -150,11 +156,15 @@ public class homeFragment extends Fragment {
                     String name = sharedPrefe.getString(User_data, "hola");
                     String altu = sharedPrefe.getString(Altura_data, "hola");
                     String pe = sharedPrefe.getString(Peso_data, "hola");
+                    String ciu = sharedPrefe.getString(Ciudad_data, "hola");
+                    String ge = sharedPrefe.getString(Genero_data, "hola");
                     user.setText(mail);
                     e.setText(String.valueOf(edad));
                     a.setText(altu);
                     peso.setText(pe);
                     nombre.setText(name);
+                    genero.setText(ge);
+                    ciudad.setText(ciu);
 
 
 

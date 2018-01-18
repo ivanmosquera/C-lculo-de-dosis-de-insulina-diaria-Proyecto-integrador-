@@ -1,116 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/fondonuevo"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="Crea tu Cuenta "
+            android:textColor="@android:color/background_light"
+            android:textSize="35dp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/txtusuario"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/botonusuario"
+            android:ems="10"
+            android:hint="   Usuario"
+            android:inputType="textPersonName"
+            android:textColorHint="@android:color/background_light"
+            />
 
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="Crea tu Cuenta "
-        android:textColor="@android:color/background_light"
-        android:textSize="35dp" />
+        <EditText
+            android:id="@+id/txtcorreoi"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/botoncorreo"
+            android:ems="10"
+            android:hint="  Correo"
+            android:inputType="textPersonName"
+            android:textColorHint="@android:color/background_light"
+            />
 
-    <EditText
-        android:id="@+id/txtusuario"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
-        android:background="@drawable/botonusuario"
-        android:ems="10"
-        android:hint="   Usuario"
-        android:inputType="textPersonName"
-        android:textColorHint="@android:color/background_light"
-         />
+        <EditText
+            android:id="@+id/txtpasswordi"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/botoncontrasenac"
+            android:ems="10"
+            android:hint="  Contraseña"
+            android:inputType="textPassword"
+            android:textColorHint="@android:color/background_light" />
 
-    <EditText
-        android:id="@+id/txtcorreoi"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/txtusuario"
-        android:layout_below="@+id/txtusuario"
-        android:layout_marginTop="19dp"
-        android:background="@drawable/botoncorreo"
-        android:ems="10"
-        android:hint="  Correo"
-        android:inputType="textPersonName"
-        android:textColorHint="@android:color/background_light"
-         />
+        <EditText
+            android:id="@+id/txtedad"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/botonedad"
+            android:ems="10"
+            android:hint="   Edad"
+            android:inputType="textPersonName"
+            android:textColorHint="@android:color/background_light" />
 
-    <EditText
-        android:id="@+id/txtpasswordi"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/txtcorreoi"
-        android:layout_below="@+id/txtcorreoi"
-        android:layout_marginTop="23dp"
-        android:background="@drawable/botoncontrasenac"
-        android:ems="10"
-        android:hint="  Contraseña"
-        android:inputType="textPassword"
-        android:textColorHint="@android:color/background_light" />
+        <EditText
+            android:id="@+id/txtpeso"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/botonpeso"
+            android:ems="10"
+            android:hint="   Peso"
+            android:inputType="textPersonName"
+            android:textColorHint="@android:color/background_light" />
 
-    <EditText
-        android:id="@+id/txtedad"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/txtpasswordi"
-        android:layout_below="@+id/txtpasswordi"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/botoncontrasenac"
-        android:ems="10"
-        android:hint="   Edad"
-        android:inputType="textPersonName"
-        android:textColorHint="@android:color/background_light" />
-
-    <EditText
-        android:id="@+id/txtpeso"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/txtedad"
-        android:layout_below="@+id/txtedad"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/botoncontrasenac"
-        android:ems="10"
-        android:hint="   Peso"
-        android:inputType="textPersonName"
-        android:textColorHint="@android:color/background_light" />
-
-    <EditText
-        android:id="@+id/txtaltura"
-        android:layout_width="220dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/txtpeso"
-        android:layout_below="@+id/txtpeso"
-        android:layout_marginTop="22dp"
-        android:background="@drawable/botoncontrasenac"
-        android:ems="10"
-        android:hint="   Altura"
-        android:inputType="textPersonName"
-        android:textColorHint="@android:color/background_light" />
-
-
-    <Button
-        android:id="@+id/btn_crear_ok"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/txtpeso"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/continuar_cuenta"
-        android:text="" />
+        <EditText
+            android:id="@+id/txtaltura"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/botonaltura"
+            android:ems="10"
+            android:hint="   Altura"
+            android:inputType="textPersonName"
+            android:textColorHint="@android:color/background_light" />
+        
+        <EditText
+            android:id="@+id/txtciudad"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/botonciudad"
+            android:ems="10"
+            android:hint="   Ciudad"
+            android:inputType="textPersonName"
+            android:textColorHint="@android:color/background_light" />
+        <EditText
+            android:id="@+id/txtsexo"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/botongenero"
+            android:ems="10"
+            android:hint="   Genero"
+            android:inputType="textPersonName"
+            android:textColorHint="@android:color/background_light" />
 
 
+        <Button
+            android:id="@+id/btn_crear_ok"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/continuar_cuenta"
+            android:text="" />
+        <Button
+            android:id="@+id/btn_crear_cancelar"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            
+            android:text="Cancelar" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+        
+    </LinearLayout>
 
 
-</RelativeLayout>
+
+
+</ScrollView>

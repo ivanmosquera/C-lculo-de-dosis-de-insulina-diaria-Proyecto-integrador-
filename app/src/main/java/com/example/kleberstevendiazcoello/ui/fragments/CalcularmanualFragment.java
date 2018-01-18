@@ -393,8 +393,7 @@ public class CalcularmanualFragment extends Fragment {
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
         for (Platos platos:cart){
-            total += (Integer.parseInt(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
-
+            total += (Float.parseFloat(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
         }
         /*Locale locale = new Locale("en","US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);*/

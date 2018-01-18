@@ -29,8 +29,8 @@ import java.util.Map;
  */
 
 public class crearcuenta extends AppCompatActivity {
-    EditText nombre, contraseña, correo,altura,edad,peso;
-    Button enviar;
+    EditText nombre, contraseña, correo,altura,edad,peso,ciudad,sexo;
+    Button enviar,cancelar;
     RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,10 @@ public class crearcuenta extends AppCompatActivity {
         altura = (EditText) findViewById(R.id.txtaltura);
         edad = (EditText) findViewById(R.id.txtedad);
         peso = (EditText) findViewById(R.id.txtpeso);
+        ciudad = (EditText) findViewById(R.id.txtciudad);
+        sexo = (EditText) findViewById(R.id.txtsexo);
         enviar = (Button) findViewById(R.id.btn_crear_ok);
+        cancelar = (Button) findViewById(R.id.btn_crear_cancelar);
         requestQueue = Volley.newRequestQueue(this);
 
         enviar.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +53,14 @@ public class crearcuenta extends AppCompatActivity {
             public void onClick(View view) {
                 enviarDatos();
 
+            }
+        });
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -100,6 +111,9 @@ public class crearcuenta extends AppCompatActivity {
                 map.put("altura",altura.getText().toString());
                 map.put("edad",edad.getText().toString());
                 map.put("peso",peso.getText().toString());
+                map.put("ciudad",ciudad.getText().toString());
+                map.put("sexo",sexo.getText().toString());
+
                 return map;
             }
 
