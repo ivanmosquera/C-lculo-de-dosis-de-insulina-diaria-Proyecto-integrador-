@@ -244,6 +244,7 @@ public class Labels_obtenidos extends Fragment {
                         try {
                             JSONObject object = jObj.getJSONObject(count);
                             Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("CHO"));
+                            new Database(getActivity()).addPlatosAuto(new Platos(String.valueOf(object.getInt("id_Comida")),object.getString("Alimento"),object.getString("CHO"),"1"));
                             listtraduc.add(d);
                             count ++;
                         } catch (JSONException e) {
@@ -254,6 +255,9 @@ public class Labels_obtenidos extends Fragment {
 
                     adapter = new FilterAdapter(listtraduc,getActivity());
                     recyclerView.setAdapter(adapter);
+                    ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
+                    ItemTouchHelper helper = new ItemTouchHelper(callback);
+                    helper.attachToRecyclerView(recyclerView);
 
 
 

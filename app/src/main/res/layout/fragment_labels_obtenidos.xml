@@ -8,39 +8,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="   Alimentos"
+            android:text="   Alimentos Detectados"
             android:padding="8dp"
+            android:layout_gravity="center"
             android:textStyle="bold"
             android:textSize="18dp"/>
 
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desliza para eliminar"
+        android:layout_gravity="center"
+        android:textSize="15dp"
+        />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
+        android:padding="2dp"
         android:id="@+id/rvalimentosfiltrados"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="60dp" />
-    <Button
+
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Continuar"
-        android:layout_gravity="bottom"
-        android:id="@+id/continuarautomatico"/>
-
-
-
-
-
-
-
-
-
-
+        android:layout_height="10dp" />
+    <Button
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:id="@+id/continuarautomatico"
+        android:background="@drawable/continuarcalauto"/>
+    
 </LinearLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="275dp"
-    android:layout_height="wrap_content"
+    android:layout_width="240dp"
+    android:layout_height="245dp"
     android:orientation="vertical"
     android:background="@color/celesteazul"
     android:padding="5dp"
@@ -23,15 +23,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Insulina a administrar :"
+            android:text="Insulina a administrar"
+            android:layout_gravity="center"
             android:textColor="@android:color/white"
             android:textSize="20dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="500 ml"
+            android:layout_gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="50dp"
+            android:textSize="30dp"
             android:id="@+id/totalinsulinadministrar"/>
 
 
@@ -40,7 +42,6 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="25dp" />
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -48,20 +49,20 @@
             android:layout_width="30dp"
             android:layout_height= "2dp"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Guardar"
-            android:id="@+id/btnguardarhistorial"/>
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:id="@+id/btnguardarhistorial"
+            android:background="@drawable/guardarconsultachange"
+            android:layout_gravity="center"/>
         <Space
             android:layout_width="30dp"
-            android:layout_height= "0dp"/>
+            android:layout_height= "7dp"/>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nuevo"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/nuevaconsultachange"
+            android:layout_gravity="center"
             android:id="@+id/btnnuevocalculo"/>
-    </LinearLayout>
-
 
 
 

@@ -330,7 +330,7 @@ public class AutomaticCalculo extends Fragment {
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
         for (Platos platos:cart){
-            total += (Integer.parseInt(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
+            total += (Float.parseFloat(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
 
         }
         total_carbo.setText(String.valueOf(total));

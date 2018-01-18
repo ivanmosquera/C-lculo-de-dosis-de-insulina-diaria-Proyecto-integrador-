@@ -151,20 +151,20 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_camera, container, false);
         takePicture = (Button)view.findViewById(R.id.takePicture);
-        imageView = (ImageView)view.findViewById(R.id.imageView);
+        /*imageView = (ImageView)view.findViewById(R.id.imageView);
         imageUploadProgress = (ProgressBar)view.findViewById(R.id.imageProgress);
         spinnerVisionAPI = (Spinner) view.findViewById(R.id.spinnerVisionAPI);
-        visionAPIData = (TextView) view.findViewById(R.id.visionAPIData);
+        visionAPIData = (TextView) view.findViewById(R.id.visionAPIData);*/
         ButterKnife.bind(getActivity());
 
         feature = new Feature();
         feature.setType(visionAPI[0]);
         feature.setMaxResults(10);
 
-        spinnerVisionAPI.setOnItemSelectedListener(this);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, visionAPI);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerVisionAPI.setAdapter(dataAdapter);
+        //spinnerVisionAPI.setOnItemSelectedListener(this);
+        //ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, visionAPI);
+        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinnerVisionAPI.setAdapter(dataAdapter);
         takePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -242,7 +242,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
                                     Intent data) {
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
             bitmap = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(bitmap);
+            //imageView.setImageBitmap(bitmap);
             callCloudVision(bitmap, feature);
         }
     }
@@ -260,7 +260,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     private void callCloudVision(final Bitmap bitmap, final Feature feature) {
-        imageUploadProgress.setVisibility(View.VISIBLE);
+        //imageUploadProgress.setVisibility(View.VISIBLE);
         final List<Feature> featureList = new ArrayList<>();
         featureList.add(feature);
 
@@ -303,8 +303,8 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
             }
 
             protected void onPostExecute(String result) {
-                visionAPIData.setText(result);
-                imageUploadProgress.setVisibility(View.INVISIBLE);
+                //visionAPIData.setText(result);
+                //imageUploadProgress.setVisibility(View.INVISIBLE);
                 //listafiltrada = compararlistas();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("ListaObtenida",listaobtenido);
@@ -338,7 +338,9 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
         List<EntityAnnotation> entityAnnotations;
 
         String message = "";
-        switch (api) {
+        entityAnnotations = imageResponses.getLabelAnnotations();
+        message = formatAnnotation(entityAnnotations);requestQueue = Volley.newRequestQueue(getActivity());
+        /*switch (api) {
             case "LANDMARK_DETECTION":
                 entityAnnotations = imageResponses.getLandmarkAnnotations();
                 message = formatAnnotation(entityAnnotations);
@@ -358,13 +360,13 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
             case "LABEL_DETECTION":
                 entityAnnotations = imageResponses.getLabelAnnotations();
                 message = formatAnnotation(entityAnnotations);requestQueue = Volley.newRequestQueue(getActivity());
-                /*try {
+                try {
                     getListLabelsNoNecesarios();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }*/
+                }
                 break;
-        }
+        }*/
         return message;
     }
 
