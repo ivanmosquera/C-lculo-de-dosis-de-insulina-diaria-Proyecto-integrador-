@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -124,7 +125,7 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
         try {
             getList();
         } catch (JSONException e) {
-            e.printStackTrace();
+            Snackbar.make(getView(),"Error, Baja Conexión",Snackbar.LENGTH_LONG).setAction("Action",null).show();
         }
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());

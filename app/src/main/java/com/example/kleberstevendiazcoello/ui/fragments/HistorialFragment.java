@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -177,29 +178,28 @@ public class HistorialFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
+
                     JSONArray jObj = new JSONArray(response);
 
-                    int count = 0;
-                    while(count<jObj.length()){
-                        try {
-                            JSONObject object = jObj.getJSONObject(count);
-                            Historial h = new Historial(object.getInt("id_historial"),object.getString("InsulinaAdministrada"),object.getString("Fecha"),object.getString("Total_Calorias"));
-                            arrayList.add(h);
-                            count ++;
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        int count = 0;
+                        while(count<jObj.length()){
+                            try {
+                                JSONObject object = jObj.getJSONObject(count);
+                                Historial h = new Historial(object.getInt("id_historial"),object.getString("InsulinaAdministrada"),object.getString("Fecha"),object.getString("Total_Calorias"));
+                                arrayList.add(h);
+                                count ++;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                         }
-
-                    }
-
-                    adapter = new HistorialAdpater(arrayList,getActivity());
-
-                    recyclerView.setAdapter(adapter);
+                        adapter = new HistorialAdpater(arrayList,getActivity());
+                        recyclerView.setAdapter(adapter);
 
 
 
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Snackbar.make(getView(),"NO EXISTEN DATOS",Snackbar.LENGTH_LONG).setAction("Action",null).show();
                 }
 
             }

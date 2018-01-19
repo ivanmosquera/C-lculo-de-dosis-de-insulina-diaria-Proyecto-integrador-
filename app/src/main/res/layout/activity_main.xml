@@ -36,7 +36,8 @@
         android:hint="   Correo"
         android:inputType="textPersonName"
         android:textColorHint="@android:color/background_light"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        />
 
     <EditText
         android:id="@+id/txtpasswordlog"

@@ -12,10 +12,10 @@
 
     <item android:title="Platos"
         android:icon="@drawable/platosboton"
-        android:id="@+id/navigation_platos"></item>
+        android:id="@+id/navigation_platos"/>
 
     <item android:title="Historial"
         android:icon="@drawable/hostorialboton"
-        android:id="@+id/navigation_historial"></item>
+        android:id="@+id/navigation_historial"/>
 
 </menu>

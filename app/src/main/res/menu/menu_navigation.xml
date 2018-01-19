@@ -4,10 +4,6 @@
         android:icon="@drawable/inicioboton"
         android:id="@+id/iniciomenu"/>
 
-    <item android:title="@string/perfil"
-        android:icon="@drawable/perfilboton"
-        android:id="@+id/perfilmenu" ></item>
-
     <item android:title="@string/camera"
         android:icon="@drawable/calcularboton"
         android:id="@+id/camaramenu"></item>

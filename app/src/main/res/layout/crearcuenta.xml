@@ -67,7 +67,7 @@
             android:background="@drawable/botonedad"
             android:ems="10"
             android:hint="   Edad"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColorHint="@android:color/background_light" />
 
         <EditText
@@ -78,8 +78,8 @@
             android:layout_marginTop="18dp"
             android:background="@drawable/botonpeso"
             android:ems="10"
-            android:hint="   Peso"
-            android:inputType="textPersonName"
+            android:hint="   Peso(kg)"
+            android:inputType="numberDecimal"
             android:textColorHint="@android:color/background_light" />
 
         <EditText
@@ -90,8 +90,8 @@
             android:layout_marginTop="18dp"
             android:background="@drawable/botonaltura"
             android:ems="10"
-            android:hint="   Altura"
-            android:inputType="textPersonName"
+            android:hint="   Altura(m)"
+            android:inputType="numberDecimal"
             android:textColorHint="@android:color/background_light" />
         
         <EditText

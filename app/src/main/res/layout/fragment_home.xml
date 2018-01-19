@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textAlignment="center"
-        android:textSize="18dp"
+        android:textSize="25dp"
         android:background="@drawable/fondonuevo"
         android:id="@+id/txtshowusuario"
         android:textStyle="bold"
@@ -23,6 +23,11 @@
 
 
 </LinearLayout>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/configmodicono"
+        android:layout_gravity="end"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp" />
@@ -36,7 +41,7 @@
             android:layout_gravity="center">
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="170dp" />
+                android:layout_height="200dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -142,7 +147,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/iconocorreo"
+                    android:background="@drawable/icongenero"
                     android:layout_gravity="center_horizontal"
                     android:scaleType="fitXY"/>
                 <Space
@@ -167,7 +172,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/iconocorreo"
+                    android:background="@drawable/iconciudad"
                     android:layout_gravity="center_horizontal"
                     android:scaleType="fitXY"/>
                 <Space
@@ -183,7 +188,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_height="130dp" />
 
         </LinearLayout>
 

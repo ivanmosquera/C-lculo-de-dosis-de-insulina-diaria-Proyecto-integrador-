@@ -27,7 +27,7 @@ public class menu extends AppCompatActivity {
         android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.content,new homeFragment()).commit();
 
-        bnv = (BottomNavigationView)findViewById(R.id.navigationview);
+        /*bnv = (BottomNavigationView)findViewById(R.id.navigationview);
         bnv.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
@@ -45,7 +45,7 @@ public class menu extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"entre", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
     }
 
 }
