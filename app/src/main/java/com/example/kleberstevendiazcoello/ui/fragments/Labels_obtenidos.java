@@ -111,6 +111,7 @@ public class Labels_obtenidos extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_labels_obtenidos, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.rvalimentosfiltrados);
+
         btn_continuar_automatico = (Button)view.findViewById(R.id.continuarautomatico);
         btn_continuar_automatico.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,12 +136,14 @@ public class Labels_obtenidos extends Fragment {
         for (int j = 0; j < arrayList.size(); j++) {
             Log.d("Lista en otro fragment",arrayList.get(j));
         }
+
         filtrada = compararlistas(listaob);
+
+
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         loadvista();
-
 
 
         return  view;
@@ -163,8 +166,10 @@ public class Labels_obtenidos extends Fragment {
 
 
     public void loadvista(){
-
-        adapter = new FilterAdapter(new Database(getActivity()).getListaComidaAuto(),getActivity());
+        ArrayList<Platos> plte = new ArrayList<>();
+        Database db = new Database(getActivity());
+        plte = db.getListaComidaAuto();
+        adapter = new FilterAdapter(plte,getActivity());
         recyclerView.setAdapter(adapter);
         ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
@@ -192,8 +197,8 @@ public class Labels_obtenidos extends Fragment {
                         }
                         for (int i = 0; i < list.size(); i++) {
                             for (int j = 0; j < arrayList.size(); j++) {
-                                Log.d("Index", "i:" + i +"de " + list.size() + " " + "j:" + j + "de " + arrayList.size());
-                                Log.d("Comparar", list.get(i).toString() + " " + arrayList.get(j).toString());
+                                //Log.d("Index", "i:" + i +"de " + list.size() + " " + "j:" + j + "de " + arrayList.size());
+                               // Log.d("Comparar", list.get(i).toString() + " " + arrayList.get(j).toString());
                                 if (list.get(i).toString().equals(arrayList.get(j).toString())) {
                                     Log.d("Removi", list.get(i).toString());
                                     list.remove(i);
@@ -218,8 +223,6 @@ public class Labels_obtenidos extends Fragment {
                             //new Database(getActivity()).addPlatosAuto(new Platos("A1",name,"12","1"));
                         }
 
-
-
                        /* adapter = new FilterAdapter(list,getActivity());
                         recyclerView.setAdapter(adapter);
                         ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
@@ -228,6 +231,7 @@ public class Labels_obtenidos extends Fragment {
                         //Log.d("Lista no deseados 2 fragment", arrayList.toString());  //Imprime lista de labels no necesarios por consola
                         //adapter = new RAdapterSPlatos(arrayList,getActivity());
                         //recyclerView.setAdapter(adapter);
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -248,7 +252,6 @@ public class Labels_obtenidos extends Fragment {
             public void onResponse(String response) {
                 try {
                     JSONArray jObj = new JSONArray(response);
-
                     int count = 0;
                     while(count<jObj.length()){
                         try {
@@ -256,6 +259,7 @@ public class Labels_obtenidos extends Fragment {
                             //Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("CHO"));
                             new Database(getActivity()).addPlatosAuto(new Platos(String.valueOf(object.getInt("id_Comida")),object.getString("Alimento"),object.getString("CHO"),"1"));
                             //listtraduc.add(d);
+                            Log.d("Guardado", object.getString("Alimento"));
 
                             count ++;
                         } catch (JSONException e) {
@@ -267,7 +271,9 @@ public class Labels_obtenidos extends Fragment {
                     //Detalle d = new Detalle(12,name,"1","1");
                     new Database(getActivity()).addPlatosAuto(new Platos("A1",name,"1","1"));
                     //listtraduc.add(d);
+                    Log.d("Guardado", name);
                 }
+
 
 
 
