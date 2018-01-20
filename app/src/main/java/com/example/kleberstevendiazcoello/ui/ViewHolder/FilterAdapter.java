@@ -14,6 +14,7 @@ import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Historial;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 
 import java.util.ArrayList;
 
@@ -22,39 +23,37 @@ import java.util.ArrayList;
  */
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.FilterviewHolder> {
-    private ArrayList<Detalle> arrayList = new ArrayList<>();
+    private ArrayList<Platos> arrayList = new ArrayList<>();
     private ItemClickListener itemClickListener;
-    private  ArrayList<Detalle>filterarray = new ArrayList<>();
     Context ctx;
     Database db;
 
-    public FilterAdapter(ArrayList<Detalle> arrayList, Context ctx) {
+    public FilterAdapter(ArrayList<Platos> arrayList, Context ctx) {
         this.arrayList = arrayList;
         this.ctx = ctx;
-        filterarray = this.arrayList;
     }
 
     @Override
     public FilterviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.alimentosfiltradoscard,parent,false);
-        FilterAdapter.FilterviewHolder historialviewHolder = new FilterAdapter.FilterviewHolder(view,ctx,filterarray);
+        FilterAdapter.FilterviewHolder historialviewHolder = new FilterAdapter.FilterviewHolder(view,ctx,arrayList);
         return historialviewHolder;
     }
 
     @Override
     public void onBindViewHolder(FilterviewHolder holder, int position) {
-        holder.alimento.setText(filterarray.get(position).getComida());
+        holder.alimento.setText(arrayList.get(position).getFoodName());
     }
 
 
     @Override
     public int getItemCount() {
-        return filterarray.size();
+        return arrayList.size();
     }
 
     //Dismiss
     public void dismissFood(int pos){
-        String item =  arrayList.get(pos).getComida();
+        String item =  arrayList.get(pos).getFoodName();
         db = new Database(ctx);
         db.DeleteItemAuto(item);
         arrayList.remove(pos);
@@ -64,12 +63,10 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
 
     public static class FilterviewHolder extends RecyclerView.ViewHolder {
         TextView alimento;
-
-
-        ArrayList<Detalle> food = new ArrayList<>();
+        ArrayList<Platos> food = new ArrayList<>();
         Context ctx ;
         private ItemClickListener itemClickListener;
-        public FilterviewHolder(View itemView, Context ctx, ArrayList<Detalle> food) {
+        public FilterviewHolder(View itemView, Context ctx, ArrayList<Platos> food) {
             super(itemView);
             this.food = food;
             this.ctx = ctx;

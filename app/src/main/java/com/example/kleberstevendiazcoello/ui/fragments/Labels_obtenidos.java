@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -138,6 +139,7 @@ public class Labels_obtenidos extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        loadvista();
 
 
 
@@ -160,7 +162,15 @@ public class Labels_obtenidos extends Fragment {
     }
 
 
+    public void loadvista(){
 
+        adapter = new FilterAdapter(new Database(getActivity()).getListaComidaAuto(),getActivity());
+        recyclerView.setAdapter(adapter);
+        ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerView);
+
+    }
     public void  getListLabelsNoNecesarios(final ArrayList<String> list) throws JSONException {
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/labels_no_necesarios.php";
         JsonArrayRequest jsonArrayRequest =  new JsonArrayRequest(com.android.volley.Request.Method.POST, url,(String) null,
@@ -243,27 +253,24 @@ public class Labels_obtenidos extends Fragment {
                     while(count<jObj.length()){
                         try {
                             JSONObject object = jObj.getJSONObject(count);
-                            Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("CHO"));
+                            //Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("CHO"));
                             new Database(getActivity()).addPlatosAuto(new Platos(String.valueOf(object.getInt("id_Comida")),object.getString("Alimento"),object.getString("CHO"),"1"));
-                            listtraduc.add(d);
+                            //listtraduc.add(d);
+
                             count ++;
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     }
-
-                    adapter = new FilterAdapter(listtraduc,getActivity());
-                    recyclerView.setAdapter(adapter);
-                    ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
-                    ItemTouchHelper helper = new ItemTouchHelper(callback);
-                    helper.attachToRecyclerView(recyclerView);
-
-
-
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    //Detalle d = new Detalle(12,name,"1","1");
+                    new Database(getActivity()).addPlatosAuto(new Platos("A1",name,"1","1"));
+                    //listtraduc.add(d);
                 }
+
+
+
 
             }
         }, new Response.ErrorListener() {
