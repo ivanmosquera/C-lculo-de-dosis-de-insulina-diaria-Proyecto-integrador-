@@ -1,10 +1,13 @@
 package com.example.kleberstevendiazcoello.ui.login;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import com.example.kleberstevendiazcoello.ui.login.MainActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +34,8 @@ import java.util.Map;
 
 public class crearcuenta extends AppCompatActivity {
     EditText nombre, contraseña, correo,altura,edad,peso,ciudad,sexo;
+    Calendar currentDate;
+    int dia, mes, año;
     Button enviar,cancelar;
     RequestQueue requestQueue;
     @Override
@@ -41,12 +47,55 @@ public class crearcuenta extends AppCompatActivity {
         correo = (EditText) findViewById(R.id.txtcorreoi);
         altura = (EditText) findViewById(R.id.txtaltura);
         edad = (EditText) findViewById(R.id.txtedad);
+        //edad.setInputType();
+        currentDate = Calendar.getInstance();
+        dia = currentDate.get(Calendar.DAY_OF_MONTH);
+        mes = currentDate.get(Calendar.MONTH);
+        año = currentDate.get(Calendar.YEAR);
+        //mes = mes + 1;
+        //edad.setText(dia+"/"+mes+"/"+año);
         peso = (EditText) findViewById(R.id.txtpeso);
         ciudad = (EditText) findViewById(R.id.txtciudad);
         sexo = (EditText) findViewById(R.id.txtsexo);
         enviar = (Button) findViewById(R.id.btn_crear_ok);
         cancelar = (Button) findViewById(R.id.btn_crear_cancelar);
         requestQueue = Volley.newRequestQueue(this);
+        /*
+        edad.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(crearcuenta.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            month = month+1;
+                            edad.setText(dayOfMonth+"/"+month+"/"+year);
+                            dia = dayOfMonth;
+                            mes = month-1;
+                            año = year;
+                        }
+                    },año,mes,dia);
+                    datePickerDialog.show();
+                }
+            }
+
+        });*/
+        edad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(crearcuenta.this,AlertDialog.THEME_DEVICE_DEFAULT_DARK, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month = month+1;
+                        edad.setText(dayOfMonth+"/"+month+"/"+year);
+                        dia = dayOfMonth;
+                        mes = month-1;
+                        año = year;
+                    }
+                },año,mes,dia);
+                datePickerDialog.show();
+            }
+        });
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,12 +153,15 @@ public class crearcuenta extends AppCompatActivity {
             }
         }){
             protected Map<String,String> getParams() throws AuthFailureError {
+                String edadParaEnviar;
+                mes = mes+1;
+                edadParaEnviar = año + "-" + mes + "-" + dia;
                 Map<String,String> map = new HashMap<String,String>();
                 map.put("nombre",nombre.getText().toString());
                 map.put("contrasena",contraseña.getText().toString());
                 map.put("correo",correo.getText().toString());
                 map.put("altura",altura.getText().toString());
-                map.put("edad",edad.getText().toString());
+                map.put("edad",edadParaEnviar);
                 map.put("peso",peso.getText().toString());
                 map.put("ciudad",ciudad.getText().toString());
                 map.put("sexo",sexo.getText().toString());

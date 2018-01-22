@@ -38,14 +38,15 @@
         android:text=" Total Carbohidratos"
         android:gravity="center"
         android:textSize="20dp"/>
+
     <TextView
+        android:id="@+id/dhistorialtotal"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="200 gr"
         android:gravity="center"
+        android:text="200 gr"
         android:textColor="@color/celesteazul"
-        android:textSize="20dp"
-        android:id="@+id/dhistorialtotal"/>
-    
+        android:textSize="20dp" />
+
 
 </LinearLayout>

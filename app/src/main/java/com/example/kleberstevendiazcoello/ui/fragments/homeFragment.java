@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -147,19 +148,21 @@ public class homeFragment extends Fragment {
                     editor.putString(Altura_data,String.valueOf(object.getString("Altura")));
                     editor.putString(Genero_data,String.valueOf(object.getString("Genero")));
                     editor.putString(Ciudad_data,String.valueOf(object.getString("Ciudad")));
-                    editor.putInt(Edad_data,object.getInt("Edad"));
+                    //editor.putInt(Edad_data,object.getInt("Edad"));
+                    editor.putString(Edad_data, String.valueOf(object.getString("Edad")));
                     editor.commit();
 
                     SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
                             "userinfodata", Context.MODE_PRIVATE);
-                    int edad = sharedPrefe.getInt(Edad_data, 0);
+                    //int edad = sharedPrefe.getInt(Edad_data, 0);
+                    String edad = sharedPrefe.getString(Edad_data, "hola");
                     String name = sharedPrefe.getString(User_data, "hola");
                     String altu = sharedPrefe.getString(Altura_data, "hola");
                     String pe = sharedPrefe.getString(Peso_data, "hola");
                     String ciu = sharedPrefe.getString(Ciudad_data, "hola");
                     String ge = sharedPrefe.getString(Genero_data, "hola");
                     user.setText(mail);
-                    e.setText(String.valueOf(edad));
+                    e.setText(edad);
                     a.setText(altu);
                     peso.setText(pe);
                     nombre.setText(name);
