@@ -143,14 +143,14 @@ public class CalcularmanualFragment extends Fragment {
                              final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calcularmanual, container, false);
-        /*BottomNavigationView navigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
+        BottomNavigationView navigationView = (BottomNavigationView) getActivity().findViewById(R.id.navigation);
         Menu drawer_menu = navigationView.getMenu();
         MenuItem menuItem;
         menuItem = drawer_menu.findItem(R.id.navigation_camera);
         if(!menuItem.isChecked())
         {
             menuItem.setChecked(true);
-        }*/
+        }
          selecplatos = (Button) view.findViewById(R.id.agregarplatos);
          requestQueue = Volley.newRequestQueue(getActivity());
          requestQueue2 = Volley.newRequestQueue(getActivity());
@@ -203,7 +203,7 @@ public class CalcularmanualFragment extends Fragment {
              public void onClick(View view) {
                  android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                  android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                 transaction.replace(R.id.content2,new SeleccionarPlatos(),"SelecPlatos").addToBackStack("ManualFragment").commit();
+                 transaction.replace(R.id.content2,new SeleccionarPlatos()).addToBackStack("").commit();
              }
          });
 
