@@ -67,10 +67,8 @@ public class Labels_obtenidos extends Fragment {
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayList<String> filtrada= new ArrayList<>();
     ArrayList<Detalle> listtraduc= new ArrayList<>();
-    RecyclerView recyclerView;
-    FilterAdapter adapter;
-    RecyclerView.LayoutManager layoutManager;
-    Button btn_continuar_automatico;
+    private int tiempo = 30;
+    int pStatus = 0;
 
     private OnFragmentInteractionListener mListener;
 
@@ -110,17 +108,6 @@ public class Labels_obtenidos extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_labels_obtenidos, container, false);
-        recyclerView = (RecyclerView)view.findViewById(R.id.rvalimentosfiltrados);
-
-        btn_continuar_automatico = (Button)view.findViewById(R.id.continuarautomatico);
-        btn_continuar_automatico.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
-                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new AutomaticCalculo()).addToBackStack("").commit();
-            }
-        });
         listaob = (ArrayList<String>) getArguments().getSerializable("ListaObtenida");
         for (int i = 0; i < listaob.size(); i++) {
             Log.d("Lista en otro fragment",listaob.get(i));
@@ -138,12 +125,25 @@ public class Labels_obtenidos extends Fragment {
         }
 
         filtrada = compararlistas(listaob);
+        Thread thread = new Thread() {
+            public void run() {
+                while (pStatus < 100) {
+                    pStatus += 1;
+                    try {
+                        sleep(tiempo);
+                    } catch (Exception e) {
+
+                    }
+                }
+
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new Dimisslabels()).addToBackStack("").commit();
+            }
+        };
+        thread.start();
 
 
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        loadvista();
 
 
         return  view;
@@ -165,17 +165,6 @@ public class Labels_obtenidos extends Fragment {
     }
 
 
-    public void loadvista(){
-        ArrayList<Platos> plte = new ArrayList<>();
-        Database db = new Database(getActivity());
-        plte = db.getListaComidaAuto();
-        adapter = new FilterAdapter(plte,getActivity());
-        recyclerView.setAdapter(adapter);
-        ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerView);
-
-    }
     public void  getListLabelsNoNecesarios(final ArrayList<String> list) throws JSONException {
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/labels_no_necesarios.php";
         JsonArrayRequest jsonArrayRequest =  new JsonArrayRequest(com.android.volley.Request.Method.POST, url,(String) null,
