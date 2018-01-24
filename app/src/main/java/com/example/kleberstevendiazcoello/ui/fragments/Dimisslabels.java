@@ -89,7 +89,7 @@ public class Dimisslabels extends Fragment {
             public void onClick(View view) {
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new AutomaticCalculo()).addToBackStack("").commit();
+                transaction.replace(R.id.content2,new AutomaticCalculo(),"Autocalcular").addToBackStack("DimissFragment").commit();
             }
         });
 
@@ -104,6 +104,7 @@ public class Dimisslabels extends Fragment {
         ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
+
         return view;
 
     }

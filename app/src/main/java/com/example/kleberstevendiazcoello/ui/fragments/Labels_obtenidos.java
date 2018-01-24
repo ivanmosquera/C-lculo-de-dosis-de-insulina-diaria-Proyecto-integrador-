@@ -138,7 +138,9 @@ public class Labels_obtenidos extends Fragment {
 
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new Dimisslabels()).addToBackStack("").commit();
+                transaction.replace(R.id.content2,new Dimisslabels(),"DimissFragment").addToBackStack("MenuCalculo").commit();
+
+
             }
         };
         thread.start();

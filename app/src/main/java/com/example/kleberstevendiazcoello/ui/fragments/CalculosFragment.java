@@ -81,7 +81,7 @@ public class CalculosFragment extends Fragment {
             public void onClick(View view) {
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new CalcularmanualFragment()).addToBackStack("").commit();
+                transaction.replace(R.id.content2,new CalcularmanualFragment(),"ManualFragment").addToBackStack("MenuCalculo").commit();
             }
         });
 
@@ -90,7 +90,7 @@ public class CalculosFragment extends Fragment {
             public void onClick(View view) {
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new cameraFragment()).addToBackStack("").commit();
+                transaction.replace(R.id.content2,new cameraFragment(),"AutomaticFragment").addToBackStack("MenuCalculo").commit();
             }
         });
         return view;

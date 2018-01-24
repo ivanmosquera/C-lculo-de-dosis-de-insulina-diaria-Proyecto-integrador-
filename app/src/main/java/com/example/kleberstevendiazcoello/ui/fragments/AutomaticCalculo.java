@@ -144,7 +144,7 @@ public class AutomaticCalculo extends Fragment {
             public void onClick(View view) {
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new SeleccionarPlatosAuto()).addToBackStack("").commit();
+                transaction.replace(R.id.content2,new SeleccionarPlatosAuto(),"PlatosAuto").addToBackStack("AutomaticFragment").commit();
             }
         });
 

@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences sharedPrefe = MainActivity.this.getSharedPreferences(
+                "userinfodata", Context.MODE_PRIVATE);
+        String name = sharedPrefe.getString(User_data, "");
+        if(!name.equals("")){
+            Intent intent = new Intent(getApplicationContext(),botton_menu.class);
+            startActivity(intent);
+        }
         btncrearcuenta = (Button) findViewById(R.id.btncrearcuenta);
         btningresar = (Button) findViewById(R.id.btn_crear_ok);
         correo = (EditText) findViewById(R.id.txtcorreolog);

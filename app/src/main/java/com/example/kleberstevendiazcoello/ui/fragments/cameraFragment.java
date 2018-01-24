@@ -336,7 +336,7 @@ public class cameraFragment extends Fragment implements AdapterView.OnItemSelect
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
                 Labels_obtenidos lbl = new Labels_obtenidos();
                 lbl.setArguments(bundle);
-                transaction.replace(R.id.content2,lbl).addToBackStack("").commit();
+                transaction.replace(R.id.content2,lbl).addToBackStack("MenuCalculo").commit();
             }
         }.execute();
     }

@@ -25,25 +25,31 @@ public class botton_menu extends AppCompatActivity  {
             android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    transaction.replace(R.id.content2,new homeFragment()).commit();
+                    transaction.replace(R.id.content2,new homeFragment(),"HomeFragment").addToBackStack("HomeFragment").commit();
 
                     return true;
                 case R.id.navigation_camera:
-                    transaction.replace(R.id.content2,new CalculosFragment()).commit();
+                    transaction.replace(R.id.content2,new CalculosFragment(),"MenuCalculo").addToBackStack("MenuCalculo").commit();
 
                     return true;
 
                 case R.id.navigation_platos:
-                    transaction.replace(R.id.content2,new PlatoFragment()).commit();
+                    transaction.replace(R.id.content2,new PlatoFragment(),"PlatosFragment").addToBackStack("PlatosFragment").commit();
                     return true;
                 case R.id.navigation_historial:
-                    transaction.replace(R.id.content2,new HistorialFragment()).commit();
+                    transaction.replace(R.id.content2,new HistorialFragment(),"HistorialFragment").addToBackStack("HistorialFragment").commit();
                     return true;
 
             }
             return false;
         }
     };
+
+
+    @Override
+    public void onBackPressed() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

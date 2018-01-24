@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class homeFragment extends Fragment {
     public static final String Ciudad_data = "ciudad";
     TextView user, e, peso,a,nombre,genero,ciudad ;
     RequestQueue requestQueue;
+    ImageView config ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -107,6 +109,29 @@ public class homeFragment extends Fragment {
         nombre = (TextView)view.findViewById(R.id.txtshowusuario);
         genero = (TextView)view.findViewById(R.id.txtshowgenero);
         ciudad = (TextView)view.findViewById(R.id.txtshowciudad);
+        config = (ImageView)view.findViewById(R.id.configurarmod);
+        config.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                        "userinfodata", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.clear();
+                editor.commit();
+
+                SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                        "userinfo", Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editore = sharedPrefe.edit();
+                editore.clear();
+                editore.commit();
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+
+               /*getActivity().finish();
+               getActivity().moveTaskToBack(true);*/
+            }
+        });
 
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(

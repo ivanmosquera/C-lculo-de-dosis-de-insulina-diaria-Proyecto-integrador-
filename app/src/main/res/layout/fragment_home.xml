@@ -27,7 +27,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/configmodicono"
-        android:layout_gravity="end"/>
+        android:layout_gravity="end"
+        android:id="@+id/configurarmod"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp" />
