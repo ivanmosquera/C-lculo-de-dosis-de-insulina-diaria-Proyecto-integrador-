@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -56,6 +57,7 @@ public class SeleccionarPlatos extends Fragment {
     Dialog waitdia;
     private int tiempo = 30;
     int pStatus = 0;
+    ImageView back;
 
 
     // TODO: Rename and change types of parameters
@@ -104,6 +106,7 @@ public class SeleccionarPlatos extends Fragment {
         Log.d("myTag", "Me cree");
         mSearchField = (EditText)view.findViewById(R.id.buscar_food_calculo_manual);
         mSearchField.addTextChangedListener(mQuery);
+        back = (ImageView) view.findViewById(R.id.back_calculomanual);
         waitdia = new Dialog(getActivity());
         waitdia.setContentView(R.layout.popupwait);
         waitdia.show();
@@ -131,6 +134,15 @@ public class SeleccionarPlatos extends Fragment {
             }
         };
         thread.start();
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new CalcularmanualFragment()).addToBackStack("").commit();
+            }
+        });
 
         return view;
     }

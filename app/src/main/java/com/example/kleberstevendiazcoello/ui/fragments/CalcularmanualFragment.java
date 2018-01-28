@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -98,6 +99,7 @@ public class CalcularmanualFragment extends Fragment {
     float nivelact = 0;
     float nivelobj = 0;
     float factor = 0;
+    ImageView back;
 
 
     // TODO: Rename and change types of parameters
@@ -151,6 +153,7 @@ public class CalcularmanualFragment extends Fragment {
         {
             menuItem.setChecked(true);
         }
+        back = (ImageView) view.findViewById(R.id.back_menucalculo);
          selecplatos = (Button) view.findViewById(R.id.agregarplatos);
          requestQueue = Volley.newRequestQueue(getActivity());
          requestQueue2 = Volley.newRequestQueue(getActivity());
@@ -233,7 +236,15 @@ public class CalcularmanualFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Database(getActivity()).cleanList();
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new CalculosFragment()).addToBackStack("").commit();
+            }
+        });
 
 
         return view;

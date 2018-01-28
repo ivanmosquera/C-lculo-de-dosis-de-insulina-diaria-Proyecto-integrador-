@@ -2,6 +2,8 @@ package com.example.kleberstevendiazcoello.ui.ViewHolder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
+import com.example.kleberstevendiazcoello.ui.fragments.Detalle_Pla_Auto;
+import com.example.kleberstevendiazcoello.ui.fragments.Detalle_plato;
 
 import java.util.ArrayList;
 
@@ -51,11 +55,15 @@ public class RadapterAutoPlatos extends RecyclerView.Adapter<RadapterAutoPlatos.
             public void OnClick(View view, int position) {
                 //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
                 Detalle detalle = filterarray.get(position);
-                Intent intent = new Intent(ctx,Detalle_Plato_Auto.class);
-                intent.putExtra("id_Comida",detalle.getId());
-                intent.putExtra("Nombre",detalle.getComida());
-                intent.putExtra("Caloria",detalle.getCarbohidratos());
-                ctx.startActivity(intent);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id_Comida",detalle.getId());
+                bundle.putString("Nombre",detalle.getComida());
+                bundle.putString("Caloria",detalle.getCarbohidratos());
+                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity)ctx).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                Detalle_Pla_Auto detalle_plato_auto= new Detalle_Pla_Auto();
+                detalle_plato_auto.setArguments(bundle);
+                transaction.replace(R.id.content2,detalle_plato_auto).addToBackStack("").commit();
             }
         });
 

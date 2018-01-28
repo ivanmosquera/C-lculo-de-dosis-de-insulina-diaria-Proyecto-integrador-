@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -84,6 +85,7 @@ public class AutomaticCalculo extends Fragment {
     String totalamostars;
     static String id_h ;
     RequestQueue requestQueue,requestQueue2,requestQueue3;
+    ImageView back;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -133,6 +135,7 @@ public class AutomaticCalculo extends Fragment {
         requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue2 = Volley.newRequestQueue(getActivity());
         requestQueue3 = Volley.newRequestQueue(getActivity());
+        back = (ImageView) view.findViewById(R.id.back_tomarfoto);
         mydialog = new Dialog(getActivity());
         mydialog.setContentView(R.layout.custompopupauto);
         txtclose = (TextView)mydialog.findViewById(R.id.txtpopcloseauto);
@@ -160,6 +163,15 @@ public class AutomaticCalculo extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Database(getActivity()).cleanListAuto();
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new CalculosFragment()).addToBackStack("").commit();
+            }
+        });
 
         return view;
     }

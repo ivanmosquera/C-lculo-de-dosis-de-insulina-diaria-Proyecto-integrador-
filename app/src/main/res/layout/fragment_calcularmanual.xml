@@ -7,6 +7,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/celesteazul"
+            >
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:src="@drawable/botonatras"
+                android:id="@+id/back_menucalculo"/>
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Cálculo de Insulina"
+                android:padding="5dp"
+                android:textSize="22sp"
+                android:gravity=""
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+        </android.support.v7.widget.Toolbar>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +124,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="120dp">
+                android:layout_height="wrap_content">
                 <android.support.v7.widget.CardView
                     android:id="@+id/calculo_manual"
                     android:layout_width="match_parent"

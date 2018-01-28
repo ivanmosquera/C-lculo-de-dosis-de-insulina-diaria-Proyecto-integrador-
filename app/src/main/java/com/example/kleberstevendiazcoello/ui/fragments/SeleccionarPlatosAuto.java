@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -53,6 +54,8 @@ public class SeleccionarPlatosAuto extends Fragment {
     GridLayoutManager gridLayoutManager;
     RequestQueue requestQueue;
     EditText mSearchField;
+    ImageView back;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -100,6 +103,7 @@ public class SeleccionarPlatosAuto extends Fragment {
         Log.d("myTag", "Me cree");
         mSearchField = (EditText)view.findViewById(R.id.buscar_food_calculo_auto);
         mSearchField.addTextChangedListener(mQuery);
+        back = (ImageView) view.findViewById(R.id.back_calculoauto);
         requestQueue = Volley.newRequestQueue(getActivity());
         try {
             getList();
@@ -109,6 +113,14 @@ public class SeleccionarPlatosAuto extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2,new AutomaticCalculo()).addToBackStack("").commit();
+            }
+        });
         return view;
     }
 

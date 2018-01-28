@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondonuevo"
+    android:background="@color/celesteazul"
     tools:context="com.example.kleberstevendiazcoello.ui.login.MainActivity">
     
     <LinearLayout

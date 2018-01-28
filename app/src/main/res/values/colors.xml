@@ -3,7 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="celesteazul">#24CECE</color>
+    <color name="celesteazul">#00B4DE</color>
     <color name="overlayBackgroud">#7f333639</color>
+    <color name="celestenuevo">#00B4DE</color>
+    <color name="backgroudnew">#0089C8</color>
+    <color name="textonegrita">#5E6060</color>
+    <color name="textonormal">#8C8C8C</color>
+
+
 
 </resources>

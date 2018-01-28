@@ -11,15 +11,28 @@
         android:background="@color/celesteazul"
         >
         <ImageView
-            android:layout_width="40dp"
+            android:layout_width="80dp"
             android:layout_height="30dp"
-            android:src="@drawable/lupaicono"/>
+            android:src="@drawable/iralcalculo"
+            android:id="@+id/back_calculoauto"/>
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Platos"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"/>
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="wrap_content" />
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
             android:id="@+id/buscar_food_calculo_auto"
-            android:backgroundTint="@color/fbutton_color_midnight_blue"
-            android:textColor="@color/fbutton_color_midnight_blue"
+            android:background="@drawable/buscar"
+            android:textColor="@android:color/white"
             />
 
     </android.support.v7.widget.Toolbar>

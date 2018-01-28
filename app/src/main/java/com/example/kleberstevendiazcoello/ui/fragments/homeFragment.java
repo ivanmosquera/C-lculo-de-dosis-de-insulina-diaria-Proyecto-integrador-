@@ -109,7 +109,7 @@ public class homeFragment extends Fragment {
         nombre = (TextView)view.findViewById(R.id.txtshowusuario);
         genero = (TextView)view.findViewById(R.id.txtshowgenero);
         ciudad = (TextView)view.findViewById(R.id.txtshowciudad);
-        config = (ImageView)view.findViewById(R.id.configurarmod);
+        config = (ImageView)view.findViewById(R.id.salirapp);
         config.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
