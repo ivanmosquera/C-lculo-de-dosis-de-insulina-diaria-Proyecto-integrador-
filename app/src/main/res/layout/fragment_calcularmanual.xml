@@ -26,7 +26,7 @@
                 android:text="Cálculo de Insulina"
                 android:padding="5dp"
                 android:textSize="22sp"
-                android:gravity=""
+                android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"/>
 
@@ -121,14 +121,10 @@
             android:padding="14dp"
             android:orientation="vertical">
             >
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
                 <android.support.v7.widget.CardView
                     android:id="@+id/calculo_manual"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     app:cardElevation="3dp"
                     app:cardCornerRadius="3dp">
                     <android.support.v7.widget.RecyclerView
@@ -137,20 +133,10 @@
                         android:id="@+id/rv_platosseleccionados"
                         ></android.support.v7.widget.RecyclerView>
                 </android.support.v7.widget.CardView>
-            </ScrollView>
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 />
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="35dp"
-                android:id="@+id/agregarplatos"
-                android:layout_gravity="center"
-                android:background="@drawable/agregarplatoschange"/>
-            <android.support.v4.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="20dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -171,9 +157,20 @@
                     android:textColor="@color/celesteazul"/>
 
             </LinearLayout>
-            <android.support.v4.widget.Space
+            <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="35dp"
+                android:id="@+id/agregarplatos"
+                android:layout_gravity="center"
+                android:background="@drawable/agregarplatoschange"/>
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+
             <Button
                 android:layout_width="200dp"
                 android:layout_height="35dp"

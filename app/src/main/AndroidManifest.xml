@@ -28,7 +28,9 @@
         <activity android:name=".Activitys.Detalle_food" />
         <activity android:name=".Activitys.Detalle_Plato_Selec" />
         <activity android:name=".Activitys.Detalle_Plato_Auto" />
-        <activity android:name=".Activitys.DetalleHistorial"></activity>
+        <activity android:name=".Activitys.DetalleHistorial" />
+        <activity android:name=".login.crearcuentasegundo" />
+        <activity android:name=".login.crearcuentatres"></activity>
     </application>
 
 </manifest>

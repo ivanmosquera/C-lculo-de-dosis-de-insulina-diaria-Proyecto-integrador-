@@ -27,12 +27,14 @@
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:id="@+id/txtcomida"
+                android:textColor="@color/textonegrita"
                 />
             <TextView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
                 android:id="@+id/txtmedida"
+                android:textColor="@color/textonormal"
                 />
 
         </LinearLayout>

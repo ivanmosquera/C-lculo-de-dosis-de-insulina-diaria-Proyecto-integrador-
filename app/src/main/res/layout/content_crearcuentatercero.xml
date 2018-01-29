@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/partesuperiordos"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Insuvida te ayudara a llevar el control de "
+        android:textColor="@color/textonegrita"
+        android:textSize="18dp" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="tu rutina alimenticia"
+        android:textColor="@color/textonegrita"
+        android:textSize="18dp" />
+
+
+
+    <EditText
+        android:id="@+id/txtsexo"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/genero"
+        android:ems="10"
+        android:hint="Género"
+        android:paddingLeft="10dp"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/textonormal"
+        />
+
+    <EditText
+        android:id="@+id/txtciudad"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/peso"
+        android:ems="10"
+        android:hint="Ciudad"
+        android:paddingLeft="10dp"
+        android:inputType="textPassword"
+        android:textColorHint="@color/textonormal"/>
+
+    <ImageView
+        android:id="@+id/lineaseparadora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:src="@drawable/lineaseparadora"
+        />
+
+    <Button
+        android:id="@+id/btn_crear_ok"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/confirmarcuenta"
+        android:text="" />
+
+    <Button
+        android:id="@+id/btncrearcuenta"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/regresarchange"
+        android:text="" />
+
+
+</LinearLayout>
+
+
+

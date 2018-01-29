@@ -21,13 +21,15 @@
             android:layout_height="20dp"
             android:id="@+id/txtcomidaSelect"
             android:textStyle="bold"
-            android:textSize="14dp"/>
+            android:textSize="14dp"
+            android:textColor="@color/textonegrita"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/txtcarbohidratosSelect"
             android:textStyle="bold"
-            android:textSize="14dp"/>
+            android:textSize="14dp"
+            android:textColor="@color/celestenuevo"/>
         
     </LinearLayout>
 

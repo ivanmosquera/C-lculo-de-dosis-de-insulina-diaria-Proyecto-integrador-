@@ -33,6 +33,7 @@
             android:id="@+id/buscar_food_calculo_auto"
             android:background="@drawable/buscar"
             android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
             />
 
     </android.support.v7.widget.Toolbar>

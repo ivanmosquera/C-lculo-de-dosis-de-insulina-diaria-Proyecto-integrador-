@@ -1,17 +1,23 @@
 package com.example.kleberstevendiazcoello.ui.ViewHolder;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_Plato_Auto;
 import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_Plato_Selec;
+import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
@@ -32,6 +38,12 @@ public class RadapterAutoPlatos extends RecyclerView.Adapter<RadapterAutoPlatos.
     private ItemClickListener itemClickListener;
     Context ctx;
     private  ArrayList<Detalle>filterarray = new ArrayList<>();
+    Dialog popselectauto;
+    ElegantNumberButton elegantNumberButton;
+    String cantidad = "1";
+    float calculo_total;
+    Button btn_agregar,btn_cancelar;
+    ElegantNumberButton number;
 
     public RadapterAutoPlatos(ArrayList<Detalle> arrayList, Context ctx){
         this.arrayList = arrayList;
@@ -53,8 +65,41 @@ public class RadapterAutoPlatos extends RecyclerView.Adapter<RadapterAutoPlatos.
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void OnClick(View view, int position) {
+                final Detalle detalle = filterarray.get(position);
+                popselectauto = new Dialog(ctx);
+                popselectauto.setContentView(R.layout.popup_porcionesauto);
+                popselectauto.show();
+                btn_agregar = (Button)popselectauto.findViewById(R.id.btnguardarplatosauto);
+                btn_cancelar = (Button)popselectauto.findViewById(R.id.btncancelarauto);
+                number =(ElegantNumberButton)popselectauto.findViewById(R.id.numbre_buttonsauto);
+                number.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("myTag", "Cantidad Ingresada : "+elegantNumberButton.getNumber());
+                        cantidad = elegantNumberButton.getNumber();
+                        calculo_total = Float.parseFloat(detalle.getCarbohidratos())*Integer.parseInt(cantidad);
+                    }
+                });
+                btn_agregar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        new Database(ctx).addPlatos(new Platos(String.valueOf(detalle.getId()),detalle.getComida(),detalle.getCarbohidratos(),cantidad));
+                        Toast.makeText(ctx, "Plato Agregado", Toast.LENGTH_LONG).show();
+                        popselectauto.dismiss();
+                    }
+
+                });
+                btn_cancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popselectauto.dismiss();
+                    }
+                });
+
+
                 //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
-                Detalle detalle = filterarray.get(position);
+                /*Detalle detalle = filterarray.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putInt("id_Comida",detalle.getId());
                 bundle.putString("Nombre",detalle.getComida());
@@ -63,7 +108,7 @@ public class RadapterAutoPlatos extends RecyclerView.Adapter<RadapterAutoPlatos.
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
                 Detalle_Pla_Auto detalle_plato_auto= new Detalle_Pla_Auto();
                 detalle_plato_auto.setArguments(bundle);
-                transaction.replace(R.id.content2,detalle_plato_auto).addToBackStack("").commit();
+                transaction.replace(R.id.content2,detalle_plato_auto).addToBackStack("").commit();*/
             }
         });
 

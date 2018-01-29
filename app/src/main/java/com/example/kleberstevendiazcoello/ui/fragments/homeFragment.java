@@ -1,5 +1,6 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +60,8 @@ public class homeFragment extends Fragment {
     TextView user, e, peso,a,nombre,genero,ciudad ;
     RequestQueue requestQueue;
     ImageView config ;
+    Dialog salirpopup;
+    Button salidaapp,cancelarsalida;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -110,23 +114,43 @@ public class homeFragment extends Fragment {
         genero = (TextView)view.findViewById(R.id.txtshowgenero);
         ciudad = (TextView)view.findViewById(R.id.txtshowciudad);
         config = (ImageView)view.findViewById(R.id.salirapp);
+        salirpopup = new Dialog(getActivity());
+        salirpopup.setContentView(R.layout.popup_salir);
+        salidaapp = (Button)salirpopup.findViewById(R.id.salirapppop);
+        cancelarsalida = (Button)salirpopup.findViewById(R.id.cancelarsalida);
         config.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPref = getActivity().getSharedPreferences(
-                        "userinfodata", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.clear();
-                editor.commit();
 
-                SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
-                        "userinfo", Context.MODE_PRIVATE);
+                salirpopup.show();
+                salidaapp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                                "userinfodata", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.clear();
+                        editor.commit();
 
-                SharedPreferences.Editor editore = sharedPrefe.edit();
-                editore.clear();
-                editore.commit();
-                android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(1);
+                        SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                                "userinfo", Context.MODE_PRIVATE);
+
+                        SharedPreferences.Editor editore = sharedPrefe.edit();
+                        editore.clear();
+                        editore.commit();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(1);
+                    }
+                });
+
+                cancelarsalida.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        salirpopup.dismiss();
+                    }
+                });
+
+
 
                /*getActivity().finish();
                getActivity().moveTaskToBack(true);*/

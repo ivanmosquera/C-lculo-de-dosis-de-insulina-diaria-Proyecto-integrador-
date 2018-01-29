@@ -1,20 +1,28 @@
 package com.example.kleberstevendiazcoello.ui.ViewHolder;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_Plato_Selec;
 import com.example.kleberstevendiazcoello.ui.Activitys.Detalle_food;
+import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
+import com.example.kleberstevendiazcoello.ui.fragments.CalcularmanualFragment;
 import com.example.kleberstevendiazcoello.ui.fragments.Detalle_plato;
 import com.example.kleberstevendiazcoello.ui.fragments.Labels_obtenidos;
 
@@ -29,6 +37,11 @@ public class RAdapterSPlatos extends RecyclerView.Adapter<RAdapterSPlatos.Recicl
     private ItemClickListener itemClickListener;
     private  ArrayList<Detalle>filterarray = new ArrayList<>();
     Context ctx;
+    Dialog popselect;
+    ElegantNumberButton elegantNumberButton;
+    String cantidad = "1";
+    float calculo_total;
+    Button btn_agregar,btn_cancelar;
 
     public RAdapterSPlatos(ArrayList<Detalle> arrayList, Context ctx){
         this.arrayList = arrayList;
@@ -49,9 +62,41 @@ public class RAdapterSPlatos extends RecyclerView.Adapter<RAdapterSPlatos.Recicl
         holder.Carbohidratos.setText(filterarray.get(position).getCarbohidratos());
         holder.setItemClickListener(new ItemClickListener() {
             @Override
-            public void OnClick(View view, int position) {
+            public void OnClick(View view, final int position) {
+                final Detalle detalle = filterarray.get(position);
+                popselect = new Dialog(ctx);
+                popselect.setContentView(R.layout.popup_porciones);
+                popselect.show();
+                btn_agregar = (Button)popselect.findViewById(R.id.btnguardarplatosmanual);
+                btn_cancelar = (Button)popselect.findViewById(R.id.btncancelarmanual);
+                elegantNumberButton = (ElegantNumberButton)popselect.findViewById(R.id.numbre_buttons);
+                elegantNumberButton.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("myTag", "Cantidad Ingresada : "+elegantNumberButton.getNumber());
+                        cantidad = elegantNumberButton.getNumber();
+                        calculo_total = Float.parseFloat(detalle.getCarbohidratos())*Integer.parseInt(cantidad);
+                    }
+                });
+                btn_agregar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        new Database(ctx).addPlatos(new Platos(String.valueOf(detalle.getId()),detalle.getComida(),detalle.getCarbohidratos(),cantidad));
+                        Toast.makeText(ctx, "Plato Agregado", Toast.LENGTH_LONG).show();
+                        popselect.dismiss();
+                    }
+
+                });
+                btn_cancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popselect.dismiss();
+                    }
+                });
+
                 //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
-                Detalle detalle = filterarray.get(position);
+                /*Detalle detalle = filterarray.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putInt("id_Comida",detalle.getId());
                 bundle.putString("Nombre",detalle.getComida());
@@ -60,7 +105,7 @@ public class RAdapterSPlatos extends RecyclerView.Adapter<RAdapterSPlatos.Recicl
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
                 Detalle_plato detalle_plato = new Detalle_plato();
                 detalle_plato.setArguments(bundle);
-                transaction.replace(R.id.content2,detalle_plato).addToBackStack("").commit();
+                transaction.replace(R.id.content2,detalle_plato).addToBackStack("").commit();*/
 
                /* Intent intent = new Intent(ctx,Detalle_Plato_Selec.class);
                 intent.putExtra("id_Comida",detalle.getId());

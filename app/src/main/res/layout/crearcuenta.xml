@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondonuevo"
+    android:background="@android:color/white"
+    android:orientation="vertical"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/partesuperioruno"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"/>
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:text="Crea tu Cuenta "
-            android:textColor="@android:color/background_light"
-            android:textSize="35dp" />
+            android:text="Seleccione las casillas y agrega tus datos "
+            android:textColor="@color/textonegrita"
+            android:textSize="18dp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="para empezar la creación de tu cuenta "
+            android:textColor="@color/textonegrita"
+            android:textSize="18dp" />
 
         <EditText
             android:id="@+id/txtusuario"
@@ -26,11 +37,12 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="18dp"
-            android:background="@drawable/botonusuario"
+            android:background="@drawable/usuarion"
             android:ems="10"
-            android:hint="   Usuario"
+            android:hint="Usuario"
+            android:paddingLeft="10dp"
             android:inputType="textPersonName"
-            android:textColorHint="@android:color/background_light"
+            android:textColorHint="@color/textonormal"
             />
 
         <EditText
@@ -39,11 +51,12 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="18dp"
-            android:background="@drawable/botoncorreo"
+            android:background="@drawable/correo"
             android:ems="10"
-            android:hint="  Correo"
+            android:hint="Correo"
+            android:paddingLeft="10dp"
             android:inputType="textPersonName"
-            android:textColorHint="@android:color/background_light"
+            android:textColorHint="@color/textonormal"
             />
 
         <EditText
@@ -52,96 +65,31 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="18dp"
-            android:background="@drawable/botoncontrasenac"
+            android:background="@drawable/contrasena"
             android:ems="10"
-            android:hint="  Contraseña"
+            android:hint="Contraseña"
+            android:paddingLeft="10dp"
             android:inputType="textPassword"
-            android:textColorHint="@android:color/background_light" />
-
-        <EditText
-            android:id="@+id/txtedad"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/botonedad"
-            android:ems="10"
-            android:hint="  Fecha de nacimiento"
-            android:focusable="false"
-            android:inputType="date"
-            android:textColorHint="@android:color/background_light" />
-
-        <EditText
-            android:id="@+id/txtpeso"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/botonpeso"
-            android:ems="10"
-            android:hint="   Peso(kg)"
-            android:inputType="numberDecimal"
-            android:textColorHint="@android:color/background_light" />
-
-        <EditText
-            android:id="@+id/txtaltura"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/botonaltura"
-            android:ems="10"
-            android:hint="   Altura(m)"
-            android:inputType="numberDecimal"
-            android:textColorHint="@android:color/background_light" />
-        
-        <EditText
-            android:id="@+id/txtciudad"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/botonciudad"
-            android:ems="10"
-            android:hint="   Ciudad"
-            android:inputType="textPersonName"
-            android:textColorHint="@android:color/background_light" />
-        <EditText
-            android:id="@+id/txtsexo"
-            android:layout_width="220dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/botongenero"
-            android:ems="10"
-            android:hint="   Genero"
-            android:inputType="textPersonName"
-            android:textColorHint="@android:color/background_light" />
-
+            android:textColorHint="@color/textonormal"/>
 
         <Button
-            android:id="@+id/btn_crear_ok"
+            android:id="@+id/btnsiguiente"
             android:layout_width="220dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/continuar_cuenta"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/siguientechange"
             android:text="" />
+
         <Button
-            android:id="@+id/btn_crear_cancelar"
+            android:id="@+id/btnyatengocuenta"
             android:layout_width="220dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            
-            android:text="Cancelar" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="80dp" />
-        
-    </LinearLayout>
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/otracuentachange"
+            android:text="" />
 
 
-
-
-</ScrollView>
+</LinearLayout>

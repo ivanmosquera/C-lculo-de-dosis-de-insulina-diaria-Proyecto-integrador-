@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="245dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/celesteazul"
+    android:padding="5dp"
+    android:layout_gravity="center">
+
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:textColor="@android:color/white"
+        android:text=""
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:id="@+id/txtpopclose"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccione Poriciones"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+
+        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+            android:id="@+id/numbre_buttons"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="18dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            app:backGroundColor="@color/celesteazul"
+            app:finalNumber="20"
+            app:initialNumber="1"
+            android:layout_gravity="center"
+            app:textSize="8sp"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnguardarplatosmanual"
+        android:background="@drawable/confirmarplatochange"
+        android:layout_gravity="center"/>
+    <Space
+        android:layout_width="30dp"
+        android:layout_height= "7dp"/>
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:background="@drawable/cancelarplatochange"
+        android:layout_gravity="center"
+        android:id="@+id/btncancelarmanual"/>
+
+
+
+</LinearLayout>

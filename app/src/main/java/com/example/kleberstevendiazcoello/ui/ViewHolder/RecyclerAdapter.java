@@ -42,20 +42,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.comida.setText(filterarray.get(position).getComida());
         holder.medida.setText(filterarray.get(position).getMedida());
         holder.Carbohidratos.setText(filterarray.get(position).getCarbohidratos());
-        holder.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
-                Detalle detalle = filterarray.get(position);
-                Intent intent = new Intent(ctx,Detalle_food.class);
-                intent.putExtra("Nombre",detalle.getComida());
-                intent.putExtra("Caloria",detalle.getCarbohidratos());
-                ctx.startActivity(intent);
-            }
-        });
-
-
-
     }
 
 

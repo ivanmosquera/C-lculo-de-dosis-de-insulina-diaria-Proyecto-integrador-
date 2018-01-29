@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
 
 
@@ -79,15 +80,18 @@ public class CalculosFragment extends Fragment {
         calculomanual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                new Database(getActivity()).cleanList();
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.content2,new CalcularmanualFragment()).commit();
+
             }
         });
 
         calculoautomatico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                new Database(getActivity()).cleanListAuto();
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.content2,new cameraFragment()).commit();

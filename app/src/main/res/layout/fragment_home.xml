@@ -6,59 +6,59 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:orientation="horizontal"
-    android:background="@color/celesteazul">
-    <Space
-        android:layout_width="20dp"
-        android:layout_height="wrap_content" />
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/celesteazul">
         <Space
-            android:layout_width="2dp"
-            android:layout_height="5dp" />
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/botonsalir"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:id="@+id/salirapp"
-            />
-    </LinearLayout>
-    <TextView
-        android:layout_width="330dp"
-        android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:textSize="22dp"
-        android:background="@color/celesteazul"
-        android:id="@+id/txtshowusuario"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        android:gravity="center"
-        android:text="Kleber Steven Diaz Coello"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:orientation="vertical">
-        <Space
-            android:layout_width="2dp"
-            android:layout_height="5dp" />
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/botonsalir"
+            android:orientation="vertical">
+            <Space
+                android:layout_width="2dp"
+                android:layout_height="5dp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/botonsalir"
+                android:layout_gravity="end"
+                android:id="@+id/salirapp"
+                />
+        </LinearLayout>
+        <TextView
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textSize="22dp"
+            android:background="@color/celesteazul"
+            android:id="@+id/txtshowusuario"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:text="Kleber Steven Diaz Coello"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="end"
-            />
-    </LinearLayout>
+            android:orientation="vertical">
+            <Space
+                android:layout_width="2dp"
+                android:layout_height="5dp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/botonsalir"
+                android:layout_gravity="end"
+                />
+        </LinearLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -90,8 +90,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:src="@drawable/iconopeson"/>
                 <TextView
@@ -101,7 +101,6 @@
                     android:textColor="@color/textonormal"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:text="14.555lb"
                     android:id="@+id/txtshowpeso"/>
             </LinearLayout>
 
@@ -126,8 +125,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:src="@drawable/iconoestatura"/>
                 <TextView
@@ -161,8 +160,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:src="@drawable/iconogeneron"/>
                 <TextView
@@ -196,8 +195,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:src="@drawable/iconoubicacion"/>
                 <TextView
@@ -231,8 +230,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:src="@drawable/iconopeson"/>
                 <TextView
@@ -266,8 +265,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:src="@drawable/iconocorreon"/>
                 <TextView
