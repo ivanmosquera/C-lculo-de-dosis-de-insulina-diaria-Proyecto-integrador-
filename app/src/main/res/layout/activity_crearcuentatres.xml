@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/partesuperiordos"
+        android:src="@drawable/partesuperiortresn"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"/>
     <TextView
@@ -35,7 +35,7 @@
 
     <EditText
         android:id="@+id/txtsexo"
-        android:layout_width="220dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="18dp"
@@ -49,7 +49,7 @@
 
     <EditText
         android:id="@+id/txtciudad"
-        android:layout_width="220dp"
+        android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="18dp"
@@ -60,19 +60,22 @@
         android:inputType="textPersonName"
         android:textColorHint="@color/textonormal"/>
 
-    <ImageView
-        android:id="@+id/lineaseparadora"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/txttelefono"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="18dp"
+        android:background="@drawable/telefono"
         android:ems="10"
-        android:src="@drawable/lineaseparadora"
-        />
+        android:hint="Teléfono"
+        android:paddingLeft="10dp"
+        android:inputType="number"
+        android:textColorHint="@color/textonormal"/>
 
     <Button
         android:id="@+id/btnconfirmarcuenta"
-        android:layout_width="220dp"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
@@ -82,7 +85,7 @@
 
     <Button
         android:id="@+id/btnregresarados"
-        android:layout_width="220dp"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"

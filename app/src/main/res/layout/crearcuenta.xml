@@ -33,7 +33,7 @@
 
         <EditText
             android:id="@+id/txtusuario"
-            android:layout_width="220dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="18dp"
@@ -47,7 +47,7 @@
 
         <EditText
             android:id="@+id/txtcorreoi"
-            android:layout_width="220dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="18dp"
@@ -61,7 +61,7 @@
 
         <EditText
             android:id="@+id/txtpasswordi"
-            android:layout_width="220dp"
+            android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="18dp"
@@ -74,7 +74,7 @@
 
         <Button
             android:id="@+id/btnsiguiente"
-            android:layout_width="220dp"
+            android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
@@ -84,7 +84,7 @@
 
         <Button
             android:id="@+id/btnyatengocuenta"
-            android:layout_width="220dp"
+            android:layout_width="250dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"

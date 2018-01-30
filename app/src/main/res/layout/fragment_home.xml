@@ -224,16 +224,15 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/iconocorreon"
+                    android:src="@drawable/iconotelefono"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="14.4"
-                    android:textSize="13sp"
+                    android:textSize="20sp"
                     android:layout_gravity="center"
-                    android:id="@+id/txtcorreouser"
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/txtshowtelefono"
+
                     />
                 <ImageView
                     android:layout_marginTop="10dp"

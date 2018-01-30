@@ -56,8 +56,9 @@ public class homeFragment extends Fragment {
     public static final String Altura_data = "altura";
     public static final String Edad_data = "edad";
     public static final String Genero_data = "genero";
+    public static final String Telefono_data = "telefono";
     public static final String Ciudad_data = "ciudad";
-    TextView user, e, peso,a,nombre,genero,ciudad ;
+    TextView user, e, peso,a,nombre,genero,ciudad,telefono ;
     RequestQueue requestQueue;
     ImageView config ;
     Dialog salirpopup;
@@ -106,13 +107,14 @@ public class homeFragment extends Fragment {
         // Inflate the layout for this fragment
        View view  =inflater.inflate(R.layout.fragment_home, container, false);
         requestQueue = Volley.newRequestQueue(getActivity());
-        user = (TextView)view.findViewById(R.id.txtcorreouser);
+        //user = (TextView)view.findViewById(R.id.txtcorreouser);
         a = (TextView)view.findViewById(R.id.txtshowaltura);
         peso= (TextView)view.findViewById(R.id.txtshowpeso);
         e = (TextView)view.findViewById(R.id.txtshowedad);
         nombre = (TextView)view.findViewById(R.id.txtshowusuario);
         genero = (TextView)view.findViewById(R.id.txtshowgenero);
         ciudad = (TextView)view.findViewById(R.id.txtshowciudad);
+        telefono = (TextView)view.findViewById(R.id.txtshowtelefono);
         config = (ImageView)view.findViewById(R.id.salirapp);
         salirpopup = new Dialog(getActivity());
         salirpopup.setContentView(R.layout.popup_salir);
@@ -197,6 +199,7 @@ public class homeFragment extends Fragment {
                     editor.putString(Altura_data,String.valueOf(object.getString("Altura")));
                     editor.putString(Genero_data,String.valueOf(object.getString("Genero")));
                     editor.putString(Ciudad_data,String.valueOf(object.getString("Ciudad")));
+                    editor.putString(Telefono_data,String.valueOf(object.getString("Telefono")));
                     //editor.putInt(Edad_data,object.getInt("Edad"));
                     editor.putString(Edad_data, String.valueOf(object.getString("Edad")));
                     editor.commit();
@@ -210,13 +213,15 @@ public class homeFragment extends Fragment {
                     String pe = sharedPrefe.getString(Peso_data, "hola");
                     String ciu = sharedPrefe.getString(Ciudad_data, "hola");
                     String ge = sharedPrefe.getString(Genero_data, "hola");
-                    user.setText(mail);
+                    String fono = sharedPrefe.getString(Telefono_data, "hola");
+                    //user.setText(mail);
                     e.setText(edad);
                     a.setText(altu);
                     peso.setText(pe);
                     nombre.setText(name);
                     genero.setText(ge);
                     ciudad.setText(ciu);
+                    telefono.setText(fono);
 
 
 

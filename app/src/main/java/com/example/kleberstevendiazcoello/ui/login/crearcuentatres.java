@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class crearcuentatres extends AppCompatActivity {
-    EditText nombre, contraseña, correo,altura,edad,peso,ciudad,sexo;Calendar currentDate;
+    EditText nombre, contraseña, correo,altura,edad,peso,ciudad,sexo,telefono;Calendar currentDate;
     Button siguiente,cancelar;
     RequestQueue requestQueue;
     String nombre_ob,conta_ob,correo_ob,altura_ob,edad_ob,peso_ob;
@@ -50,8 +50,10 @@ public class crearcuentatres extends AppCompatActivity {
         Log.d("MYTAG :",peso_ob);
         ciudad = (EditText) findViewById(R.id.txtciudad);
         sexo = (EditText) findViewById(R.id.txtsexo);
+        telefono = (EditText)findViewById(R.id.txttelefono);
         siguiente = (Button) findViewById(R.id.btnconfirmarcuenta);
         cancelar = (Button) findViewById(R.id.btnregresarados);
+
         requestQueue = Volley.newRequestQueue(this);
 
 
@@ -120,6 +122,7 @@ public class crearcuentatres extends AppCompatActivity {
                 map.put("peso",peso_ob);
                 map.put("ciudad",ciudad.getText().toString());
                 map.put("sexo",sexo.getText().toString());
+                map.put("telefono",telefono.getText().toString());
 
                 return map;
             }
