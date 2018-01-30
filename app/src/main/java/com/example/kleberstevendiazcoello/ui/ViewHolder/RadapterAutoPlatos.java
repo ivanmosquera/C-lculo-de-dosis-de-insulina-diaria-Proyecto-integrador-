@@ -53,7 +53,7 @@ public class RadapterAutoPlatos extends RecyclerView.Adapter<RadapterAutoPlatos.
     @Override
     public ReciclerViewHolderAuto onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.platos_elegidos_modeloauto,parent,false);
-        RadapterAutoPlatos.ReciclerViewHolderAuto reciclerViewHolderAuto = new RadapterAutoPlatos.ReciclerViewHolderAuto(view,ctx,filterarray);
+        ReciclerViewHolderAuto reciclerViewHolderAuto = new ReciclerViewHolderAuto(view,ctx,filterarray);
         return reciclerViewHolderAuto;
     }
 
@@ -84,7 +84,7 @@ public class RadapterAutoPlatos extends RecyclerView.Adapter<RadapterAutoPlatos.
                     @Override
                     public void onClick(View view) {
 
-                        new Database(ctx).addPlatos(new Platos(String.valueOf(detalle.getId()),detalle.getComida(),detalle.getCarbohidratos(),cantidad));
+                        new Database(ctx).addPlatosAuto(new Platos(String.valueOf(detalle.getId()),detalle.getComida(),detalle.getCarbohidratos(),cantidad));
                         Toast.makeText(ctx, "Plato Agregado", Toast.LENGTH_LONG).show();
                         popselectauto.dismiss();
                     }

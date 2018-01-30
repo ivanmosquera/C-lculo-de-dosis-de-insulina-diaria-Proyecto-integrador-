@@ -32,14 +32,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="    Alimentos"
+            android:text="Platos"
             android:padding="8dp"
             android:textStyle="bold"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_marginLeft="30dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Carbohidratos"
+            android:text="Gramos de CHO"
             android:padding="8dp"
             android:textStyle="bold"
             android:textSize="18dp"

@@ -304,14 +304,13 @@ public class CalcularmanualFragment extends Fragment {
     }
 
     private String totalcalculo(){
-         tot = Float.parseFloat(total_carbo.getText().toString());
-         icr = 15;
-         nivelact = Float.parseFloat(glucosoactual.getText().toString());
-         nivelobj = Float.parseFloat(glucosaobjetivo.getText().toString());
-         factor = 1;
-
+        tot = Float.parseFloat(total_carbo.getText().toString());
+        icr = 15;
+        nivelact = Float.parseFloat(glucosoactual.getText().toString());
+        nivelobj = Float.parseFloat(glucosaobjetivo.getText().toString());
+        factor = (1500/45);
         totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
-        totalamostars = String.valueOf(totalamostar);
+        totalamostars = String.format("%.1f", totalamostar);
 
         return totalamostars;
     }
@@ -399,6 +398,8 @@ public class CalcularmanualFragment extends Fragment {
                 map.put("idusuario",idusuario);
                 map.put("insulina",txttotalinsu.getText().toString());
                 map.put("total",total_carbo.getText().toString());
+                map.put("glucosaa",glucosoactual.getText().toString());
+                map.put("glucosao",glucosaobjetivo.getText().toString());
                 return map;
             }
 
@@ -420,7 +421,7 @@ public class CalcularmanualFragment extends Fragment {
         }
         /*Locale locale = new Locale("en","US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);*/
-        total_carbo.setText(String.valueOf(total));
+        total_carbo.setText(String.format("%.2f", total));
     }
 
     // TODO: Rename method, update argument and hook method into UI event

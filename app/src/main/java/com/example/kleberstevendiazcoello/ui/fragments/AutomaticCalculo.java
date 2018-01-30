@@ -242,6 +242,8 @@ public class AutomaticCalculo extends Fragment {
                 map.put("idusuario",idusuario);
                 map.put("insulina",txttotalinsu.getText().toString());
                 map.put("total",total_carbo.getText().toString());
+                map.put("glucosaa",glucosoactual.getText().toString());
+                map.put("glucosao",glucosaobjetivo.getText().toString());
                 return map;
             }
 
@@ -320,10 +322,8 @@ public class AutomaticCalculo extends Fragment {
         nivelact = Float.parseFloat(glucosoactual.getText().toString());
         nivelobj = Float.parseFloat(glucosaobjetivo.getText().toString());
         factor = 1;
-
         totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
-        totalamostars = String.valueOf(totalamostar);
-
+        totalamostars = String.format("%.1f", totalamostar);
         return totalamostars;
     }
     // TODO: Rename method, update argument and hook method into UI event
@@ -345,7 +345,7 @@ public class AutomaticCalculo extends Fragment {
             total += (Float.parseFloat(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
 
         }
-        total_carbo.setText(String.valueOf(total));
+        total_carbo.setText(String.format("%.2f", total));
     }
     @Override
     public void onAttach(Context context) {

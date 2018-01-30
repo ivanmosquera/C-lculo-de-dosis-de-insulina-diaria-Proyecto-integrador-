@@ -6,19 +6,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.Volley;
 import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
-import com.example.kleberstevendiazcoello.ui.ViewHolder.FilterAdapter;
-import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
-import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelperFilter;
-import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelperFilterRigth;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -26,20 +27,19 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Dimisslabels.OnFragmentInteractionListener} interface
+ * {@link fragment_DetalleHistorial.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Dimisslabels#newInstance} factory method to
+ * Use the {@link fragment_DetalleHistorial#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Dimisslabels extends Fragment {
+public class fragment_DetalleHistorial extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    RecyclerView recyclerView;
-    FilterAdapter adapter;
-    RecyclerView.LayoutManager layoutManager;
-    Button btn_continuar_automatico;
+    TextView txtfecha;
+    TextView txttotalcarbs,txtinsulinatot;
+    ImageView back_histo;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -47,7 +47,7 @@ public class Dimisslabels extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Dimisslabels() {
+    public fragment_DetalleHistorial() {
         // Required empty public constructor
     }
 
@@ -57,11 +57,11 @@ public class Dimisslabels extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Dimisslabels.
+     * @return A new instance of fragment fragment_DetalleHistorial.
      */
     // TODO: Rename and change types and number of parameters
-    public static Dimisslabels newInstance(String param1, String param2) {
-        Dimisslabels fragment = new Dimisslabels();
+    public static fragment_DetalleHistorial newInstance(String param1, String param2) {
+        fragment_DetalleHistorial fragment = new fragment_DetalleHistorial();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -82,35 +82,31 @@ public class Dimisslabels extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_dimisslabels, container, false);
-        recyclerView = (RecyclerView)view.findViewById(R.id.rvalimentosfiltrados);
-        btn_continuar_automatico = (Button)view.findViewById(R.id.continuarautomatico);
-        btn_continuar_automatico.setOnClickListener(new View.OnClickListener() {
+       View view = inflater.inflate(R.layout.fragment_fragment__detalle_historial, container, false);
+        String carbs =getArguments().getString("TotalCarb");
+        String fecha = getArguments().getString("Fecha");
+        String Insulina = getArguments().getString("Insulina");
+        String hora = getArguments().getString("Hora");
+        String ga = getArguments().getString("glucosaa");
+        String go = getArguments().getString("glucosao");
+        int idh = getArguments().getInt("id_historial");
+        back_histo = (ImageView)view.findViewById(R.id.back_historial);
+        txtfecha = (TextView)view.findViewById(R.id.historialfecha);
+        txttotalcarbs = (TextView)view.findViewById(R.id.dhistorialtotal);
+        txtinsulinatot =(TextView)view.findViewById(R.id.historialInsulina);
+        txtfecha.setText(fecha);
+        txtinsulinatot.setText(Insulina);
+        txttotalcarbs.setText(carbs);
+        back_histo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                new Database(getActivity()).cleanListAuto();
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new AutomaticCalculo()).addToBackStack("").commit();
+                transaction.replace(R.id.content2,new HistorialFragment()).commit();
             }
         });
-
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        ArrayList<Platos> plte = new ArrayList<>();
-        Database db = new Database(getActivity());
-        plte = db.getListaComidaAuto();
-        adapter = new FilterAdapter(plte,getActivity());
-        recyclerView.setAdapter(adapter);
-        ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerView);
-        ItemTouchHelper.Callback callback2 = new SwipeHelperFilterRigth(adapter);
-        ItemTouchHelper helper2 = new ItemTouchHelper(callback2);
-        helper2.attachToRecyclerView(recyclerView);
-
         return view;
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -126,7 +122,7 @@ public class Dimisslabels extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            Toast.makeText(context,"Notificacion dismisslables de Fragmento",Toast.LENGTH_SHORT);
+            Toast.makeText(context,"Notificacion Detalle Historial de Fragmento",Toast.LENGTH_SHORT);
         }
     }
 

@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Seleccione Poriciones"
+            android:text="Seleccione Porciones"
             android:layout_gravity="center"
             android:textColor="@android:color/white"
             android:textSize="20dp" />

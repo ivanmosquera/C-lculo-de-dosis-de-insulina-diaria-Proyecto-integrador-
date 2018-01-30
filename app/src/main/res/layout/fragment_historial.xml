@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="  Insulina administrada"
+            android:text="  Insulina administrada (UI)"
             android:padding="8dp"
             android:textStyle="bold"
             android:textSize="15dp"/>
@@ -43,12 +43,17 @@
             android:textSize="15dp"
             android:gravity="center"/>
     </LinearLayout>
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <android.support.v7.widget.RecyclerView
         android:padding="8dp"
         android:id="@+id/recyclerviewhistorial"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+         />
+
+
+</ScrollView>
 
 </LinearLayout>

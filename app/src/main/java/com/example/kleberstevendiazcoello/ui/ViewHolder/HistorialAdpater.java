@@ -2,6 +2,9 @@ package com.example.kleberstevendiazcoello.ui.ViewHolder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,8 @@ import com.example.kleberstevendiazcoello.ui.Otros.ItemClickListener;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Historial;
+import com.example.kleberstevendiazcoello.ui.fragments.Labels_obtenidos;
+import com.example.kleberstevendiazcoello.ui.fragments.fragment_DetalleHistorial;
 
 import java.util.ArrayList;
 
@@ -44,17 +49,29 @@ public class HistorialAdpater extends RecyclerView.Adapter<HistorialAdpater.Hist
     public void onBindViewHolder(HistorialviewHolder holder, int position) {
         holder.fecha.setText(filterarray.get(position).getFecha());
         holder.insulina.setText(filterarray.get(position).getInsulina());
-        holder.carbs.setText(filterarray.get(position).getCarbs());
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void OnClick(View view, int position) {
                 Historial his = filterarray.get(position);
-                Intent intent = new Intent(ctx,DetalleHistorial.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id_historial",his.getId_historial());
+                bundle.putString("Fecha",his.getFecha());
+                bundle.putString("TotalCarb",his.getCarbs());
+                bundle.putString("Insulina",his.getInsulina());
+                bundle.putString("Hora",his.getHora());
+                bundle.putString("glucosao",his.getGlucosao());
+                bundle.putString("glucosaa",his.getGlucoaa());
+                //bundle.putSerializable("ListaObtenida",listaobtenido);
+                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity)ctx).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                fragment_DetalleHistorial fragment_detalleHistorial = new fragment_DetalleHistorial();
+
+                fragment_detalleHistorial.setArguments(bundle);
+                transaction.replace(R.id.content2,fragment_detalleHistorial).addToBackStack("").commit();
+                /*Intent intent = new Intent(ctx,DetalleHistorial.class);
                 intent.putExtra("id_Historial",his.getId_historial());
                 intent.putExtra("fechahistorial",his.getFecha());
-                intent.putExtra("totalcarbs",his.getCarbs());
-
-                ctx.startActivity(intent);
+                intent.putExtra("totalcarbs",his.getCarbs());*/
             }
         });
     }
@@ -80,7 +97,6 @@ public class HistorialAdpater extends RecyclerView.Adapter<HistorialAdpater.Hist
     public static class HistorialviewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView fecha;
         TextView insulina;
-        TextView carbs;
 
         ArrayList<Historial> food = new ArrayList<>();
         Context ctx ;
@@ -91,7 +107,6 @@ public class HistorialAdpater extends RecyclerView.Adapter<HistorialAdpater.Hist
             this.ctx = ctx;
             insulina = (TextView) itemView.findViewById(R.id.htxttotalinsulina);
             fecha= (TextView) itemView.findViewById(R.id.hfechahistorial);
-            carbs = (TextView) itemView.findViewById(R.id.htotalcarh);
             itemView.setOnClickListener(this);
         }
 

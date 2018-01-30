@@ -16,23 +16,16 @@
             android:src="@drawable/iralcalculo"
             android:id="@+id/back_calculomanual"/>
         <Space
-            android:layout_width="30dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Platos"
-            android:textSize="18sp"
-            android:textColor="@android:color/white"/>
-        <Space
             android:layout_width="20dp"
             android:layout_height="wrap_content" />
         <EditText
-            android:layout_width="170dp"
+            android:layout_width="230dp"
             android:layout_height="40dp"
+            android:hint="Busqueda de Platos"
             android:id="@+id/buscar_food_calculo_manual"
             android:background="@drawable/buscar"
             android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:paddingLeft="10dp"
             />
 
@@ -44,14 +37,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="    Alimentos"
+            android:text="Platos"
             android:padding="8dp"
+            android:layout_marginLeft="30dp"
             android:textStyle="bold"
             android:textSize="18dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Carbohidratos"
+            android:text="Gramos de CHO"
             android:padding="8dp"
             android:textStyle="bold"
             android:textSize="18dp"

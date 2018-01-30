@@ -39,11 +39,11 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="18dp"
-        android:background="@drawable/correo"
+        android:background="@drawable/peso"
         android:ems="10"
         android:hint="Peso (kg)"
         android:paddingLeft="10dp"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textColorHint="@color/textonormal"
         />
 
@@ -57,7 +57,7 @@
         android:ems="10"
         android:hint="Altura(m)"
         android:paddingLeft="10dp"
-        android:inputType="textPassword"
+        android:inputType="numberDecimal"
         android:textColorHint="@color/textonormal"/>
 
     <EditText
@@ -69,7 +69,6 @@
         android:background="@drawable/edad"
         android:ems="10"
         android:hint="Fecha de nacimiento"
-        android:paddingLeft="10dp"
         android:inputType="textPersonName"
         android:textColorHint="@color/textonormal"
         />

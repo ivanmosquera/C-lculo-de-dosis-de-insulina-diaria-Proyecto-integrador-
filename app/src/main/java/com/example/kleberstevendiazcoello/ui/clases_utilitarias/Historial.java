@@ -9,12 +9,42 @@ public class Historial {
     private String insulina;
     private  String fecha;
     private String carbs;
+    private  String hora;
+    private String glucoaa;
+    private String glucosao;
 
-    public Historial(int id_historial, String insulina, String fecha, String carbs) {
+    public Historial(int id_historial, String insulina, String fecha, String carbs, String hora, String glucoaa, String glucosao) {
         this.id_historial = id_historial;
         this.insulina = insulina;
         this.fecha = fecha;
         this.carbs = carbs;
+        this.hora = hora;
+        this.glucoaa = glucoaa;
+        this.glucosao = glucosao;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public String getGlucoaa() {
+        return glucoaa;
+    }
+
+    public void setGlucoaa(String glucoaa) {
+        this.glucoaa = glucoaa;
+    }
+
+    public String getGlucosao() {
+        return glucosao;
+    }
+
+    public void setGlucosao(String glucosao) {
+        this.glucosao = glucosao;
     }
 
     public int getId_historial() {
