@@ -27,6 +27,7 @@
                 android:layout_height="30dp"
                 android:background="@drawable/botonsalir"
                 android:layout_gravity="end"
+                android:layout_marginBottom="30dp"
                 android:id="@+id/salirapp"
                 />
         </LinearLayout>
@@ -46,251 +47,208 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:orientation="vertical">
-            <Space
-                android:layout_width="2dp"
-                android:layout_height="5dp" />
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/botonsalir"
-                android:layout_gravity="end"
-                />
+
         </LinearLayout>
 
 
     </LinearLayout>
-    <GridLayout
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/configmodicono"
+        android:layout_gravity="end"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        android:columnCount="2"
-        android:rowCount="3"
-        android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false"
-        android:padding="14dp"
-
-        >
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginRight="16dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="0dp"
-            >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_margin="16dp">
+                android:layout_marginLeft="70dp"
+                >
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/iconopeson"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/iconopeson"
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@color/textonormal"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:text="14.4"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
                     android:id="@+id/txtshowpeso"/>
-            </LinearLayout>
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/lineaseperador"
+                    android:layout_gravity="center"/>
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginRight="16dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="0dp"
-            >
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_margin="16dp">
+                android:layout_marginLeft="40dp"
+                >
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/iconoestatura"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/iconoestatura"
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@color/textonormal"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:text="14.4"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
                     android:id="@+id/txtshowaltura"/>
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/lineaseperador"
+                    android:layout_gravity="center"/>
+
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginRight="16dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="0dp"
-            >
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_margin="16dp">
+                android:layout_marginLeft="70dp"
+                >
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/iconogeneron"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/iconogeneron"
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@color/textonormal"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:text="14.4"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
                     android:id="@+id/txtshowgenero"/>
-            </LinearLayout>
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/lineaseperador"
+                    android:layout_gravity="center"
+                    />
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginRight="16dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="0dp"
-            >
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_margin="16dp">
+                android:layout_marginLeft="45dp"
+                >
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/iconoubicacion"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/iconoubicacion"
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@color/textonormal"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:text="14.4"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
                     android:id="@+id/txtshowciudad"/>
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/lineaseperador"
+                    android:layout_gravity="center"/>
+
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginRight="16dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="0dp"
-            >
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_margin="16dp">
+                android:layout_marginLeft="70dp"
+                >
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/iconopeson"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/iconopeson"
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@color/textonormal"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:text="14.4"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
                     android:id="@+id/txtshowedad"/>
-            </LinearLayout>
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/lineaseperador"
+                    android:layout_gravity="center"
+                    />
 
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_marginRight="16dp"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="0dp"
-            >
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_margin="16dp">
+                android:layout_marginLeft="50dp"
+                >
                 <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/iconocorreon"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/iconocorreon"
+                    />
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14.4"
+                    android:textSize="13sp"
+                    android:layout_gravity="center"
+                    android:id="@+id/txtcorreouser"
+                    android:layout_marginTop="10dp"
+                    />
+                <ImageView
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@color/textonormal"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:id="@+id/txtcorreouser"/>
+                    android:src="@drawable/lineaseperador"
+                    android:layout_gravity="center"
+                   />
+
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
 
+        </LinearLayout>
 
-
-
-
-
-
-
-
-
-    </GridLayout>
+    </LinearLayout>
 
 
 

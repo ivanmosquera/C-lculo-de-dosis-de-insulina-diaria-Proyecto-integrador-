@@ -321,7 +321,7 @@ public class AutomaticCalculo extends Fragment {
         icr = 15;
         nivelact = Float.parseFloat(glucosoactual.getText().toString());
         nivelobj = Float.parseFloat(glucosaobjetivo.getText().toString());
-        factor = 1;
+        factor = (1500/45);
         totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
         totalamostars = String.format("%.1f", totalamostar);
         return totalamostars;
