@@ -17,7 +17,7 @@
             android:layout_marginLeft="40dp"
             android:background="@drawable/buscar"
             android:id="@+id/buscar_historial"
-            android:hint="Busqueda de Historial"
+            android:hint="Busqueda Por Fecha"
             android:textColorHint="@android:color/white"
             android:textColor="@android:color/white"
             android:paddingLeft="10dp"/>

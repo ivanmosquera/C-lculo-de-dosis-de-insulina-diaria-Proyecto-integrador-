@@ -89,7 +89,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.Filterview
     }
 
     private void enviarDatos(final String item){
-        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/enviarnodeseados.php";
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/nonecesarios.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

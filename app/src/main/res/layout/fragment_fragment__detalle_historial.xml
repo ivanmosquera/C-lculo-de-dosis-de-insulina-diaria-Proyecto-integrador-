@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.kleberstevendiazcoello.ui.Activitys.DetalleHistorial"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/white">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -35,42 +36,64 @@
         android:layout_height="50dp" />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text=" Alimentos Ingeridos"
+        android:layout_height="wrap_content"
+        android:text="Fecha y Hora"
         android:gravity="center"
-        android:textSize="20dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="2017-12-18"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:id="@+id/historialfecha"/>
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/textonegrita"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:id="@+id/historialfecha"/>
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/textonegrita"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:id="@+id/historialhora"/>
+
+    </LinearLayout>
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="50dp" />
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text=" Insulina Administrada"
+        android:layout_height="wrap_content"
+        android:src="@drawable/insulinaadministrada"
         android:gravity="center"
         android:textSize="20dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text=""
+        android:textStyle="bold"
+        android:textColor="@color/textonegrita"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="22sp"
         android:id="@+id/historialInsulina"/>
     <Space
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
-    <TextView
+        android:layout_height="20dp" />
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text=" Total Carbohidratos"
+        android:layout_height="wrap_content"
+        android:src="@drawable/totalcarbohidratos"
         android:gravity="center"
-        android:textSize="20dp"/>
+        />
 
     <TextView
         android:id="@+id/dhistorialtotal"
