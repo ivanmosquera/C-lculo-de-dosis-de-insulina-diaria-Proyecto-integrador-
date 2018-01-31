@@ -30,6 +30,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kleberstevendiazcoello.ui.Database.Database;
+import com.example.kleberstevendiazcoello.ui.ViewHolder.RAdapterSPlatos;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.ConnectionDetector;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.Otros.MyAdapater;
 import com.example.kleberstevendiazcoello.ui.R;
@@ -62,6 +65,7 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
     ArrayList<Detalle> arrayList = new ArrayList<>();
+    ArrayList<Detalle> arrayListdiscoshow = new ArrayList<>();
     RecyclerAdapter adapter;
     GridLayoutManager gridLayoutManager;
     RequestQueue requestQueue;
@@ -71,7 +75,7 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
     Dialog waitdia;
     private int tiempo = 30;
     int pStatus = 0;
-
+    ConnectionDetector connectionDetector;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -118,36 +122,42 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
         mSearchField.addTextChangedListener(mQuery);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview);
         Log.d("myTag", "Me cree");
-        waitdia = new Dialog(getActivity());
-        waitdia.setContentView(R.layout.popupwait);
-        waitdia.show();
-        requestQueue = Volley.newRequestQueue(getActivity());
-        try {
-            getList();
-        } catch (JSONException e) {
-            Snackbar.make(getView(),"Error, Baja Conexión",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        connectionDetector = new ConnectionDetector(getActivity());
+        if(connectionDetector.isConnected()){
+            waitdia = new Dialog(getActivity());
+            waitdia.setContentView(R.layout.popupwait);
+            waitdia.show();
+            requestQueue = Volley.newRequestQueue(getActivity());
+            try {
+                getList();
+            } catch (JSONException e) {
+                Snackbar.make(getView(),"Error, Baja Conexión",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+            }
+
+            Thread thread = new Thread() {
+                public void run() {
+                    while (pStatus < 100) {
+                        pStatus += 1;
+                        try {
+                            sleep(tiempo);
+                        } catch (Exception e) {
+
+                        }
+                    }
+
+                    waitdia.dismiss();
+                }
+            };
+            thread.start();
+
+        }else{
+            Toast.makeText(getActivity(),"No Internet",Toast.LENGTH_SHORT);
+            getListDisconected();
+
         }
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
-        Thread thread = new Thread() {
-            public void run() {
-                while (pStatus < 100) {
-                    pStatus += 1;
-                    try {
-                        sleep(tiempo);
-                    } catch (Exception e) {
-
-                    }
-                }
-
-                waitdia.dismiss();
-            }
-        };
-        thread.start();
-
-
 
 
 
@@ -155,7 +165,11 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
 
     }
 
-
+    public void getListDisconected(){
+        arrayListdiscoshow =  new Database(getActivity()).getListaFood();
+        adapter = new RecyclerAdapter(arrayListdiscoshow,getActivity());
+        recyclerView.setAdapter(adapter);
+    }
     private TextWatcher mQuery = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -283,7 +297,6 @@ public class PlatoFragment extends Fragment implements SearchView.OnQueryTextLis
                         }
 
                         adapter = new RecyclerAdapter(arrayList,getActivity());
-
                         recyclerView.setAdapter(adapter);
 
                     }

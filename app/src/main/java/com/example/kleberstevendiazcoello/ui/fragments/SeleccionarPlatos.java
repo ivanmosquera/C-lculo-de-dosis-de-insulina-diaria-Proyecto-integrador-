@@ -24,8 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RAdapterSPlatos;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.ConnectionDetector;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 
 import org.json.JSONArray;
@@ -50,6 +52,7 @@ public class SeleccionarPlatos extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
     ArrayList<Detalle> arrayList = new ArrayList<>();
+    ArrayList<Detalle> arrayListdisco = new ArrayList<>();
     RAdapterSPlatos adapter;
     GridLayoutManager gridLayoutManager;
     RequestQueue requestQueue;
@@ -58,6 +61,7 @@ public class SeleccionarPlatos extends Fragment {
     private int tiempo = 30;
     int pStatus = 0;
     ImageView back;
+    ConnectionDetector conn;
 
 
     // TODO: Rename and change types of parameters
@@ -111,11 +115,19 @@ public class SeleccionarPlatos extends Fragment {
         waitdia.setContentView(R.layout.popupwait);
         waitdia.show();
         requestQueue = Volley.newRequestQueue(getActivity());
-        try {
-            getList();
-        } catch (JSONException e) {
-            Snackbar.make(getView(),"Error, Baja Conexión",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+        conn = new ConnectionDetector(getActivity());
+        if(conn.isConnected()){
+            try {
+                getList();
+            } catch (JSONException e) {
+                Snackbar.make(getView(),"Error, Baja Conexión",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+            }
+
+        }else {
+            Toast.makeText(getActivity(),"No Internet",Toast.LENGTH_SHORT);
+            getListDisconected();
         }
+
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -165,6 +177,12 @@ public class SeleccionarPlatos extends Fragment {
         }
     };
 
+
+    public void getListDisconected(){
+       arrayListdisco =  new Database(getActivity()).getListaFood();
+       adapter = new RAdapterSPlatos(arrayListdisco,getActivity());
+       recyclerView.setAdapter(adapter);
+    }
 
 
     public void  getList() throws JSONException {

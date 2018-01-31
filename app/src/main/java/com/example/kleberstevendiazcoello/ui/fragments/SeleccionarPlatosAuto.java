@@ -3,6 +3,7 @@ package com.example.kleberstevendiazcoello.ui.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,9 +23,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RAdapterSPlatos;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RadapterAutoPlatos;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.ConnectionDetector;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 
 import org.json.JSONArray;
@@ -50,11 +53,13 @@ public class SeleccionarPlatosAuto extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
     ArrayList<Detalle> arrayList = new ArrayList<>();
+    ArrayList<Detalle> arrayListdiscoauto = new ArrayList<>();
     RadapterAutoPlatos adapter;
     GridLayoutManager gridLayoutManager;
     RequestQueue requestQueue;
     EditText mSearchField;
     ImageView back;
+    ConnectionDetector conn;
 
 
     // TODO: Rename and change types of parameters
@@ -105,10 +110,16 @@ public class SeleccionarPlatosAuto extends Fragment {
         mSearchField.addTextChangedListener(mQuery);
         back = (ImageView) view.findViewById(R.id.back_calculoauto);
         requestQueue = Volley.newRequestQueue(getActivity());
-        try {
-            getList();
-        } catch (JSONException e) {
-            e.printStackTrace();
+        conn = new ConnectionDetector(getActivity());
+        if(conn.isConnected()){
+            try {
+                getList();
+            } catch (JSONException e) {
+                Snackbar.make(getView(),"Error, Baja Conexión",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+            }
+
+        }else {
+            getListDisconected();
         }
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
@@ -124,7 +135,11 @@ public class SeleccionarPlatosAuto extends Fragment {
         return view;
     }
 
-
+    public void getListDisconected(){
+        arrayListdiscoauto =  new Database(getActivity()).getListaFood();
+        adapter = new RadapterAutoPlatos(arrayListdiscoauto,getActivity());
+        recyclerView.setAdapter(adapter);
+    }
     public void  getList() throws JSONException {
         final ArrayList<Detalle> arrayListe = new ArrayList<>();
         String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/itemscomida.php";

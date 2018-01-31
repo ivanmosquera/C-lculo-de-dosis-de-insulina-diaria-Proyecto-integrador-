@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.AdapaterAutoHolder;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.Apter_carrito_paltos;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.ConnectionDetector;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelper;
 import com.example.kleberstevendiazcoello.ui.mSwipper.SwipeHelperAuto;
@@ -86,6 +88,7 @@ public class AutomaticCalculo extends Fragment {
     static String id_h ;
     RequestQueue requestQueue,requestQueue2,requestQueue3;
     ImageView back;
+    ConnectionDetector connectionDetector;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -190,17 +193,23 @@ public class AutomaticCalculo extends Fragment {
         guardarhistorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                String currentDate = sdf.format(new Date());
-                SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
-                        "userinfodata", Context.MODE_PRIVATE);
-                int iduser = sharedPrefe.getInt(ID_data, 0);
-                String ids = String.valueOf(iduser);
-                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
-                String hour = format.format(new Date());
-                saveHistorial(currentDate,hour,ids);
-                getlastindexHistorial();
-                Toast.makeText(getActivity(), "Historial Guardado", Toast.LENGTH_LONG).show();
+                connectionDetector = new ConnectionDetector(getActivity());
+                if(connectionDetector.isConnected()) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                    String currentDate = sdf.format(new Date());
+                    SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
+                            "userinfodata", Context.MODE_PRIVATE);
+                    int iduser = sharedPrefe.getInt(ID_data, 0);
+                    String ids = String.valueOf(iduser);
+                    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
+                    String hour = format.format(new Date());
+                    saveHistorial(currentDate, hour, ids);
+                    getlastindexHistorial();
+                    Toast.makeText(getActivity(), "Historial Guardado", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Snackbar.make(getView(), "NO TIENE CONEXIÓN A INTERNET, NO SE GUARDARA SU HISTORIAL", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
             }
         });
 

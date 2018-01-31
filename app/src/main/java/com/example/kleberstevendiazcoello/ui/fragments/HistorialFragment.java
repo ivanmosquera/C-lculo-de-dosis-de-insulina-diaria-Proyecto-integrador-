@@ -31,6 +31,7 @@ import com.example.kleberstevendiazcoello.ui.Otros.MyAdapater;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.HistorialAdpater;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.ConnectionDetector;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Historial;
 
@@ -64,6 +65,7 @@ public class HistorialFragment extends Fragment {
     private int tiempo = 30;
     int pStatus = 0;
     public static final String ID_data = "iduser";
+    ConnectionDetector connectionDetector;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -115,33 +117,40 @@ public class HistorialFragment extends Fragment {
         mSearchField.addTextChangedListener(mQuery);
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerviewhistorial);
         Log.d("myTag", "Me cree");
-        waitdia = new Dialog(getActivity());
-        waitdia.setContentView(R.layout.popupwait);
-        waitdia.show();
         requestQueue = Volley.newRequestQueue(getActivity());
-        try {
-            getList();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        Thread thread = new Thread() {
-            public void run() {
-                while (pStatus < 100) {
-                    pStatus += 1;
-                    try {
-                        sleep(tiempo);
-                    } catch (Exception e) {
-
-                    }
-                }
-
-                waitdia.dismiss();
+        connectionDetector = new ConnectionDetector(getActivity());
+        if(connectionDetector.isConnected()){
+            waitdia = new Dialog(getActivity());
+            waitdia.setContentView(R.layout.popupwait);
+            waitdia.show();
+            try {
+                getList();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        };
-        thread.start();
+            recyclerView.setHasFixedSize(true);
+            layoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(layoutManager);
+            Thread thread = new Thread() {
+                public void run() {
+                    while (pStatus < 100) {
+                        pStatus += 1;
+                        try {
+                            sleep(tiempo);
+                        } catch (Exception e) {
+
+                        }
+                    }
+
+                    waitdia.dismiss();
+                }
+            };
+            thread.start();
+
+        }else {
+            Snackbar.make(getActivity().findViewById(android.R.id.content), "NO TIENE CONEXIÓN A INTERNET", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        }
+
 
 
         return view;

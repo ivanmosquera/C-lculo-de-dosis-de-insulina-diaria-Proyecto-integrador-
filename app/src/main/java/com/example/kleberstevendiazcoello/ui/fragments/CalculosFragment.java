@@ -3,6 +3,7 @@ package com.example.kleberstevendiazcoello.ui.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.ConnectionDetector;
 
 
 /**
@@ -30,6 +32,7 @@ public class CalculosFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     CardView calculomanual;
     CardView calculoautomatico;
+    ConnectionDetector connectionDetector;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,13 +80,18 @@ public class CalculosFragment extends Fragment {
         calculomanual = view.findViewById(R.id.calculo_manual);
         calculoautomatico = view.findViewById(R.id.calculo_automatico);
         Log.d("myTag", "Me cree");
+
         calculomanual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Database(getActivity()).cleanList();
-                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
-                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new CalcularmanualFragment()).commit();
+
+                    new Database(getActivity()).cleanList();
+                    android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                    android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.content2,new CalcularmanualFragment()).commit();
+
+
+
 
             }
         });
@@ -91,10 +99,18 @@ public class CalculosFragment extends Fragment {
         calculoautomatico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            connectionDetector = new ConnectionDetector(getActivity());
+            if(connectionDetector.isConnected()) {
                 new Database(getActivity()).cleanListAuto();
-                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
+                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content2,new cameraFragment()).commit();
+                transaction.replace(R.id.content2, new cameraFragment()).commit();
+            }else{
+                Snackbar.make(getView(),"NO TIENE CONEXIÓN A INTERNET, PRUEBE CÀLCULO MANUAL",Snackbar.LENGTH_LONG).setAction("Action",null).show();
+            }
+
+
+
             }
         });
         return view;

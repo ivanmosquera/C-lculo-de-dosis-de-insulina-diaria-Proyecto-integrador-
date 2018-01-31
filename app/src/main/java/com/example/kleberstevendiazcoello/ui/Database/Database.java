@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 
 public class Database extends SQLiteAssetHelper {
-    private static final String DB_NAME="Insuvida.db";
+    private static final String DB_NAME="databaseInsu.db";
     private static final int DB_VER = 1;
     public Database(Context context) {
         super(context, DB_NAME, null, DB_VER);
@@ -37,6 +38,27 @@ public class Database extends SQLiteAssetHelper {
         }
         return result;
     }
+
+    public ArrayList<Detalle> getListaFood(){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String[] sqlSelect={"id_Comida, Alimento, Medida, Cantidad, CHO, Categoria, Traducuno"};
+        String sqlTable="Comida";
+        qb.setTables(sqlTable);
+        //
+        Cursor c = qb.query(db,sqlSelect,null,null,null,null,null);
+        final ArrayList<Detalle> result = new ArrayList<>();
+        if(c.moveToFirst()){
+            do{
+                //Detalle d = new Detalle(object.getInt("id_Comida"),object.getString("Alimento"),object.getString("Medida"),object.getString("CHO"));
+                result.add(new Detalle(c.getInt(c.getColumnIndex("id_Comida")),c.getString(c.getColumnIndex("Alimento")),
+                        c.getString(c.getColumnIndex("Medida")),c.getString(c.getColumnIndex("CHO"))));
+            }while (c.moveToNext());
+        }
+        return result;
+    }
+
+
 
     public void addPlatos(Platos platos){
         SQLiteDatabase db = getWritableDatabase();
