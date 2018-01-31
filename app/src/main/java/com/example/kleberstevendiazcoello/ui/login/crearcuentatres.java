@@ -1,6 +1,7 @@
 package com.example.kleberstevendiazcoello.ui.login;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.kleberstevendiazcoello.ui.R;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.ConnectionDetector;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +32,7 @@ public class crearcuentatres extends AppCompatActivity {
     Button siguiente,cancelar;
     RequestQueue requestQueue;
     String nombre_ob,conta_ob,correo_ob,altura_ob,edad_ob,peso_ob;
+    ConnectionDetector connectionDetector;
 
 
     @Override
@@ -55,12 +58,18 @@ public class crearcuentatres extends AppCompatActivity {
         cancelar = (Button) findViewById(R.id.btnregresarados);
 
         requestQueue = Volley.newRequestQueue(this);
-
+        connectionDetector = new ConnectionDetector(getApplicationContext());
 
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(connectionDetector.isConnected()) {
                 enviarDatos();
+                }else {
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "NO TIENE CONEXIÓN A INTERNET", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
 
             }
         });

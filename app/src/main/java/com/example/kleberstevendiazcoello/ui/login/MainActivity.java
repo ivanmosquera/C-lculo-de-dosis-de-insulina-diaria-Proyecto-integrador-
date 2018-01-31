@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.kleberstevendiazcoello.ui.R;
 import com.example.kleberstevendiazcoello.ui.Activitys.botton_menu;
 import com.example.kleberstevendiazcoello.ui.ViewHolder.RecyclerAdapter;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.ConnectionDetector;
 import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Detalle;
 
 import org.json.JSONArray;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     EditText correo, contrasena;
     private ProgressDialog pDialog;
     RequestQueue requestQueue;
+    ConnectionDetector connectionDetector;
     public static final String ID_data = "iduser";
     public static final String Mail_data = "email";
     public static final String User_data = "user";
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(),botton_menu.class);
             startActivity(intent);
         }
+        connectionDetector = new ConnectionDetector(getApplicationContext());
         btncrearcuenta = (Button) findViewById(R.id.btncrearcuenta);
         btningresar = (Button) findViewById(R.id.btn_crear_ok);
         correo = (EditText) findViewById(R.id.txtcorreolog);
@@ -65,10 +69,15 @@ public class MainActivity extends AppCompatActivity {
         btncrearcuenta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(connectionDetector.isConnected()){
+                    Intent i = new Intent(getApplicationContext(),crearcuenta.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "NO TIENE CONEXIÓN A INTERNET", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
 
-               Intent i = new Intent(getApplicationContext(),crearcuenta.class);
-                startActivity(i);
-                finish();
 
 
             }
@@ -76,9 +85,15 @@ public class MainActivity extends AppCompatActivity {
          btningresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mail = correo.getText().toString();
-                String pass = contrasena.getText().toString();
-                enviarDatos(mail,pass);
+                if(connectionDetector.isConnected()) {
+                    String mail = correo.getText().toString();
+                    String pass = contrasena.getText().toString();
+                    enviarDatos(mail, pass);
+                }else {
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "NO TIENE CONEXIÓN A INTERNET", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
+
 
 
             }

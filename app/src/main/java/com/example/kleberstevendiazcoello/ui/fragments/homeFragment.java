@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -163,7 +164,31 @@ public class homeFragment extends Fragment {
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 "userinfo", Context.MODE_PRIVATE);
         String username = sharedPref.getString(Mail_data, "hola");
-        getdatosuser(username);
+        SharedPreferences sharedPrefet = getActivity().getSharedPreferences(
+                "userinfodata", Context.MODE_PRIVATE);
+        String nameob = sharedPrefet.getString(User_data, "hola");
+        if(!nameob.equals("")){
+            Log.d("Homefragment", "entre al if");
+            String edad = sharedPrefet.getString(Edad_data, "hola");
+            String name = sharedPrefet.getString(User_data, "hola");
+            String altu = sharedPrefet.getString(Altura_data, "hola");
+            String pe = sharedPrefet.getString(Peso_data, "hola");
+            String ciu = sharedPrefet.getString(Ciudad_data, "hola");
+            String ge = sharedPrefet.getString(Genero_data, "hola");
+            String fono = sharedPrefet.getString(Telefono_data, "hola");
+            //user.setText(mail);
+            e.setText(edad);
+            a.setText(altu);
+            peso.setText(pe);
+            nombre.setText(name);
+            genero.setText(ge);
+            ciudad.setText(ciu);
+            telefono.setText(fono);
+
+        }else{
+            getdatosuser(username);
+        }
+
 
 
         /*SharedPreferences sharedPref = getActivity().getSharedPreferences(
