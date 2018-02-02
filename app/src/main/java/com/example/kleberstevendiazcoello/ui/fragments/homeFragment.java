@@ -167,7 +167,8 @@ public class homeFragment extends Fragment {
         SharedPreferences sharedPrefet = getActivity().getSharedPreferences(
                 "userinfodata", Context.MODE_PRIVATE);
         String nameob = sharedPrefet.getString(User_data, "hola");
-        if(!nameob.equals("")){
+        getdatosuser(username);
+       /* if(!nameob.equals("")){
             Log.d("Homefragment", "entre al if");
             String edad = sharedPrefet.getString(Edad_data, "hola");
             String name = sharedPrefet.getString(User_data, "hola");
@@ -187,7 +188,8 @@ public class homeFragment extends Fragment {
 
         }else{
             getdatosuser(username);
-        }
+        }*/
+
 
 
 

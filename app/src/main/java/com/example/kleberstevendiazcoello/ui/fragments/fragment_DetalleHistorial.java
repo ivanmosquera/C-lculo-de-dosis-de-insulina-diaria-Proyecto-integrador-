@@ -38,7 +38,7 @@ public class fragment_DetalleHistorial extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     TextView txtfecha;
-    TextView txttotalcarbs,txtinsulinatot,txthora;
+    TextView txttotalcarbs,txtinsulinatot,txthora,txtglucosaact,txtglucosaobj;
     ImageView back_histo;
 
     // TODO: Rename and change types of parameters
@@ -95,10 +95,14 @@ public class fragment_DetalleHistorial extends Fragment {
         txtfecha = (TextView)view.findViewById(R.id.historialfecha);
         txttotalcarbs = (TextView)view.findViewById(R.id.dhistorialtotal);
         txtinsulinatot =(TextView)view.findViewById(R.id.historialInsulina);
+        txtglucosaact = (TextView)view.findViewById(R.id.glucosaactualshow);
+        txtglucosaobj = (TextView)view.findViewById(R.id.glucosaobjetivoshow);
         txtfecha.setText(fecha);
         txtinsulinatot.setText(Insulina);
         txttotalcarbs.setText(carbs);
         txthora.setText(hora);
+        txtglucosaact.setText(ga);
+        txtglucosaobj.setText(go);
         back_histo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

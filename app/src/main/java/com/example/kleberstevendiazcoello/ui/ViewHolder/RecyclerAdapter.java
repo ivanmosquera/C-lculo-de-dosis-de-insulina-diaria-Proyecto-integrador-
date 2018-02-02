@@ -84,7 +84,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         @Override
         public void onClick(View view) {
-            this.itemClickListener.OnClick(view,getLayoutPosition());
+            //this.itemClickListener.OnClick(view,getLayoutPosition());
           /* int position = getAdapterPosition();
             Detalle detalle = this.food.get(position);
             Intent intent = new Intent(this.ctx,Detalle_food.class);

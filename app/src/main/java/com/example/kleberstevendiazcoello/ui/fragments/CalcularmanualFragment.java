@@ -320,8 +320,10 @@ public class CalcularmanualFragment extends Fragment {
         factor = (1500/45);
         totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
         totalamostars = String.format("%.1f", totalamostar);
-
-        return totalamostars;
+        NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
+        nf_out.setMaximumFractionDigits(2);
+        String output = nf_out.format(totalamostar);
+        return output;
     }
 
     private void getlastindexHistorial(){
@@ -430,7 +432,11 @@ public class CalcularmanualFragment extends Fragment {
         }
         /*Locale locale = new Locale("en","US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);*/
-        total_carbo.setText(String.format("%.2f", total));
+        NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
+        nf_out.setMaximumFractionDigits(2);
+        String output = nf_out.format(total);
+        //total_carbo.setText(String.format("%.2f", total));
+        total_carbo.setText(output);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

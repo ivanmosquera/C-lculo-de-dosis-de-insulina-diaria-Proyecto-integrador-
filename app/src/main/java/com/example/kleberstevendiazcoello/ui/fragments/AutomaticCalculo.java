@@ -333,7 +333,10 @@ public class AutomaticCalculo extends Fragment {
         factor = (1500/45);
         totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
         totalamostars = String.format("%.1f", totalamostar);
-        return totalamostars;
+        NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
+        nf_out.setMaximumFractionDigits(1);
+        String output = nf_out.format(totalamostar);
+        return output;
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -354,7 +357,10 @@ public class AutomaticCalculo extends Fragment {
             total += (Float.parseFloat(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
 
         }
-        total_carbo.setText(String.format("%.2f", total));
+        NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
+        nf_out.setMaximumFractionDigits(2);
+        String output = nf_out.format(total);
+        total_carbo.setText(output);
     }
     @Override
     public void onAttach(Context context) {

@@ -34,75 +34,133 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="50dp" />
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fecha y Hora"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="30sp"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-        <TextView
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
-            android:textColor="@color/textonegrita"
-            android:gravity="center"
-            android:textSize="22sp"
-            android:id="@+id/historialfecha"/>
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="30dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textStyle="bold"
-            android:textColor="@color/textonegrita"
-            android:gravity="center"
-            android:textSize="22sp"
-            android:id="@+id/historialhora"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:src="@drawable/fechahora"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="30sp"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textonegrita"
+                    android:gravity="center"
+                    android:textSize="22sp"
+                    android:id="@+id/historialfecha"/>
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textonegrita"
+                    android:gravity="center"
+                    android:textSize="22sp"
+                    android:id="@+id/historialhora"/>
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/insulinaadministrada"
-        android:gravity="center"
-        android:textSize="20dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/textonegrita"
-        android:gravity="center"
-        android:textSize="22sp"
-        android:id="@+id/historialInsulina"/>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/totalcarbohidratos"
-        android:gravity="center"
-        />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:src="@drawable/insulinaadministrada"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textStyle="bold"
+                android:textColor="@color/textonegrita"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:id="@+id/historialInsulina"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/totalcarbohidratos"
+                android:gravity="center"
+                />
 
-    <TextView
-        android:id="@+id/dhistorialtotal"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center"
+            <TextView
+                android:id="@+id/dhistorialtotal"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
 
-        android:textColor="@color/celesteazul"
-        android:textSize="20dp" />
+                android:textColor="@color/celesteazul"
+                android:textSize="20dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/glucosaactual"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/glucosaactualshow"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/celesteazul"
+                android:textSize="20dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:src="@drawable/glucosaobjetivo"
+                android:gravity="center"
+
+                />
+            <TextView
+                android:id="@+id/glucosaobjetivoshow"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/celesteazul"
+                android:textSize="20dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 
 </LinearLayout>
