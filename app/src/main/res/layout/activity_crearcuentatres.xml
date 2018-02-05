@@ -32,20 +32,14 @@
         android:textSize="18dp" />
 
 
-
-    <EditText
-        android:id="@+id/txtsexo"
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="18dp"
         android:background="@drawable/genero"
-        android:ems="10"
-        android:hint="Género"
-        android:paddingLeft="10dp"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/textonormal"
-        />
+        android:paddingLeft="2dp"/>
 
     <EditText
         android:id="@+id/txtciudad"
