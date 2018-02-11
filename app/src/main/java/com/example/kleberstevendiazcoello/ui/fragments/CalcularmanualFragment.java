@@ -73,6 +73,10 @@ public class CalcularmanualFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String Actual = "actual";
+    public static final String Objetivo = "objetivo";
+    public static final String DDI = "ddi";
+    public static final String ICR= "icr";
     Button selecplatos,calc_dosis;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
@@ -92,17 +96,19 @@ public class CalcularmanualFragment extends Fragment {
     static String id_h ;
     Dialog mydialog;
     TextView txtclose,txttotalinsu;
-    EditText glucosoactual, glucosaobjetivo;
+    EditText glucosoactual, glucosaobjetivo,txticr,txtddi;
     float totalamostar;
     String totalamostars;
     Button guardarhistorial,nuevainsulina;
     float tot = 0;
-    float icr = 0;
+    int icr = 0;
+    int ddi = 0;
     float nivelact = 0;
     float nivelobj = 0;
     float factor = 0;
     ImageView back;
     ConnectionDetector connectionDetector;
+
 
 
     // TODO: Rename and change types of parameters
@@ -169,44 +175,20 @@ public class CalcularmanualFragment extends Fragment {
          mydialog.setContentView(R.layout.custompopup);
          txtclose = (TextView)mydialog.findViewById(R.id.txtpopclose);
          txttotalinsu = (TextView)mydialog.findViewById(R.id.totalinsulinadministrar);
-
-
-        spsalud = (Spinner)view.findViewById(R.id.spinnervida);
-        //Implemento el setOnItemSelectedListener: para realizar acciones cuando se seleccionen los ítems
-        //spsalud.setOnItemSelectedListener(getActivity());
-        //Convierto la variable List<> en un ArrayList<>()
-        listavida = new ArrayList<>();
-        //Arreglo con nombre de frutas
-        strvida = new String[] {"Alta","Media","Baja"};
-        //Agrego las frutas del arreglo `strFrutas` a la listaFrutas
-        Collections.addAll(listavida, strvida);
-        comboAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item, listavida);
-        spsalud.setAdapter(comboAdapter);
-
-        spinenfermo = (Spinner)view.findViewById(R.id.spinersalud);
-        //Implemento el setOnItemSelectedListener: para realizar acciones cuando se seleccionen los ítems
-        //spsalud.setOnItemSelectedListener(getActivity());
-        //Convierto la variable List<> en un ArrayList<>()
-        listaenfermo = new ArrayList<>();
-        //Arreglo con nombre de frutas
-        senfermo = new String[] {"Si","No"};
-        //Agrego las frutas del arreglo `strFrutas` a la listaFrutas
-        Collections.addAll(listaenfermo, senfermo);
-        //Implemento el adapter con el contexto, layout, listaFrutas
-        comboadapterenfermo = new ArrayAdapter<>(getActivity(),android.R.layout.simple_spinner_item, listaenfermo);
-        //Cargo el spinner con los datos
-        spinenfermo.setAdapter(comboadapterenfermo);
-
-
-
-
-
-
-
-
+         txticr = (EditText)view.findViewById(R.id.txticr);
+         txtddi = (EditText)view.findViewById(R.id.txtddi);
          selecplatos.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
+                 SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                         "datosmedicos", Context.MODE_PRIVATE);
+                 SharedPreferences.Editor editor = sharedPref.edit();
+                 editor.clear();
+                 editor.putString(Objetivo,glucosaobjetivo.getText().toString());
+                 editor.putString(Actual,glucosoactual.getText().toString());
+                 editor.putString(DDI,txtddi.getText().toString());
+                 editor.putString(ICR,txticr.getText().toString());
+                 editor.commit();
                  android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                  android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
                  transaction.replace(R.id.content2,new SeleccionarPlatos()).addToBackStack("").commit();
@@ -248,6 +230,19 @@ public class CalcularmanualFragment extends Fragment {
                 transaction.replace(R.id.content2,new CalculosFragment()).addToBackStack("").commit();
             }
         });
+
+        SharedPreferences sharedPrefe2 = getActivity().getSharedPreferences(
+                "datosmedicos", Context.MODE_PRIVATE);
+        //int edad = sharedPrefe.getInt(Edad_data, 0);
+        String objetive = sharedPrefe2.getString(Objetivo, "0");
+        String actualiti = sharedPrefe2.getString(Actual, "0");
+        String icract = sharedPrefe2.getString(ICR, "15");
+        String ddiact = sharedPrefe2.getString(DDI, "0");
+        //user.setText(mail);
+        glucosaobjetivo.setText(objetive);
+        glucosoactual.setText(actualiti);
+        txticr.setText(icract);
+        txtddi.setText(ddiact);
 
 
         return view;
@@ -314,14 +309,18 @@ public class CalcularmanualFragment extends Fragment {
 
     private String totalcalculo(){
         tot = Float.parseFloat(total_carbo.getText().toString());
-        icr = 15;
-        nivelact = Float.parseFloat(glucosoactual.getText().toString());
-        nivelobj = Float.parseFloat(glucosaobjetivo.getText().toString());
-        factor = (1500/45);
+        String icrs = txticr.getText().toString().replaceAll(" ", "");
+        icr = Integer.parseInt(icrs);//si el no quiere nada es 15 sino cambia.//factor desensibilidad
+        ddi = Integer.parseInt(txtddi.getText().toString());
+        String act= glucosoactual.getText().toString().replaceAll(" ", "");
+        String obj= glucosaobjetivo.getText().toString().replaceAll(" ", "");
+        nivelact = Float.parseFloat(act);
+        nivelobj = Float.parseFloat(obj);
+        factor = (1800/ddi);//variable,//ultrarapida
         totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
         totalamostars = String.format("%.1f", totalamostar);
         NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
-        nf_out.setMaximumFractionDigits(2);
+        nf_out.setMaximumFractionDigits(1);
         String output = nf_out.format(totalamostar);
         return output;
     }

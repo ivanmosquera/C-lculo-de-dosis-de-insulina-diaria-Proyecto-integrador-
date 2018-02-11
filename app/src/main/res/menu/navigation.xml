@@ -11,7 +11,7 @@
         android:title="Calcular" />
 
     <item android:title="Platos"
-        android:icon="@drawable/platosboton"
+        android:icon="@drawable/platoss"
         android:id="@+id/navigation_platos"/>
 
     <item android:title="Historial"

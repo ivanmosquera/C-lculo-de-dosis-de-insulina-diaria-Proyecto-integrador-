@@ -2,16 +2,16 @@ package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,18 +21,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.kleberstevendiazcoello.ui.Activitys.botton_menu;
 import com.example.kleberstevendiazcoello.ui.R;
-import com.example.kleberstevendiazcoello.ui.login.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,12 +36,12 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link homeFragment.OnFragmentInteractionListener} interface
+ * {@link ModificarPerfilFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link homeFragment#newInstance} factory method to
+ * Use the {@link ModificarPerfilFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class homeFragment extends Fragment {
+public class ModificarPerfilFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,12 +55,13 @@ public class homeFragment extends Fragment {
     public static final String Genero_data = "genero";
     public static final String Telefono_data = "telefono";
     public static final String Ciudad_data = "ciudad";
-    TextView user, e, peso,a,nombre,genero,ciudad,telefono ;
-    RequestQueue requestQueue;
-    ImageView config ,configmod;
+    EditText user, e, peso,a,nombre,genero,ciudad,telefono ;
+    RequestQueue requestQueue,requestQueue2;
+    ImageView config ;
     Dialog salirpopup;
     Button salidaapp,cancelarsalida;
     String username;
+    Button guardarcambios;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -72,7 +69,7 @@ public class homeFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public homeFragment() {
+    public ModificarPerfilFragment() {
         // Required empty public constructor
     }
 
@@ -82,11 +79,11 @@ public class homeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment homeFragment.
+     * @return A new instance of fragment ModificarPerfilFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static homeFragment newInstance(String param1, String param2) {
-        homeFragment fragment = new homeFragment();
+    public static ModificarPerfilFragment newInstance(String param1, String param2) {
+        ModificarPerfilFragment fragment = new ModificarPerfilFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -107,61 +104,19 @@ public class homeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view  =inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_modificar_perfil, container, false);
         requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue2 = Volley.newRequestQueue(getActivity());
         //user = (TextView)view.findViewById(R.id.txtcorreouser);
-        a = (TextView)view.findViewById(R.id.txtshowaltura);
-        peso= (TextView)view.findViewById(R.id.txtshowpeso);
-        e = (TextView)view.findViewById(R.id.txtshowedad);
-        nombre = (TextView)view.findViewById(R.id.txtshowusuario);
-        genero = (TextView)view.findViewById(R.id.txtshowgenero);
-        ciudad = (TextView)view.findViewById(R.id.txtshowciudad);
-        telefono = (TextView)view.findViewById(R.id.txtshowtelefono);
-        config = (ImageView)view.findViewById(R.id.salirapp);
-        configmod = (ImageView)view.findViewById(R.id.modificardatos);
-        salirpopup = new Dialog(getActivity());
-        salirpopup.setContentView(R.layout.popup_salir);
-        salidaapp = (Button)salirpopup.findViewById(R.id.salirapppop);
-        cancelarsalida = (Button)salirpopup.findViewById(R.id.cancelarsalida);
-        config.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                salirpopup.show();
-                salidaapp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        SharedPreferences sharedPref = getActivity().getSharedPreferences(
-                                "userinfodata", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.clear();
-                        editor.commit();
-
-                        SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
-                                "userinfo", Context.MODE_PRIVATE);
-
-                        SharedPreferences.Editor editore = sharedPrefe.edit();
-                        editore.clear();
-                        editore.commit();
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                        System.exit(1);
-                    }
-                });
-
-                cancelarsalida.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        salirpopup.dismiss();
-                    }
-                });
-
-
-
-               /*getActivity().finish();
-               getActivity().moveTaskToBack(true);*/
-            }
-        });
-
+        a = (EditText) view.findViewById(R.id.txtshowalturamod);
+        peso= (EditText) view.findViewById(R.id.txtshowpesomod);
+        e = (EditText) view.findViewById(R.id.txtshowedadmod);
+        //nombre = (TextView)view.findViewById(R.id.txtshowusuariom);
+        genero = (EditText) view.findViewById(R.id.txtshowgeneromod);
+        ciudad = (EditText) view.findViewById(R.id.txtshowciudadmod);
+        telefono = (EditText) view.findViewById(R.id.txtshowtelefonomod);
+        config = (ImageView)view.findViewById(R.id.salirappmod);
+        guardarcambios = (Button)view.findViewById(R.id.guardarcambios);
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 "userinfo", Context.MODE_PRIVATE);
@@ -170,53 +125,23 @@ public class homeFragment extends Fragment {
                 "userinfodata", Context.MODE_PRIVATE);
         String nameob = sharedPrefet.getString(User_data, "hola");
         getdatosuser(username);
-       /* if(!nameob.equals("")){
-            Log.d("Homefragment", "entre al if");
-            String edad = sharedPrefet.getString(Edad_data, "hola");
-            String name = sharedPrefet.getString(User_data, "hola");
-            String altu = sharedPrefet.getString(Altura_data, "hola");
-            String pe = sharedPrefet.getString(Peso_data, "hola");
-            String ciu = sharedPrefet.getString(Ciudad_data, "hola");
-            String ge = sharedPrefet.getString(Genero_data, "hola");
-            String fono = sharedPrefet.getString(Telefono_data, "hola");
-            //user.setText(mail);
-            e.setText(edad);
-            a.setText(altu);
-            peso.setText(pe);
-            nombre.setText(name);
-            genero.setText(ge);
-            ciudad.setText(ciu);
-            telefono.setText(fono);
-
-        }else{
-            getdatosuser(username);
-        }*/
-
-
-
-
-        /*SharedPreferences sharedPref = getActivity().getSharedPreferences(
-                "userinfo", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(ID_data,object.getInt("id"));
-        editor.putString(User_data,object.getString("Usuario"));
-        editor.putString(Peso_data,String.valueOf(object.getString("Peso")));
-        editor.putString(Altura_data,String.valueOf(object.getString("Altura")));
-        editor.putInt(Edad_data,object.getInt("Edad"));
-        editor.commit();*/
-        configmod.setOnClickListener(new View.OnClickListener() {
+        guardarcambios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("Mail",username);
-                android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
-                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                ModificarPerfilFragment mod = new ModificarPerfilFragment();
-                mod.setArguments(bundle);
-                transaction.replace(R.id.content2,mod).addToBackStack("").commit();
+                GuardarCambios(username);
             }
         });
-       return view;
+
+        config.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content2, new homeFragment()).commit();
+            }
+        });
+
+        return view;
     }
 
 
@@ -258,7 +183,7 @@ public class homeFragment extends Fragment {
                     e.setText(edad);
                     a.setText(altu);
                     peso.setText(pe);
-                    nombre.setText(name);
+                    //nombre.setText(name);
                     genero.setText(ge);
                     ciudad.setText(ciu);
                     telefono.setText(fono);
@@ -288,6 +213,35 @@ public class homeFragment extends Fragment {
 
 
     }
+    public void GuardarCambios(final  String mail){
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/ModificarDatos.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Snackbar.make(getActivity().findViewById(android.R.id.content), "Modificado Sastifactoriamente", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("edad",e.getText().toString());
+                map.put("ciudad",ciudad.getText().toString());
+                map.put("telefono",telefono.getText().toString());
+                map.put("altura",a.getText().toString());
+                map.put("peso",peso.getText().toString());
+                map.put("genero",genero.getText().toString());
+                map.put("correo",username);
+                return map;
+            }
+
+        };
+        requestQueue2.add(request);
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -302,7 +256,7 @@ public class homeFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            Toast.makeText(context,"Notificacion de Fragmento",Toast.LENGTH_SHORT);
+            Toast.makeText(context,"Modificar Fragment",Toast.LENGTH_SHORT);
         }
     }
 

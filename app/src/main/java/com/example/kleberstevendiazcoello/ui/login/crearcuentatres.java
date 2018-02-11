@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,7 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class crearcuentatres extends AppCompatActivity {
-    EditText nombre, contraseña, correo,altura,edad,peso,ciudad,sexo,telefono;Calendar currentDate;
+    EditText nombre, contraseña, correo,altura,edad,peso,ciudad,telefono;Calendar currentDate;
+    Spinner sexo;
     Button siguiente,cancelar;
     RequestQueue requestQueue;
     String nombre_ob,conta_ob,correo_ob,altura_ob,edad_ob,peso_ob;
@@ -52,10 +55,13 @@ public class crearcuentatres extends AppCompatActivity {
         Log.d("MYTAG :",edad_ob);
         Log.d("MYTAG :",peso_ob);
         ciudad = (EditText) findViewById(R.id.txtciudad);
-        sexo = (EditText) findViewById(R.id.txtsexo);
+        sexo = (Spinner) findViewById(R.id.txtsexo);
         telefono = (EditText)findViewById(R.id.txttelefono);
         siguiente = (Button) findViewById(R.id.btnconfirmarcuenta);
         cancelar = (Button) findViewById(R.id.btnregresarados);
+        String[]  genero = {"<Seleccione Género>","MASCULINO","FEMENINO"};
+        sexo.setPrompt("Género");
+        sexo.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero));
 
         requestQueue = Volley.newRequestQueue(this);
         connectionDetector = new ConnectionDetector(getApplicationContext());
@@ -130,7 +136,7 @@ public class crearcuentatres extends AppCompatActivity {
                 map.put("edad",edad_ob);
                 map.put("peso",peso_ob);
                 map.put("ciudad",ciudad.getText().toString());
-                map.put("sexo",sexo.getText().toString());
+                map.put("sexo",sexo.getSelectedItem().toString());
                 map.put("telefono",telefono.getText().toString());
 
                 return map;

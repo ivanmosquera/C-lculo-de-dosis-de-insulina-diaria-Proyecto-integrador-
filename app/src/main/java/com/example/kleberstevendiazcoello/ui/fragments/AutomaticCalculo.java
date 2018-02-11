@@ -63,6 +63,10 @@ public class AutomaticCalculo extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String Actual = "actual";
+    public static final String Objetivo = "objetivo";
+    public static final String DDI = "ddi";
+    public static final String ICR= "icr";
     Button selecplatos,calc_dosis;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
@@ -82,13 +86,14 @@ public class AutomaticCalculo extends Fragment {
     float nivelact = 0;
     float nivelobj = 0;
     float factor = 0;
-    EditText glucosoactual, glucosaobjetivo;
+    EditText glucosoactual, glucosaobjetivo,txticr,txtddi;
     float totalamostar;
     String totalamostars;
     static String id_h ;
     RequestQueue requestQueue,requestQueue2,requestQueue3;
     ImageView back;
     ConnectionDetector connectionDetector;
+    int ddi;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -145,9 +150,20 @@ public class AutomaticCalculo extends Fragment {
         txttotalinsu = (TextView)mydialog.findViewById(R.id.totalinsulinadministrarauto);
         glucosoactual = (EditText)view.findViewById(R.id.mglucosaactualauto);
         glucosaobjetivo = (EditText)view.findViewById(R.id.mglucosaobjetivoauto);
+        txticr = (EditText) view.findViewById(R.id.txticrauto);
+        txtddi = (EditText)view.findViewById(R.id.txtddiauto);
         selecplatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                        "datosmedicos", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.clear();
+                editor.putString(Objetivo,glucosaobjetivo.getText().toString());
+                editor.putString(Actual,glucosoactual.getText().toString());
+                editor.putString(DDI,txtddi.getText().toString());
+                editor.putString(ICR,txticr.getText().toString());
+                editor.commit();
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.content2,new SeleccionarPlatosAuto()).addToBackStack("").commit();
@@ -176,6 +192,19 @@ public class AutomaticCalculo extends Fragment {
             }
         });
 
+
+        SharedPreferences sharedPrefe2 = getActivity().getSharedPreferences(
+                "datosmedicos", Context.MODE_PRIVATE);
+        //int edad = sharedPrefe.getInt(Edad_data, 0);
+        String objetive = sharedPrefe2.getString(Objetivo, "0");
+        String actualiti = sharedPrefe2.getString(Actual, "0");
+        String icract = sharedPrefe2.getString(ICR, "15");
+        String ddiact = sharedPrefe2.getString(DDI, "0");
+        //user.setText(mail);
+        glucosaobjetivo.setText(objetive);
+        glucosoactual.setText(actualiti);
+        txticr.setText(icract);
+        txtddi.setText(ddiact);
         return view;
     }
 
@@ -327,10 +356,14 @@ public class AutomaticCalculo extends Fragment {
     }
     private String totalcalculo(){
         tot = Float.parseFloat(total_carbo.getText().toString());
-        icr = 15;
-        nivelact = Float.parseFloat(glucosoactual.getText().toString());
-        nivelobj = Float.parseFloat(glucosaobjetivo.getText().toString());
-        factor = (1500/45);
+        String icrs = txticr.getText().toString().replaceAll(" ", "");
+        icr = Integer.parseInt(icrs);//si el no quiere nada es 15 sino cambia.//factor desensibilidad
+        ddi = Integer.parseInt(txtddi.getText().toString());
+        String act= glucosoactual.getText().toString().replaceAll(" ", "");
+        String obj= glucosaobjetivo.getText().toString().replaceAll(" ", "");
+        nivelact = Float.parseFloat(act);
+        nivelobj = Float.parseFloat(obj);
+        factor = (1800/ddi);//variable,//ultrarapida
         totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
         totalamostars = String.format("%.1f", totalamostar);
         NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);

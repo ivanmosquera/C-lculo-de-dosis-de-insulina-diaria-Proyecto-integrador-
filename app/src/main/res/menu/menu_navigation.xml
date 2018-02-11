@@ -9,7 +9,7 @@
         android:id="@+id/camaramenu"></item>
 
     <item android:title="platos"
-        android:icon="@drawable/platosboton"
+        android:icon="@drawable/platoss"
         android:id="@+id/platosmenu"></item>
 
     <item android:title="historial"
