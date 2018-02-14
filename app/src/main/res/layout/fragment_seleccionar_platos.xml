@@ -21,7 +21,7 @@
         <EditText
             android:layout_width="230dp"
             android:layout_height="40dp"
-            android:hint="Busqueda de Platos"
+            android:hint="Búsqueda de Platos"
             android:id="@+id/buscar_food_calculo_manual"
             android:background="@drawable/buscar"
             android:textColor="@android:color/white"

@@ -47,7 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nivel Glucosa Actual     : "
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:textColor="@color/textonegrita"/>
                 <EditText
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -69,7 +70,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="Nivel Glucosa objetivo   : "
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:textColor="@color/textonegrita"/>
                 <EditText
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
@@ -92,7 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:text="Factor de sensibilidad (ICR)  :"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:textColor="@color/textonegrita"/>
             <EditText
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
@@ -115,6 +118,7 @@
                     android:layout_height="30dp"
                     android:text="Dosis diaria de insulina (DDI) :"
                     android:textSize="15dp"
+                    android:textColor="@color/textonegrita"
 
                     />
                 <EditText
