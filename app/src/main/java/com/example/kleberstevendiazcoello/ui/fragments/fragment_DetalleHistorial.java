@@ -1,8 +1,10 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,17 +13,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.kleberstevendiazcoello.ui.Database.Database;
 import com.example.kleberstevendiazcoello.ui.R;
+import com.example.kleberstevendiazcoello.ui.clases_utilitarias.Platos;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -40,6 +53,10 @@ public class fragment_DetalleHistorial extends Fragment {
     TextView txtfecha;
     TextView txttotalcarbs,txtinsulinatot,txthora,txtglucosaact,txtglucosaobj;
     ImageView back_histo;
+    EditText editpost;
+    Button ingresopost,btn_guardar,btn_cancelar;
+    Dialog poppost;
+    RequestQueue requestQueue;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -89,7 +106,7 @@ public class fragment_DetalleHistorial extends Fragment {
         String hora = getArguments().getString("Hora");
         String ga = getArguments().getString("glucosaa");
         String go = getArguments().getString("glucosao");
-        int idh = getArguments().getInt("id_historial");
+        final int  idh = getArguments().getInt("id_historial");
         back_histo = (ImageView)view.findViewById(R.id.back_historial);
         txthora =(TextView)view.findViewById(R.id.historialhora);
         txtfecha = (TextView)view.findViewById(R.id.historialfecha);
@@ -97,6 +114,8 @@ public class fragment_DetalleHistorial extends Fragment {
         txtinsulinatot =(TextView)view.findViewById(R.id.historialInsulina);
         txtglucosaact = (TextView)view.findViewById(R.id.glucosaactualshow);
         txtglucosaobj = (TextView)view.findViewById(R.id.glucosaobjetivoshow);
+        ingresopost = (Button)view.findViewById(R.id.ingresopost);
+        requestQueue = Volley.newRequestQueue(getActivity());
         txtfecha.setText(fecha);
         txtinsulinatot.setText(Insulina);
         txttotalcarbs.setText(carbs);
@@ -112,9 +131,65 @@ public class fragment_DetalleHistorial extends Fragment {
                 transaction.replace(R.id.content2,new HistorialFragment()).commit();
             }
         });
+
+
+        ingresopost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                poppost = new Dialog(getActivity());
+                poppost.setContentView(R.layout.popup_post);
+                btn_guardar = (Button)poppost.findViewById(R.id.btnguardarpost);
+                btn_cancelar = (Button)poppost.findViewById(R.id.btncancelarpost);
+                editpost = (EditText)poppost.findViewById(R.id.txtpost);
+                btn_guardar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String postpan = editpost.getText().toString();
+                        String idhisto = String.valueOf(idh);
+                        ingresarpostpandrial(postpan,idhisto);
+                        poppost.dismiss();
+                    }
+
+                });
+                btn_cancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        poppost.dismiss();
+                    }
+                });
+                poppost.show();
+            }
+        });
+
+
         return view;
     }
 
+
+    void ingresarpostpandrial(final String postpand,final String idhis){
+        String url = "http://www.flexoviteq.com.ec/InsuvidaFolder/GlucosaPostMod.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Snackbar.make(getActivity().findViewById(android.R.id.content), "Modificado Sastifactoriamente", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("glucosapost",postpand);
+                map.put("idh",idhis);
+                return map;
+            }
+
+        };
+        requestQueue.add(request);
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

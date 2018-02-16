@@ -33,7 +33,17 @@
     </android.support.v7.widget.Toolbar>
     <Space
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="8dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Glucosa Post Prandial"
+        android:id="@+id/ingresopost"
+        android:textSize="10sp"/>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
     <ScrollView
         android:layout_width="match_parent"

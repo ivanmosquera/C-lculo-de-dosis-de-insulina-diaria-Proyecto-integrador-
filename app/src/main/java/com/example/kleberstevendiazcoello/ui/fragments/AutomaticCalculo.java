@@ -248,6 +248,11 @@ public class AutomaticCalculo extends Fragment {
             public void onClick(View view) {
                 new Database(getActivity()).cleanListAuto();
                 total = 0;
+                SharedPreferences sharedPrefe4 = getActivity().getSharedPreferences(
+                        "datosmedicos", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor3 = sharedPrefe4.edit();
+                editor3.clear();
+                editor3.commit();
                 android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.content2,new AutomaticCalculo()).commit();
@@ -355,6 +360,7 @@ public class AutomaticCalculo extends Fragment {
 
     }
     private String totalcalculo(){
+        String output;
         tot = Float.parseFloat(total_carbo.getText().toString());
         String icrs = txticr.getText().toString().replaceAll(" ", "");
         icr = Integer.parseInt(icrs);//si el no quiere nada es 15 sino cambia.//factor desensibilidad
@@ -363,12 +369,20 @@ public class AutomaticCalculo extends Fragment {
         String obj= glucosaobjetivo.getText().toString().replaceAll(" ", "");
         nivelact = Float.parseFloat(act);
         nivelobj = Float.parseFloat(obj);
-        factor = (1800/ddi);//variable,//ultrarapida
-        totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
-        totalamostars = String.format("%.1f", totalamostar);
-        NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
-        nf_out.setMaximumFractionDigits(1);
-        String output = nf_out.format(totalamostar);
+        if(nivelact <= nivelobj){
+            totalamostar = (tot/icr);
+            NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
+            nf_out.setMaximumFractionDigits(1);
+            output = nf_out.format(totalamostar);
+        }else{
+            factor = (1800/ddi);//variable,//ultrarapida
+            totalamostar = ((tot/icr) + ((nivelact-nivelobj)/factor));
+            totalamostars = String.format("%.1f", totalamostar);
+            NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
+            nf_out.setMaximumFractionDigits(1);
+            output = nf_out.format(totalamostar);
+        }
+
         return output;
     }
     // TODO: Rename method, update argument and hook method into UI event

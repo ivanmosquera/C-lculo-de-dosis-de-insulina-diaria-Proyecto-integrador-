@@ -1,6 +1,7 @@
 package com.example.kleberstevendiazcoello.ui.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -84,7 +85,11 @@ public class CalculosFragment extends Fragment {
         calculomanual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                    SharedPreferences sharedPrefe5 = getActivity().getSharedPreferences(
+                            "datosmedicos", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor4 = sharedPrefe5.edit();
+                    editor4.clear();
+                    editor4.commit();
                     new Database(getActivity()).cleanList();
                     android.support.v4.app.FragmentManager fragmentManager= getFragmentManager();
                     android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -101,6 +106,11 @@ public class CalculosFragment extends Fragment {
             public void onClick(View view) {
             connectionDetector = new ConnectionDetector(getActivity());
             if(connectionDetector.isConnected()) {
+                SharedPreferences sharedPrefe6 = getActivity().getSharedPreferences(
+                        "datosmedicos", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor5 = sharedPrefe6.edit();
+                editor5.clear();
+                editor5.commit();
                 new Database(getActivity()).cleanListAuto();
                 android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();

@@ -194,7 +194,7 @@ public class HistorialFragment extends Fragment {
                         while(count<jObj.length()){
                             try {
                                 JSONObject object = jObj.getJSONObject(count);
-                                Historial h = new Historial(object.getInt("id_historial"),object.getString("InsulinaAdministrada"),object.getString("Fecha"),object.getString("Total_Calorias"),
+                                Historial h = new Historial(object.getInt("id_historial"),object.getString("InsulinaAdministrada"),object.getString("Fecha"),object.getString("Total_CHO"),
                                         object.getString("Hora"),object.getString("GlucosaObjetivo"),object.getString("GlucosaActual"));
                                 arrayList.add(h);
                                 count ++;

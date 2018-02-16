@@ -57,6 +57,7 @@
                     android:id="@+id/mglucosaactualauto"
                     android:text="0"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
                     />
 
 
@@ -80,6 +81,7 @@
                     android:id="@+id/mglucosaobjetivoauto"
                     android:text="0"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
 
                     />
 
@@ -104,6 +106,7 @@
                     android:id="@+id/txticrauto"
                     android:text="15"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
                     >
 
                 </EditText>
@@ -129,6 +132,7 @@
                     android:id="@+id/txtddiauto"
                     android:text="0"
                     android:paddingLeft="10dp"
+                    android:inputType="number"
                     >
 
                 </EditText>

@@ -3,6 +3,7 @@ package com.example.kleberstevendiazcoello.ui.login;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -58,17 +59,21 @@ public class crearcuentasegundo extends AppCompatActivity {
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String edadParaEnviar;
-                mes = mes+1;
-                edadParaEnviar = año + "-" + mes + "-" + dia;
-                Intent intent = new Intent(getApplicationContext(),crearcuentatres.class);
-                intent.putExtra("NombreUser",nombre_ob);
-                intent.putExtra("Contrasena",conta_ob);
-                intent.putExtra("Correo",correo_ob);
-                intent.putExtra("Altura",altura.getText().toString());
-                intent.putExtra("Edad",edadParaEnviar);
-                intent.putExtra("Peso",peso.getText().toString());
-                startActivity(intent);
+                if(altura.getText().toString().equals("")||peso.getText().toString().equals("")||edad.getText().toString().equals("")){
+                    Snackbar.make(view, "LLENAR TODOS LOS CAMPOS", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }else {
+                    String edadParaEnviar;
+                    mes = mes + 1;
+                    edadParaEnviar = año + "-" + mes + "-" + dia;
+                    Intent intent = new Intent(getApplicationContext(), crearcuentatres.class);
+                    intent.putExtra("NombreUser", nombre_ob);
+                    intent.putExtra("Contrasena", conta_ob);
+                    intent.putExtra("Correo", correo_ob);
+                    intent.putExtra("Altura", altura.getText().toString());
+                    intent.putExtra("Edad", edadParaEnviar);
+                    intent.putExtra("Peso", peso.getText().toString());
+                    startActivity(intent);
+                }
 
             }
         });

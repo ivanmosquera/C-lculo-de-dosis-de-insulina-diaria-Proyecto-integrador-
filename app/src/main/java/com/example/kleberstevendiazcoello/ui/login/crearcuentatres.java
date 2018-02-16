@@ -1,7 +1,9 @@
 package com.example.kleberstevendiazcoello.ui.login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,7 +73,28 @@ public class crearcuentatres extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(connectionDetector.isConnected()) {
-                enviarDatos();
+                    if(ciudad.getText().toString().equals("")||sexo.getSelectedItem().toString().equals("")||telefono.getText().toString().equals("")){
+                        Snackbar.make(view, "LLENAR TODOS LOS CAMPOS", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    }else {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(crearcuentatres.this);
+                        builder.setTitle("Declaraciòn");
+                        builder.setMessage("Al crear la cuenta usted aprueba que se usen sus datos para fines academicos, y que no nos resposabilizamos por mal uso de la aplicaciòn");
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                enviarDatos();
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+
+                    }
                 }else {
                     View parentLayout = findViewById(android.R.id.content);
                     Snackbar.make(parentLayout, "NO TIENE CONEXIÓN A INTERNET", Snackbar.LENGTH_LONG).setAction("Action", null).show();

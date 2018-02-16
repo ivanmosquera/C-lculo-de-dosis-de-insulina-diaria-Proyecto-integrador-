@@ -66,7 +66,6 @@ public class RAdapterSPlatos extends RecyclerView.Adapter<RAdapterSPlatos.Recicl
                 final Detalle detalle = filterarray.get(position);
                 popselect = new Dialog(ctx);
                 popselect.setContentView(R.layout.popup_porciones);
-                popselect.show();
                 btn_agregar = (Button)popselect.findViewById(R.id.btnguardarplatosmanual);
                 btn_cancelar = (Button)popselect.findViewById(R.id.btncancelarmanual);
                 elegantNumberButton = (ElegantNumberButton)popselect.findViewById(R.id.numbre_buttons);
@@ -94,6 +93,7 @@ public class RAdapterSPlatos extends RecyclerView.Adapter<RAdapterSPlatos.Recicl
                         popselect.dismiss();
                     }
                 });
+                popselect.show();
 
                 //Snackbar.make(view,filterarray.get(position).getComida(),Snackbar.LENGTH_SHORT).show();
                 /*Detalle detalle = filterarray.get(position);

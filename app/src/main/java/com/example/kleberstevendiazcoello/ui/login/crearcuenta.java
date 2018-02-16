@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -76,11 +77,15 @@ public class crearcuenta extends AppCompatActivity {
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(nombre.getText().toString().equals("")||contraseña.getText().toString().equals("")||correo.getText().toString().equals("")){
+                    Snackbar.make(view, "LLENAR TODOS LOS CAMPOS", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }else{
                 Intent intent = new Intent(getApplicationContext(),crearcuentasegundo.class);
                 intent.putExtra("NombreUser",nombre.getText().toString());
                 intent.putExtra("Contrasena",contraseña.getText().toString());
                 intent.putExtra("Correo",correo.getText().toString());
                 startActivity(intent);
+                }
 
             }
         });
