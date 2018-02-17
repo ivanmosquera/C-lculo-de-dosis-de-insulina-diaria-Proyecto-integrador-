@@ -198,22 +198,8 @@ public class CalcularmanualFragment extends Fragment {
          calc_dosis.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-
+                 changetot();
                  showpopu(view);
-
-                 /*SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-                 String currentDate = sdf.format(new Date());
-                 SharedPreferences sharedPrefe = getActivity().getSharedPreferences(
-                         "userinfodata", Context.MODE_PRIVATE);
-                 int iduser = sharedPrefe.getInt(ID_data, 0);
-                 String ids = String.valueOf(iduser);
-                 SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.US);
-                 String hour = format.format(new Date());
-                 saveHistorial(currentDate,hour,ids);
-                 getlastindexHistorial();*/
-
-
-
              }
          });
         recyclerView = (RecyclerView)view.findViewById(R.id.rv_platosseleccionados);
@@ -316,7 +302,20 @@ public class CalcularmanualFragment extends Fragment {
 
 
     }
-
+    private void changetot(){
+        total = 0;
+        cart = new Database(getActivity()).getListaComida();
+        for (Platos platos:cart){
+            total += (Float.parseFloat(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
+        }
+        /*Locale locale = new Locale("en","US");
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);*/
+        NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
+        nf_out.setMaximumFractionDigits(2);
+        String output = nf_out.format(total);
+        //total_carbo.setText(String.format("%.2f", total));
+        total_carbo.setText(output);
+    }
     private String totalcalculo(){
         String output;
         tot = Float.parseFloat(total_carbo.getText().toString());
@@ -438,12 +437,12 @@ public class CalcularmanualFragment extends Fragment {
 
 
     }
-    private void LoadListFood() {
+    public void LoadListFood() {
         total = 0;
         cart = new Database(getActivity()).getListaComida();
         adapter = new Apter_carrito_paltos(cart,getActivity());
         recyclerView.setAdapter(adapter);
-        ItemTouchHelper.Callback callback = new SwipeHelper(adapter);
+        ItemTouchHelper.Callback callback = new SwipeHelper(adapter,getActivity());
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
         for (Platos platos:cart){

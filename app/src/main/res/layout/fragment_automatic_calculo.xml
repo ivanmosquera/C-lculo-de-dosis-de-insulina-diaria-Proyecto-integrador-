@@ -97,7 +97,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Factor de sensibilidad (ICR)  :"
+                    android:text="FSI  :"
                     android:textSize="15dp"
                     android:textColor="@color/textonegrita"/>
                 <EditText
@@ -207,7 +207,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nota: Recuerde que esta aplicación solo considera el uso de insulina ultrarapida para el càlculo de la dosis. "/>
+                android:text="Nota: Recuerde que esta aplicación solo considera el uso de insulina ultrarápida para el cálculo de la dosis. "/>
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="20dp" />

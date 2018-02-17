@@ -42,7 +42,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="que debes ingerir despues de comer"
+            android:text="que debes ingerir después de comer"
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="@android:color/white"
@@ -51,7 +51,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ciertos alimentos o comida"
+            android:text="ciertos alimentos o comida."
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="@android:color/white"

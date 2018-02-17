@@ -18,7 +18,7 @@
          android:layout_marginLeft="40dp"
          android:background="@drawable/buscar"
 
-         android:hint="Bùsqueda de Platos"
+         android:hint="Búsqueda de Platos"
          android:textColorHint="@android:color/white"
          android:textColor="@android:color/white"
          android:paddingLeft="10dp"/>

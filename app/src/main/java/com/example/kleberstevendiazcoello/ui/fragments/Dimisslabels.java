@@ -102,10 +102,10 @@ public class Dimisslabels extends Fragment {
         plte = db.getListaComidaAuto();
         adapter = new FilterAdapter(plte,getActivity());
         recyclerView.setAdapter(adapter);
-        ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter);
+        ItemTouchHelper.Callback callback = new SwipeHelperFilter(adapter,getActivity());
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
-        ItemTouchHelper.Callback callback2 = new SwipeHelperFilterRigth(adapter);
+        ItemTouchHelper.Callback callback2 = new SwipeHelperFilterRigth(adapter,getActivity());
         ItemTouchHelper helper2 = new ItemTouchHelper(callback2);
         helper2.attachToRecyclerView(recyclerView);
 

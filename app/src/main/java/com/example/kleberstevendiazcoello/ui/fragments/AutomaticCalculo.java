@@ -173,6 +173,7 @@ public class AutomaticCalculo extends Fragment {
         calc_dosis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                changetot();
                 showpopu(view);
 
             }
@@ -209,6 +210,20 @@ public class AutomaticCalculo extends Fragment {
     }
 
 
+    private void changetot(){
+        total = 0;
+        cart = new Database(getActivity()).getListaComida();
+        for (Platos platos:cart){
+            total += (Float.parseFloat(platos.getCalorias())) * (Integer.parseInt(platos.getCantidad()));
+        }
+        /*Locale locale = new Locale("en","US");
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);*/
+        NumberFormat nf_out = NumberFormat.getNumberInstance(Locale.UK);
+        nf_out.setMaximumFractionDigits(2);
+        String output = nf_out.format(total);
+        //total_carbo.setText(String.format("%.2f", total));
+        total_carbo.setText(output);
+    }
     public void showpopu(View v){
 
         txtclose.setOnClickListener(new View.OnClickListener() {
@@ -397,7 +412,7 @@ public class AutomaticCalculo extends Fragment {
         cart = new Database(getActivity()).getListaComidaAuto();
         adapter = new AdapaterAutoHolder(cart,getActivity());
         recyclerView.setAdapter(adapter);
-        ItemTouchHelper.Callback callback = new SwipeHelperAuto(adapter);
+        ItemTouchHelper.Callback callback = new SwipeHelperAuto(adapter,getActivity());
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
         for (Platos platos:cart){
